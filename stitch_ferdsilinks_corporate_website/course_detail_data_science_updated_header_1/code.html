@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mastering Data Science &amp; Big Data | Ferdsilinks</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space_Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#aec7f6",
+                        "secondary-container": "#659dfe",
+                        "on-secondary-fixed": "#001a40",
+                        "inverse-primary": "#aec7f6",
+                        "on-primary-fixed-variant": "#2d476f",
+                        "surface-container-low": "#f3f4f5",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-fixed": "#2f1500",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-background": "#191c1d",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdcc3",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#465f88",
+                        "surface-bright": "#f8f9fa",
+                        "on-surface-variant": "#44474e",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed-dim": "#ffb77d",
+                        "outline": "#74777f",
+                        "on-primary-fixed": "#001b3d",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary-fixed-variant": "#6e3900",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary-container": "#371a00",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9fa",
+                        "secondary-fixed-dim": "#acc7ff",
+                        "on-tertiary-container": "#cf7000",
+                        "surface-variant": "#e1e3e4",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "outline-variant": "#c4c6cf",
+                        "secondary": "#115cb9",
+                        "on-secondary-fixed-variant": "#004491",
+                        "primary-container": "#002147",
+                        "on-secondary-container": "#003370",
+                        "tertiary": "#160700",
+                        "primary": "#000a1e",
+                        "on-primary-container": "#708ab5",
+                        "inverse-on-surface": "#f0f1f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Space_Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .architect-grid-bg {
+            background-image: radial-gradient(rgba(0, 33, 71, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-background architect-grid-bg">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#000a1e]/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,33,71,0.04)]">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20 relative">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-extrabold text-[#000a1e] dark:text-white tracking-tighter font-['Manrope']">Ferdsilinks</span>
+<div class="hidden lg:flex items-center gap-8 font-['Manrope'] font-bold tracking-tight">
+<a class="text-[#002147] dark:text-[#f8f9fa] hover:text-[#cf7000] transition-colors" href="#">Home</a>
+<a class="text-[#002147] dark:text-[#f8f9fa] hover:text-[#cf7000] transition-colors" href="#">About</a>
+<a class="text-[#002147] dark:text-[#f8f9fa] hover:text-[#cf7000] transition-colors" href="#">Services</a>
+<a class="text-[#cf7000] border-b-2 border-[#cf7000] pb-1" href="#">Training Hub</a>
+<a class="text-[#002147] dark:text-[#f8f9fa] hover:text-[#cf7000] transition-colors" href="#">Blog</a>
+<a class="text-[#002147] dark:text-[#f8f9fa] hover:text-[#cf7000] transition-colors" href="#">Podcast</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-[#cf7000] text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-80 transition-all duration-300 scale-95 active:scale-90 transition-transform">Get a Quote</button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-[#e7e8e9] to-transparent h-[1px]"></div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-4 md:px-8 py-12 pt-32">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Content -->
+<div class="lg:col-span-8 space-y-16">
+<!-- Hero Section -->
+<section class="space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-label uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">terminal</span>
+                        Advanced Specialization
+                    </div>
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-primary tracking-tighter leading-[1.1]">
+                        Mastering <span class="text-on-tertiary-container">Data Science</span> &amp; Big Data
+                    </h1>
+<p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                        Architect the future of tech. Master advanced analytics, scalable big data pipelines, and machine learning models designed for the next generation of African digital innovation.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">Enroll Now - $499</button>
+<button class="outline outline-2 outline-outline-variant px-8 py-4 rounded-lg font-bold text-lg hover:bg-surface-container-high transition-all">Download Syllabus</button>
+</div>
+</section>
+<!-- What You'll Learn: Bento Style -->
+<section class="space-y-8">
+<h2 class="font-headline text-3xl font-bold text-primary">What You'll Learn</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/15 flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl">javascript</span>
+<div>
+<h3 class="font-bold text-primary mb-1">Advanced Python</h3>
+<p class="text-sm text-on-surface-variant">Functional programming and production-grade data scripts.</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/15 flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl">hub</span>
+<div>
+<h3 class="font-bold text-primary mb-1">Machine Learning</h3>
+<p class="text-sm text-on-surface-variant">Neural networks, clustering, and predictive modeling at scale.</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/15 flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl">monitoring</span>
+<div>
+<h3 class="font-bold text-primary mb-1">Data Visualization</h3>
+<p class="text-sm text-on-surface-variant">Creating executive-level insights with D3.js and PowerBI.</p>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl border border-outline-variant/15 flex gap-4 items-start">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl">database</span>
+<div>
+<h3 class="font-bold text-primary mb-1">Big Data Ecosystems</h3>
+<p class="text-sm text-on-surface-variant">Hadoop, Spark, and cloud-native data warehousing architectures.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Curriculum Section -->
+<section class="space-y-8">
+<div class="flex justify-between items-end">
+<h2 class="font-headline text-3xl font-bold text-primary">Curriculum</h2>
+<span class="font-label text-sm text-on-surface-variant uppercase tracking-widest">12 Comprehensive Modules</span>
+</div>
+<div class="space-y-4">
+<!-- Module 1 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<div class="p-6 flex justify-between items-center cursor-pointer">
+<div class="flex gap-6 items-center">
+<span class="text-on-tertiary-container font-label font-bold">01</span>
+<h4 class="font-bold text-lg text-primary">Foundations of Data Architecture</h4>
+</div>
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<!-- Module 2 (Expanded State Simulation) -->
+<div class="bg-surface-container-lowest rounded-xl border-l-4 border-on-tertiary-container shadow-sm overflow-hidden">
+<div class="p-6 flex justify-between items-center">
+<div class="flex gap-6 items-center">
+<span class="text-on-tertiary-container font-label font-bold">02</span>
+<h4 class="font-bold text-lg text-primary">Python for Big Data Processing</h4>
+</div>
+<span class="material-symbols-outlined">expand_less</span>
+</div>
+<div class="px-6 pb-6 pt-0 ml-12 space-y-4">
+<ul class="space-y-3 text-on-surface-variant border-t border-outline-variant/20 pt-4">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm">play_circle</span> Vectorized Operations with NumPy</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm">play_circle</span> High-performance DataFrames with Pandas</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-sm">description</span> Assignment: Real-world Logistics Optimization</li>
+</ul>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden">
+<div class="p-6 flex justify-between items-center cursor-pointer">
+<div class="flex gap-6 items-center">
+<span class="text-on-tertiary-container font-label font-bold">03</span>
+<h4 class="font-bold text-lg text-primary">Statistical Modeling &amp; Inference</h4>
+</div>
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Instructor Section -->
+<section class="bg-primary-container text-white rounded-xl p-8 md:p-12 relative overflow-hidden">
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+<div class="col-span-1">
+<img class="w-full aspect-square object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-500 shadow-2xl" data-alt="professional portrait of a confident tech instructor with glasses against a clean architectural background, soft cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzEzAIA6CfN3sIUGLqgkRawgDOBoHpCqzXIeZbPDu8ZMf4W-KDyT2jjav5ZMLDqlmPZcndzoPhcqA8Yd0nygZbcjcvt5kY30eLEG5gpcVpxuVGTSDqk0MCJyCvPbSEEmiXBkxFUYBEIlEM2WyutszMzBxgXuCWlYQyJjpe9hDmL2wMdUQexB-5yJZFUMdG63MTa2tb6LktJ8huOls4LqlCEUuhknJtABGBkDOksZi2cE5s4kyHUuGxvpk_tzrPbRGqkp0A5h7Pjl07"/>
+</div>
+<div class="col-span-2 space-y-4">
+<h2 class="font-headline text-3xl font-extrabold tracking-tight">Meet Your Instructor</h2>
+<h3 class="text-tertiary-fixed text-xl font-bold">Dr. Emmanuel Fongoh</h3>
+<p class="text-on-primary-container text-lg leading-relaxed">
+                                Lead Data Scientist at Silicon Mountain Hub. With over 15 years of experience architecting large-scale data systems for global fintech firms, Dr. Fongoh brings practical, battle-tested expertise to the classroom.
+                            </p>
+<div class="flex gap-4 pt-2">
+<span class="text-xs font-label uppercase tracking-tighter bg-white/10 px-3 py-1 rounded">Ex-Google DeepMind</span>
+<span class="text-xs font-label uppercase tracking-tighter bg-white/10 px-3 py-1 rounded">Stanford Alum</span>
+</div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-on-tertiary-container opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+</section>
+<!-- Testimonials -->
+<section class="space-y-8 pb-12">
+<h2 class="font-headline text-3xl font-bold text-primary">Student Impact</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-high p-8 rounded-xl space-y-4">
+<div class="flex gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="italic text-primary font-medium leading-relaxed">"The Big Data module completely changed how I approach backend architecture. The local context provided by the instructors is invaluable."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary">JM</div>
+<div>
+<p class="text-sm font-bold text-primary">Junior Mbah</p>
+<p class="text-xs text-on-surface-variant">Data Engineer, Fintech Buea</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-xl space-y-4">
+<div class="flex gap-1 text-on-tertiary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="italic text-primary font-medium leading-relaxed">"High-end curriculum with a focus on real-world application. I landed a senior role before I even finished the Capstone project."</p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-primary">SN</div>
+<div>
+<p class="text-sm font-bold text-primary">Sarah Ngassa</p>
+<p class="text-xs text-on-surface-variant">ML Researcher</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sticky Sidebar -->
+<aside class="lg:col-span-4">
+<div class="sticky top-28 space-y-6">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_24px_48px_rgba(0,33,71,0.08)] border border-outline-variant/10 overflow-hidden">
+<div class="aspect-video relative group overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="clean high-tech dashboard displaying glowing data visualizations and charts on a dark interface, modern tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX7iz0Wv2BRIfnBOtT55ua8ja2q3oV6ZBAGgk3xlBWdvKEGwu-vcT1MiE0kHI_b5QnUM-iSoTVOGmPtkyrffFe_quk1pDMKSP2uDvqritck67naa1gottc73No46kpSq-gRXhwXSMXeoqFYbzUVqa6b1_O67_LgiEHaut-1Nia8LRp-xf1xL3PpDULZAKgGe-U_fQ30dmyqPqKViJ1Ok52uFMTEBeondBLPMkvNcxuu5Ws7NUWcVQcFczpZOi6vYTZMc6nhGDwJQn_"/>
+<div class="absolute inset-0 bg-primary/40 flex items-center justify-center">
+<button class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-primary-container shadow-xl hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="p-8 space-y-6">
+<div class="flex justify-between items-center">
+<span class="text-3xl font-black text-primary">$499</span>
+<span class="text-on-surface-variant line-through">$899</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined">calendar_today</span>
+<div>
+<p class="text-xs uppercase font-label tracking-widest">Start Date</p>
+<p class="text-primary font-bold">Oct 15, 2024</p>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined">schedule</span>
+<div>
+<p class="text-xs uppercase font-label tracking-widest">Duration</p>
+<p class="text-primary font-bold">12 Weeks / 80+ Hours</p>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined">bar_chart</span>
+<div>
+<p class="text-xs uppercase font-label tracking-widest">Skill Level</p>
+<p class="text-primary font-bold">Intermediate to Advanced</p>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined">verified</span>
+<div>
+<p class="text-xs uppercase font-label tracking-widest">Certification</p>
+<p class="text-primary font-bold">Professional Certificate</p>
+</div>
+</div>
+</div>
+<button class="w-full bg-on-tertiary-container text-white py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-md">Enroll Now</button>
+<p class="text-center text-xs text-on-surface-variant font-label">30-Day Money Back Guarantee</p>
+</div>
+</div>
+<!-- Additional Sidebar Info -->
+<div class="bg-primary p-8 rounded-xl text-white space-y-4">
+<h4 class="font-bold text-lg">Group Enrollment?</h4>
+<p class="text-sm text-slate-300 leading-relaxed">Corporate training packages available for teams of 5 or more. Build a data-driven culture in your organization.</p>
+<a class="inline-block font-label text-xs text-[#ffdcc3] uppercase tracking-widest border-b border-[#ffdcc3] pb-1" href="#">Contact Enterprise Sales</a>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#002147] dark:bg-[#00050a] full-width py-12 px-8 border-t border-white/5">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 w-full">
+<div class="space-y-4 text-center md:text-left">
+<span class="text-white font-bold text-2xl font-headline tracking-tighter">Ferdsilinks</span>
+<p class="text-slate-400 font-['Space_Grotesk'] text-sm uppercase tracking-widest max-w-sm">
+                    © 2024 Ferdsilinks Tech Hub. Built for the Silicon Mountain Ecosystem.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-['Space_Grotesk'] text-sm uppercase tracking-widest">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Campus Map</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+</body></html>

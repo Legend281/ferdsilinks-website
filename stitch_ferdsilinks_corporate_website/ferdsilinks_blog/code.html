@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space_Grotesk:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f3f4f5",
+                    "on-surface-variant": "#44474e",
+                    "outline-variant": "#c4c6cf",
+                    "on-secondary-fixed": "#001a40",
+                    "on-primary-fixed": "#001b3d",
+                    "error": "#ba1a1a",
+                    "background": "#f8f9fa",
+                    "on-primary-container": "#708ab5",
+                    "secondary-fixed-dim": "#acc7ff",
+                    "secondary-fixed": "#d7e2ff",
+                    "inverse-primary": "#aec7f6",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1d",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#aec7f6",
+                    "inverse-surface": "#2e3132",
+                    "surface": "#f8f9fa",
+                    "on-tertiary-container": "#cf7000",
+                    "surface-container": "#edeeef",
+                    "outline": "#74777f",
+                    "surface-dim": "#d9dadb",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "primary": "#000a1e",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed": "#d6e3ff",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "tertiary": "#160700",
+                    "surface-tint": "#465f88",
+                    "inverse-on-surface": "#f0f1f2",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "secondary-container": "#659dfe",
+                    "on-secondary-container": "#003370",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#371a00",
+                    "primary-container": "#002147",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdcc3",
+                    "on-tertiary-fixed": "#2f1500",
+                    "surface-container-high": "#e7e8e9",
+                    "secondary": "#115cb9",
+                    "on-secondary-fixed-variant": "#004491",
+                    "surface-bright": "#f8f9fa",
+                    "on-background": "#191c1d",
+                    "surface-variant": "#e1e3e4",
+                    "surface-container-highest": "#e1e3e4"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .architect-grid {
+            background-image: radial-gradient(#c4c6cf 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-background architect-grid">
+<!-- TopNavBar -->
+<header class="bg-[#f8f9fa] dark:bg-[#000a1e]/90 backdrop-blur-md docked full-width top-0 sticky z-50 shadow-[0px_24px_48px_rgba(0,33,71,0.08)]">
+<div class="max-w-[1440px] mx-auto px-8 py-6 flex justify-between items-center">
+<div class="text-2xl font-['Manrope'] font-black tracking-tighter text-[#000a1e] dark:text-white">
+                Ferdsilinks
+            </div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-['Manrope'] uppercase tracking-widest text-[13px] font-bold text-[#002147] dark:text-slate-300 hover:text-[#cf7000] transition-all duration-300 ease-in-out" href="#">Home</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[13px] font-bold text-[#002147] dark:text-slate-300 hover:text-[#cf7000] transition-all duration-300 ease-in-out" href="#">About</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[13px] font-bold text-[#002147] dark:text-slate-300 hover:text-[#cf7000] transition-all duration-300 ease-in-out" href="#">Services</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[13px] font-bold text-[#002147] dark:text-slate-300 hover:text-[#cf7000] transition-all duration-300 ease-in-out" href="#">Training Hub</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[13px] font-bold text-[#cf7000] border-b-2 border-[#cf7000] pb-1" href="#">Blog</a>
+<a class="font-['Manrope'] uppercase tracking-widest text-[13px] font-bold text-[#002147] dark:text-slate-300 hover:text-[#cf7000] transition-all duration-300 ease-in-out" href="#">Podcast</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="scale-95 active:scale-100 transition-transform bg-on-tertiary-container text-white px-6 py-2 font-headline font-bold text-sm rounded-lg">Join Hub</button>
+</div>
+</div>
+<div class="bg-[#f3f4f5] dark:bg-[#002147] h-[1px] w-full"></div>
+</header>
+<main class="max-w-[1440px] mx-auto px-8 py-12">
+<!-- Hero Section: Featured Article -->
+<section class="mb-20">
+<div class="relative group overflow-hidden rounded-xl bg-primary-container min-h-[600px] flex items-end">
+<img alt="Featured Article" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="Professional African tech team collaborating in a modern glass office overlooking Buea mountains with cinematic lighting and deep contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0r-VRi7JJ8TibGT3hVYEa41NcRdmTRJWO9gHC6ID6YZ35oVNLx_gveDgJaSnAyBHyKDpg64jdSb_C940nxauXC2zNCiZO6_y_Ev8FVeMTSiWimFyWP_9DwF-HnzZQHGIo-9nXHetYCSWBPufNYwpsAGjBrE0BJG6gWZW8QD3MRmAa1nCvp2BX0hSMtZGUt2f6HQHJgHvw5SD7dbzrURr_zxyTJ8dRSikUyBv2jOtX02l6ppV3xYeLbYKLlFyTpDomCWr18oRv6POl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+<div class="relative p-12 lg:p-20 max-w-4xl">
+<span class="font-label text-xs uppercase tracking-widest text-tertiary-fixed bg-tertiary-container/50 px-4 py-2 rounded-full mb-6 inline-block">Featured Insight</span>
+<h1 class="font-headline text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6">Architecting Silicon Mountain: The Future of Data in Africa</h1>
+<p class="font-body text-lg text-slate-300 mb-8 max-w-2xl leading-relaxed">How localized data ecosystems are driving the next wave of industrial revolution across Central Africa, starting from the slopes of Mount Fako.</p>
+<div class="flex items-center gap-6">
+<button class="bg-on-tertiary-container text-white font-headline font-bold px-8 py-4 rounded-lg flex items-center gap-2 group/btn transition-all">
+                            Read Full Story
+                            <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<span class="font-label text-sm text-slate-400">12 Min Read • Oct 24, 2024</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Filter Bar -->
+<section class="mb-16">
+<div class="flex flex-wrap items-center justify-between gap-6 border-b border-outline-variant/20 pb-6">
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2 rounded-full font-label text-sm font-bold bg-primary text-white">All</button>
+<button class="px-6 py-2 rounded-full font-label text-sm font-bold bg-surface-container-high text-on-surface hover:bg-primary-fixed transition-colors">Data Science</button>
+<button class="px-6 py-2 rounded-full font-label text-sm font-bold bg-surface-container-high text-on-surface hover:bg-primary-fixed transition-colors">AI</button>
+<button class="px-6 py-2 rounded-full font-label text-sm font-bold bg-surface-container-high text-on-surface hover:bg-primary-fixed transition-colors">Tech Culture</button>
+<button class="px-6 py-2 rounded-full font-label text-sm font-bold bg-surface-container-high text-on-surface hover:bg-primary-fixed transition-colors">Software Development</button>
+<button class="px-6 py-2 rounded-full font-label text-sm font-bold bg-surface-container-high text-on-surface hover:bg-primary-fixed transition-colors">Business Growth</button>
+</div>
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-body text-sm" placeholder="Search insights..." type="text"/>
+</div>
+</div>
+</section>
+<!-- Recent Blog Posts Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+<!-- Article 1 -->
+<article class="group flex flex-col h-full">
+<div class="aspect-[16/10] overflow-hidden rounded-xl mb-6 bg-surface-container-low">
+<img alt="Data Analytics" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern data dashboard on multiple monitors in a dark room with blue ambient light and tech aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzVfkwwhadCdEU6jS7UJDWkfxvvMPhn1YbEiLBzTODl5svXv9sH7CiTxLKStUiqDfdKt4-ACLOQlsxT8yUmsRjoo5vJU0k6NnGqh-xa5mzXx5PRSL95zeDgjGEns18RR8StuUwpUvAEKgrb8Tl9rO4VLXntcrFO3xR34igkpV59glfOa1ntm1zXs5CGqHrkK3HWn7K0Q3scoa1dcrzhVczI9MnZUuJ6tSdggGuYABLtJMLswItdFm9WThGVOyS0nrQU29JEKdkbRzY"/>
+</div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-secondary-container bg-secondary-fixed px-2 py-1 rounded">Data Science</span>
+<span class="font-body text-xs text-outline">Oct 18, 2024</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">Visualizing Growth: The Power of Predictive Analytics</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6 flex-grow">A deep dive into how startups in Cameroon are leveraging data to predict market shifts before they happen.</p>
+<a class="font-headline font-bold text-sm text-on-tertiary-container flex items-center gap-2 group/link" href="#">
+                    Read Story
+                    <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</article>
+<!-- Article 2 -->
+<article class="group flex flex-col h-full">
+<div class="aspect-[16/10] overflow-hidden rounded-xl mb-6 bg-surface-container-low">
+<img alt="AI Networks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Digital representation of artificial intelligence neural networks glowing in vibrant orange and blue tones on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_c72Ko8DRmys4iCVKhYzhY2f-Z564NljzgLFYbcIoDEDewNIbtA7E8Z3LzzjiXMeyq2U8G6czalBSjaJMQzdvTQ8qAWB5i8ytnByVEoTfYj2SXGyx4IFkd5HNwq8CTx784bokSjcn6aIcl4eF7j8LsnJrRFShHHVwshES-0IWmWaPwJtNuUZjG8-3oaMhbzZGe3g6XM1FXCY1S7CsbRgXNaOeGKKxcwjri7C_6kOlZwENx0wqyMPsddlNoq2dR-x4fIbDi59vk7Wj"/>
+</div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-secondary-container bg-secondary-fixed px-2 py-1 rounded">AI</span>
+<span class="font-body text-xs text-outline">Oct 12, 2024</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">Ethical AI in Emerging Markets</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6 flex-grow">Addressing the unique challenges of implementing ethical artificial intelligence frameworks in diverse cultural contexts.</p>
+<a class="font-headline font-bold text-sm text-on-tertiary-container flex items-center gap-2 group/link" href="#">
+                    Read Story
+                    <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</article>
+<!-- Article 3 -->
+<article class="group flex flex-col h-full">
+<div class="aspect-[16/10] overflow-hidden rounded-xl mb-6 bg-surface-container-low">
+<img alt="Collab Tech" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Close-up of diverse hands typing on high-end laptops in a brightly lit collaborative workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrvMZEWin18DpN0y9d40X8QNv8fMyOjmhBswFiD3WvQ90BNRiaGwiG_QAHII7WDqZ_1aZh1f80qT25pPhF0aEBVqxnbnI2LXV6StlPL2s2qbZn8aDnV6s6-ZbFM3IZo_jid4jIa5FgNQBsTN1zAIb-WFSozSN6VlTMKb2NRCxBiMHG6JvN5pnaj-aEWJBJyd4R22cfcC3JFPFRWIoDjUDmo_FAgVnamCoNwf-vMH6NqWwjvdTzUwiJW8xFOK4AWKChkfsrkz4VStt1"/>
+</div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-secondary-container bg-secondary-fixed px-2 py-1 rounded">Tech Culture</span>
+<span class="font-body text-xs text-outline">Oct 05, 2024</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">The Buea Blueprint: Community over Competition</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6 flex-grow">Exploring the collaborative DNA that makes the Silicon Mountain tech hub a global outlier in startup success.</p>
+<a class="font-headline font-bold text-sm text-on-tertiary-container flex items-center gap-2 group/link" href="#">
+                    Read Story
+                    <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</article>
+</section>
+<!-- Newsletter Section -->
+<section class="relative bg-primary overflow-hidden rounded-2xl mb-20">
+<div class="absolute inset-0 opacity-10">
+<div class="absolute top-0 right-0 w-96 h-96 bg-on-tertiary-container rounded-full blur-[100px]"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary rounded-full blur-[80px]"></div>
+</div>
+<div class="relative px-8 py-20 lg:px-24 flex flex-col lg:flex-row items-center justify-between gap-12">
+<div class="max-w-xl text-center lg:text-left">
+<span class="font-label text-xs uppercase tracking-widest text-tertiary-fixed mb-4 inline-block">Stay Ahead</span>
+<h2 class="font-headline text-4xl lg:text-5xl font-extrabold text-white mb-4">Join the Silicon Mountain Pulse</h2>
+<p class="font-body text-slate-300 text-lg leading-relaxed">Bi-weekly architectural insights into tech, data ethics, and the digital economy delivered directly to your inbox.</p>
+</div>
+<div class="w-full max-w-md">
+<form class="flex flex-col sm:flex-row gap-3">
+<input class="flex-grow bg-white/10 border border-white/20 rounded-lg px-6 py-4 text-white font-body placeholder:text-white/40 focus:bg-white/20 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none" placeholder="Your executive email" type="email"/>
+<button class="bg-on-tertiary-container text-white font-headline font-bold px-8 py-4 rounded-lg hover:brightness-110 transition-all whitespace-nowrap" type="submit">
+                            Subscribe
+                        </button>
+</form>
+<p class="font-label text-[10px] text-white/40 mt-4 text-center lg:text-left">By subscribing, you agree to our Data Ethics policy.</p>
+</div>
+</div>
+</section>
+<!-- Secondary Grid (More Articles) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
+<!-- Big Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col md:flex-row gap-8 items-center shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="w-full md:w-1/3 aspect-square overflow-hidden rounded-lg">
+<img alt="Business Growth" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" data-alt="Minimalist business growth charts and analytics on a bright clean screen with professional stationery nearby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrMm21UJP-_O2zYPHwbNwhyZMZkHUKWkN4py8qjsw8Ifu5nm70nH57Yyy117PanapQEvoOWfwz5DFHxg8dja7mhgosfGWWaOFofVFoz5zyhwkkpG7oabzJktbuB5arL1W_hsRS2LIs7Ng4tE23KtsgTG5z-6vZG8wEnT-c3so5pDvU8mpNU5mYwBtUK8Blynsn0wFUthHhlinvAKdxgQkB3jf_zvDZfty9q972xJTMer678GYo77Jv6BYrT4mwnH9CPwsXBXZTPfTQ"/>
+</div>
+<div class="w-full md:w-2/3">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-tertiary-fixed-variant bg-tertiary-fixed px-2 py-1 rounded">Business Growth</span>
+<h4 class="font-headline text-xl font-bold text-primary mt-3 mb-2">Scaling Lean: From Buea to the World</h4>
+<p class="font-body text-sm text-on-surface-variant mb-4">Effective strategies for bootstrapping tech ventures in high-potential markets.</p>
+<a class="text-on-tertiary-container font-bold text-xs uppercase tracking-widest" href="#">Read Article</a>
+</div>
+</div>
+<!-- Big Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col md:flex-row gap-8 items-center shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="w-full md:w-1/3 aspect-square overflow-hidden rounded-lg">
+<img alt="Software Dev" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" data-alt="Futuristic glowing circuits and microchips representing high-performance software engineering and security" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYahZok6-R9Mw7oRzhOXLV8Ry5UyRM_7akZdMT_vZNkRJe4EzJ9GkdlXpl_zIxjsNT9CswEFlJzBF_RMsT2v5dw_1--pXne94hcjK-PFYfhwKbYzNoI53bvsQCwQvo0QWVNyEWg96XaPRM4tIMne6a17FJ2Y-uMHJCV1pEHzc4JdZecgHhd0bZKpdXRLg8mZxG08O_nuelkLD1k8pFPISzPQfL7_vwfYUJtxH4dTsoAgyLU2uYQVI0PoNk3K4piKkPiAGRZzvZ8u5w"/>
+</div>
+<div class="w-full md:w-2/3">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-secondary-fixed-variant bg-secondary-fixed px-2 py-1 rounded">Software Dev</span>
+<h4 class="font-headline text-xl font-bold text-primary mt-3 mb-2">Clean Code in the Age of Co-Pilots</h4>
+<p class="font-body text-sm text-on-surface-variant mb-4">Maintaining architectural integrity when AI is writing your boilerplate.</p>
+<a class="text-on-tertiary-container font-bold text-xs uppercase tracking-widest" href="#">Read Article</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#000a1e] dark:bg-[#000a1e] full-width pt-20 pb-10 border-t border-white/10">
+<div class="max-w-[1440px] mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="md:col-span-2">
+<div class="text-xl font-['Manrope'] font-bold text-[#ffdcc3] mb-6">Ferdsilinks</div>
+<p class="text-slate-400 font-['Inter'] text-sm leading-relaxed max-w-sm mb-8">
+                    We are the architects of the digital future in Cameroon. Empowering innovators through data, design, and strategic intelligence.
+                </p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">brand_awareness</span></a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">groups</span></a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">hub</span></a>
+</div>
+</div>
+<div>
+<h5 class="text-white font-headline font-bold mb-6">Resources</h5>
+<ul class="flex flex-col gap-4">
+<li><a class="text-slate-400 hover:text-white transition-transform duration-200 hover:translate-x-1 inline-block font-['Inter'] text-sm" href="#">Case Studies</a></li>
+<li><a class="text-slate-400 hover:text-white transition-transform duration-200 hover:translate-x-1 inline-block font-['Inter'] text-sm" href="#">Data Ethics</a></li>
+<li><a class="text-slate-400 hover:text-white transition-transform duration-200 hover:translate-x-1 inline-block font-['Inter'] text-sm" href="#">Community Hub</a></li>
+<li><a class="text-slate-400 hover:text-white transition-transform duration-200 hover:translate-x-1 inline-block font-['Inter'] text-sm" href="#">Career Path</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-headline font-bold mb-6">Connect</h5>
+<ul class="flex flex-col gap-4">
+<li class="text-slate-400 font-['Inter'] text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">mail</span>
+                        insights@ferdsilinks.com
+                    </li>
+<li class="text-slate-400 font-['Inter'] text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">location_on</span>
+                        Silicon Mountain, Buea
+                    </li>
+</ul>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-8 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-500 font-['Inter'] text-sm">© 2024 Ferdsilinks. Architecting the Future of Silicon Mountain.</p>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-white text-xs" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-white text-xs" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>
