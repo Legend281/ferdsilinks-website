@@ -1,0 +1,41 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#000a1e"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#002147"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Gradient overlay -->
+  <rect width="1200" height="630" fill="url(#gradient)" fill-opacity="0.9"/>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#000a1e"/>
+      <stop offset="1" stop-color="#002147"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Logo Mark -->
+  <g transform="translate(100, 200)">
+    <path d="M0 0L100 200L200 0" stroke="#cf7000" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="100" cy="100" r="20" fill="#cf7000"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="100" y="480" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="white">
+    FERDSILINKS
+  </text>
+  <text x="100" y="540" font-family="Arial, sans-serif" font-size="28" fill="#708ab5">
+    Innovation & Digital Architecture
+  </text>
+  <text x="100" y="590" font-family="Arial, sans-serif" font-size="20" fill="#cf7000">
+    Silicon Mountain, Cameroon
+  </text>
+  
+  <!-- Accent elements -->
+  <circle cx="1050" cy="100" r="60" stroke="#cf7000" stroke-width="4" fill="none" opacity="0.3"/>
+  <circle cx="1100" cy="500" r="40" stroke="#cf7000" stroke-width="3" fill="none" opacity="0.2"/>
+</svg>

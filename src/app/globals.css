@@ -6,8 +6,17 @@
     font-family: 'Material Symbols Outlined';
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
-}
 
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body), sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
 
 @theme {
   --color-on-error-container: #93000a;
@@ -54,9 +63,9 @@
   --color-on-surface: #191c1d;
   --color-on-surface-variant: #44474e;
   --color-on-secondary-fixed-variant: #004491;
+  --color-surface-container-low: #f3f4f5;
   --color-surface-container-high: #e7e8e9;
   --color-tertiary: #160700;
-  --color-surface-container-low: #f3f4f5;
 
   --font-headline: var(--font-manrope);
   --font-body: var(--font-inter);
@@ -68,10 +77,139 @@
   --radius-full: 0.75rem;
 }
 
-@layer base {
-  body {
-    background-color: var(--color-surface);
-    color: var(--color-on-surface);
-    font-family: var(--font-body), sans-serif;
+@layer components {
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply bg-on-tertiary-container text-white px-6 py-3 rounded-lg font-bold 
+           transition-all duration-200 ease-out hover:shadow-lg hover:-translate-y-0.5 
+           active:scale-[0.98];
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-lg font-bold 
+           transition-all duration-200 ease-out hover:bg-primary hover:text-white;
+  }
+  
+  .link-underline {
+    @apply relative inline-block;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-current transition-all duration-300;
+  }
+  
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+  
+  .img-zoom {
+    @apply overflow-hidden;
+  }
+  
+  .img-zoom img {
+    @apply transition-transform duration-500 ease-out;
+  }
+  
+  .img-zoom:hover img {
+    @apply scale-105;
+  }
+  
+  .btn-scale {
+    @apply transition-transform duration-200 ease-out hover:scale-105 active:scale-95;
+  }
+  
+  .gradient-hover {
+    @apply transition-all duration-300;
+    background-size: 200% 200%;
+  }
+  
+  .gradient-hover:hover {
+    background-position: 100% 100%;
+  }
+  
+  .slide-arrow {
+    @apply inline-flex items-center gap-2 transition-all duration-200;
+  }
+  
+  .slide-arrow .arrow {
+    @apply transition-transform duration-200;
+  }
+  
+  .slide-arrow:hover .arrow {
+    @apply translate-x-1;
+  }
+  
+  .glow-hover {
+    @apply transition-all duration-300;
+  }
+  
+  .glow-hover:hover {
+    box-shadow: 0 0 20px rgba(207, 112, 0, 0.3);
+  }
+  
+  .border-animate {
+    @apply relative overflow-hidden;
+  }
+  
+  .border-animate::before {
+    content: '';
+    @apply absolute inset-0 border-2 border-transparent transition-all duration-300;
+  }
+  
+  .border-animate:hover::before {
+    @apply border-on-tertiary-container;
+  }
+}
+
+@layer utilities {
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  
+  .px-responsive {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .py-responsive {
+    @apply py-12 sm:py-16 lg:py-24;
+  }
+  
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+  
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
   }
 }

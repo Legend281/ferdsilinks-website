@@ -1,5 +1,4 @@
-import AboutContent from './AboutClient';
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -11,6 +10,4 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <AboutContent />;
-}
+export { metadata as aboutMetadata };

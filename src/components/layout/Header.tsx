@@ -4,33 +4,34 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from 'next-themes';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
   const pathname = usePathname();
+  const { language, t, toggleLanguage, setLanguage } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Training Hub', path: '/training' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Podcast', path: '/podcast' }
+    { name: t.nav.home, path: '/' },
+    { name: t.nav.about, path: '/about' },
+    { name: t.nav.services, path: '/services' },
+    { name: t.nav.portfolio, path: '/portfolio' },
+    { name: t.nav.training, path: '/training' },
+    { name: t.nav.careers, path: '/careers' },
+    { name: t.nav.blog, path: '/blog' }
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#000a1e]/80 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,33,71,0.04)] min-h-20 flex items-center">
+    <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl shadow-[0px_24px_48px_rgba(0,33,71,0.04)] min-h-20 flex items-center">
       <div className="flex justify-between items-center max-w-7xl mx-auto px-6 w-full relative py-4 lg:py-0">
         
         {/* Logo */}
-        <Link href="/" className="text-2xl font-extrabold text-[#000a1e] dark:text-white tracking-tighter font-headline">
+        <Link href="/" className="text-2xl font-extrabold text-primary tracking-tighter font-headline">
           Ferdsilinks
         </Link>
         
@@ -45,7 +46,7 @@ export function Header() {
                 className={`transition-colors ${
                   isActive 
                     ? 'text-on-tertiary-container border-b-2 border-on-tertiary-container pb-1' 
-                    : 'text-primary dark:text-[#f8f9fa] hover:text-on-tertiary-container'
+                    : 'text-primary hover:text-on-tertiary-container'
                 }`}
               >
                 {link.name}
@@ -54,25 +55,40 @@ export function Header() {
           })}
         </div>
         
-        {/* CTA & Mobile Toggle */}
+        {/* CTA & Language Switcher */}
         <div className="flex items-center gap-4">
+          {/* Language Switcher */}
           {mounted && (
-            <button 
-              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-              className="p-2 text-primary dark:text-white rounded-lg hover:bg-surface-container transition-colors"
-            >
-              <span className="material-symbols-outlined text-2xl">
-                {resolvedTheme === 'dark' ? 'light_mode' : 'dark_mode'}
-              </span>
-            </button>
+            <div className="flex items-center gap-1 bg-surface-container-high rounded-lg p-1">
+              <button 
+                onClick={() => setLanguage('en')}
+                className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                  language === 'en' 
+                    ? 'bg-white text-primary shadow-sm' 
+                    : 'text-on-surface-variant hover:text-primary'
+                }`}
+              >
+                EN
+              </button>
+              <button 
+                onClick={() => setLanguage('fr')}
+                className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                  language === 'fr' 
+                    ? 'bg-white text-primary shadow-sm' 
+                    : 'text-on-surface-variant hover:text-primary'
+                }`}
+              >
+                FR
+              </button>
+            </div>
           )}
 
           <Link href="/contact" className="hidden sm:inline-block bg-on-tertiary-container text-white px-6 py-2.5 rounded-lg font-bold hover:opacity-80 transition-all duration-300 scale-95 active:scale-90">
-            Get a Quote
+            {t.nav.getAQuote}
           </Link>
 
           <button 
-            className="lg:hidden p-2 text-primary dark:text-white rounded-lg hover:bg-surface-container transition-colors"
+            className="lg:hidden p-2 text-primary rounded-lg hover:bg-surface-container transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
             <span className="material-symbols-outlined text-3xl">
@@ -90,7 +106,7 @@ export function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-[80px] left-0 w-full bg-white dark:bg-[#000a1e] shadow-2xl border-t border-surface-container lg:hidden py-6 px-6 z-40"
+            className="absolute top-[80px] left-0 w-full bg-white shadow-2xl border-t border-surface-container lg:hidden py-6 px-6 z-40"
           >
             <div className="flex flex-col gap-6 font-headline font-bold text-lg text-center">
               {navLinks.map((link) => {
@@ -103,19 +119,44 @@ export function Header() {
                     className={`block w-full py-2 ${
                       isActive 
                         ? 'text-on-tertiary-container border-b-2 border-on-tertiary-container inline-block w-max mx-auto' 
-                        : 'text-primary dark:text-[#f8f9fa] hover:text-on-tertiary-container'
+                        : 'text-primary hover:text-on-tertiary-container'
                     }`}
                   >
                     {link.name}
                   </Link>
                 );
               })}
+              
+              {/* Language Switcher Mobile */}
+              <div className="flex justify-center gap-2 py-4 border-t border-b border-surface-container">
+                <button 
+                  onClick={() => setLanguage('en')}
+                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
+                    language === 'en' 
+                      ? 'bg-on-tertiary-container text-white' 
+                      : 'bg-surface-container-high text-primary'
+                  }`}
+                >
+                  English
+                </button>
+                <button 
+                  onClick={() => setLanguage('fr')}
+                  className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
+                    language === 'fr' 
+                      ? 'bg-on-tertiary-container text-white' 
+                      : 'bg-surface-container-high text-primary'
+                  }`}
+                >
+                  Français
+                </button>
+              </div>
+              
               <Link 
                 href="/contact" 
                 onClick={() => setIsOpen(false)}
                 className="mt-4 bg-on-tertiary-container text-white px-6 py-3 rounded-lg font-bold w-full mx-auto max-w-[200px]"
               >
-                Get a Quote
+                {t.nav.getAQuote}
               </Link>
             </div>
           </motion.div>
