@@ -1,11 +1,56 @@
 "use client";
 
+import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageProvider';
 
 export default function ContactContent() {
   const { t } = useLanguage();
+  const [isLoading, setIsLoading] = useState(false);
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [formMessage, setFormMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setFormStatus('idle');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone') || undefined,
+      company: formData.get('company') || undefined,
+      service_interest: formData.get('service_interest'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormMessage('Thank you! Your message has been sent. We will get back to you within 24 hours.');
+        e.currentTarget.reset();
+      } else {
+        setFormStatus('error');
+        setFormMessage(result.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setFormStatus('error');
+      setFormMessage('Network error. Please check your connection and try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <main className="pt-24 space-y-4">
       
@@ -81,6 +126,7 @@ export default function ContactContent() {
     </div>
   </section>
 </FadeIn>
+
 {/* Form & Details Section */}
 <FadeIn><section id="contact-form" className="px-8 py-16 bg-surface-container-low">
 <div className="max-w-7xl mx-auto">
@@ -89,36 +135,77 @@ export default function ContactContent() {
 <div className="lg:col-span-7 bg-surface-container-lowest p-8 lg:p-12 rounded-xl shadow-sm">
 <h2 className="font-headline text-3xl font-bold text-primary mb-2">{t.contact.sendMessage}</h2>
 <p className="text-on-surface-variant mb-8">We typically respond within 24 hours.</p>
-<form className="space-y-6">
+
+{formStatus === 'success' && (
+  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+    <div className="flex items-center gap-2 text-green-700">
+      <span className="material-symbols-outlined">check_circle</span>
+      <span className="font-medium">{formMessage}</span>
+    </div>
+  </div>
+)}
+
+{formStatus === 'error' && (
+  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+    <div className="flex items-center gap-2 text-red-700">
+      <span className="material-symbols-outlined">error</span>
+      <span className="font-medium">{formMessage}</span>
+    </div>
+  </div>
+)}
+
+<form onSubmit={handleSubmit} className="space-y-6">
 <div className="grid md:grid-cols-2 gap-6">
 <div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.fullName}</label>
-<input className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="John Doe" type="text"/>
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">Your Name *</label>
+<input name="name" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="John Doe" type="text"/>
 </div>
 <div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.emailAddress}</label>
-<input className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="john@company.cm" type="email"/>
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">Email Address *</label>
+<input name="email" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="john@company.cm" type="email"/>
+</div>
+</div>
+<div className="grid md:grid-cols-2 gap-6">
+<div className="space-y-2">
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">Phone</label>
+<input name="phone" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="+237 6XX XXX XXX" type="tel"/>
+</div>
+<div className="space-y-2">
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">Company</label>
+<input name="company" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="Your Company Ltd" type="text"/>
 </div>
 </div>
 <div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.subject}</label>
-<select className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none">
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">Service Interest</label>
+<select name="service_interest" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none">
+<option value="">Select a service...</option>
 <option>Data Science & AI Solutions</option>
 <option>Software Development</option>
-<option>IT Consulting</option>
+<option>OHADA Solutions (Solafide ERP)</option>
 <option>Training Programs</option>
 <option>General Inquiry</option>
 </select>
 </div>
 <div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.message}</label>
-<textarea className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none resize-none" placeholder="Tell us about your project or inquiry..." rows={5}></textarea>
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">Your Message *</label>
+<textarea name="message" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none resize-none" placeholder="Tell us about your project or inquiry..." rows={5}></textarea>
 </div>
-<button className="w-full md:w-auto px-10 py-4 bg-on-tertiary-container text-white font-headline font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-on-tertiary-container/20" type="submit">
-                                {t.contact.submitMessage}
-                            </button>
+<button disabled={isLoading} className="w-full md:w-auto px-10 py-4 bg-on-tertiary-container text-white font-headline font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-on-tertiary-container/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2" type="submit">
+{isLoading ? (
+  <>
+    <span className="material-symbols-outlined animate-spin">progress_activity</span>
+    Sending...
+  </>
+) : (
+  <>
+    {t.contact.submitMessage}
+    <span className="material-symbols-outlined">send</span>
+  </>
+)}
+</button>
 </form>
 </div>
+
 {/* Contact Details Sidebar */}
 <div className="lg:col-span-5 space-y-12">
 <div>
@@ -187,6 +274,7 @@ export default function ContactContent() {
 </div>
 </div>
 </section></FadeIn>
+
 {/* Interactive Map Placeholder */}
 <FadeIn><section className="px-8 py-20">
 <div className="max-w-7xl mx-auto">

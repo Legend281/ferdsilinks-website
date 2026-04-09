@@ -1,0 +1,119 @@
+export interface Lead {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  service_interest?: string;
+  message: string;
+  source?: string;
+  status: 'new' | 'contacted' | 'qualified' | 'converted' | 'lost';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Subscriber {
+  id: string;
+  email: string;
+  name?: string;
+  source?: string;
+  status: 'active' | 'unsubscribed';
+  created_at: string;
+}
+
+export interface JobApplication {
+  id: string;
+  job_id: string;
+  job_title: string;
+  full_name: string;
+  email: string;
+  phone?: string;
+  linkedin_url?: string;
+  portfolio_url?: string;
+  cover_letter: string;
+  resume_url?: string;
+  status: 'pending' | 'reviewing' | 'interview' | 'rejected' | 'accepted';
+  notes?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Enrollment {
+  id: string;
+  course_id: string;
+  course_title: string;
+  full_name: string;
+  email: string;
+  phone?: string;
+  education_level?: string;
+  experience_level?: string;
+  motivation?: string;
+  payment_method?: string;
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface JobListing {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  type: 'full-time' | 'part-time' | 'contract' | 'internship';
+  remote: boolean;
+  description: string;
+  requirements: string[];
+  responsibilities: string[];
+  salary_range?: string;
+  status: 'draft' | 'published' | 'closed';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  cover_image?: string;
+  author_id?: string;
+  author_name?: string;
+  category: string;
+  tags: string[];
+  status: 'draft' | 'published';
+  published_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  department?: string;
+  bio: string;
+  image_url?: string;
+  linkedin_url?: string;
+  twitter_url?: string;
+  email?: string;
+  order?: number;
+  status: 'active' | 'inactive';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ServiceRequest {
+  id: string;
+  service_type: string;
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  message: string;
+  budget_range?: string;
+  timeline?: string;
+  status: 'new' | 'in_progress' | 'completed' | 'cancelled';
+  created_at: string;
+  updated_at: string;
+}

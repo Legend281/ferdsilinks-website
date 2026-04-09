@@ -4,9 +4,14 @@ import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
 import { courses } from '@/data/training';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export default function TrainingHubPage() {
+  const { t } = useLanguage();
   const [activeLevel, setActiveLevel] = useState<string>('All Levels');
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [newsletterMessage, setNewsletterMessage] = useState('');
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];
 
   const filteredCourses = courses.filter(course => {
@@ -238,9 +243,74 @@ export default function TrainingHubPage() {
                     <span className="font-label text-on-tertiary-container font-bold text-sm tracking-widest uppercase">Stay Informed</span>
                     <h2 className="font-headline text-4xl font-extrabold text-primary">Join the Silicon Mountain Pulse</h2>
                     <p className="text-on-surface-variant max-w-xl mx-auto">Get notified about new curriculum drops, exclusive scholarship opportunities, and local tech ecosystem events.</p>
-                    <form className="flex flex-col sm:flex-row gap-4 mt-8 max-w-lg mx-auto" onSubmit={(e) => e.preventDefault()}>
-                        <input className="flex-grow px-6 py-4 rounded-md bg-white border border-outline-variant focus:ring-2 focus:ring-secondary focus:outline-none transition-all" placeholder="Your professional email" type="email" required />
-                        <button className="bg-on-tertiary-container text-white px-8 py-4 rounded-md font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg whitespace-nowrap" type="submit">Subscribe Now</button>
+                    
+                    {newsletterStatus === 'success' && (
+                      <div className="max-w-lg mx-auto p-4 bg-green-50 border border-green-200 rounded-lg">
+                        <div className="flex items-center justify-center gap-2 text-green-700">
+                          <span className="material-symbols-outlined">check_circle</span>
+                          <span className="font-medium">{newsletterMessage}</span>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {newsletterStatus === 'error' && (
+                      <div className="max-w-lg mx-auto p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <div className="flex items-center justify-center gap-2 text-red-700">
+                          <span className="material-symbols-outlined">error</span>
+                          <span className="font-medium">{newsletterMessage}</span>
+                        </div>
+                      </div>
+                    )}
+                    
+                    <form onSubmit={async (e) => {
+                      e.preventDefault();
+                      setNewsletterStatus('loading');
+                      setNewsletterMessage('');
+                      
+                      try {
+                        const response = await fetch('/api/newsletter', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ email: newsletterEmail }),
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (response.ok) {
+                          setNewsletterStatus('success');
+                          setNewsletterMessage(result.message || 'Successfully subscribed!');
+                          setNewsletterEmail('');
+                        } else {
+                          setNewsletterStatus('error');
+                          setNewsletterMessage(result.error || 'Something went wrong');
+                        }
+                      } catch {
+                        setNewsletterStatus('error');
+                        setNewsletterMessage('Network error. Please try again.');
+                      }
+                    }} className="flex flex-col sm:flex-row gap-4 mt-8 max-w-lg mx-auto">
+                        <input 
+                          value={newsletterEmail}
+                          onChange={(e) => setNewsletterEmail(e.target.value)}
+                          className="flex-grow px-6 py-4 rounded-md bg-white border border-outline-variant focus:ring-2 focus:ring-secondary focus:outline-none transition-all" 
+                          placeholder="Your professional email" 
+                          type="email" 
+                          required 
+                        />
+                        <button 
+                          disabled={newsletterStatus === 'loading'}
+                          className="bg-on-tertiary-container text-white px-8 py-4 rounded-md font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg whitespace-nowrap disabled:opacity-50 flex items-center justify-center gap-2" 
+                          type="submit"
+                        >
+                          {newsletterStatus === 'loading' ? (
+                            <>
+                              <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                              Subscribing...
+                            </>
+                          ) : (
+                            'Subscribe Now'
+                          )}
+                        </button>
                     </form>
                     <p className="text-[10px] text-on-surface-variant uppercase font-label tracking-tighter mt-4">Zero spam. Only high-value tech updates.</p>
                 </div>
