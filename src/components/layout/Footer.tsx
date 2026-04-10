@@ -52,7 +52,7 @@ export function Footer() {
 <div>
 <h4 className="font-headline font-bold text-white mb-6 uppercase tracking-widest text-xs">Office</h4>
 <p className="text-slate-400 mb-4">Tech District, Molyko<br/>Buea, SW Region<br/>Cameroon</p>
-<Link className="text-on-tertiary-container font-bold underline underline-offset-4" href="#">Get Directions</Link>
+<a href="https://www.google.com/maps/dir//Ferdsilinks+Buea,+Molyko,+Buea,+Cameroon" target="_blank" rel="noopener noreferrer" className="text-on-tertiary-container font-bold underline underline-offset-4">Get Directions</a>
 </div>
 </div>
 <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
