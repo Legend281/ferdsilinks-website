@@ -3,20 +3,45 @@
 import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
-import { courses } from '@/data/training';
-import { useLanguage } from '@/components/LanguageProvider';
 
-export default function TrainingHubPage() {
-  const { t } = useLanguage();
+interface Course {
+  id: string;
+  slug: string;
+  title: string;
+  short_description?: string;
+  description?: string;
+  cover_image?: string;
+  duration?: string;
+  level?: string;
+  curriculum?: string[];
+  price: number;
+  currency: string;
+  instructor_name?: string;
+  certificate_provided?: boolean;
+  is_online?: boolean;
+}
+
+interface TrainingClientProps {
+  initialCourses: Course[];
+}
+
+export default function TrainingClient({ initialCourses }: TrainingClientProps) {
   const [activeLevel, setActiveLevel] = useState<string>('All Levels');
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [newsletterMessage, setNewsletterMessage] = useState('');
+
+  const courses = initialCourses;
   const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];
 
   const filteredCourses = courses.filter(course => {
     return activeLevel === 'All Levels' || course.level === activeLevel;
   });
+
+  const formatPrice = (price: number, currency: string) => {
+    if (price === 0) return 'Free';
+    return `${currency} ${price.toLocaleString()}`;
+  };
 
   return (
     <main className="min-h-screen pt-24 font-body">
@@ -102,11 +127,11 @@ export default function TrainingHubPage() {
             <span className="material-symbols-outlined text-3xl">keyboard_double_arrow_down</span>
           </div>
         </section>
-      </FadeIn>
+      </FadeIn> 
 
       {/* Course Filter & Grid */}
       <FadeIn>
-        <section className="py-24 bg-surface px-8">
+        <section id="courses" className="py-24 bg-surface px-8">
             <div className="container max-w-[1440px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
                     <div className="max-w-xl">
@@ -135,11 +160,19 @@ export default function TrainingHubPage() {
                         <div key={course.id} className="group bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 transition-all hover:-translate-y-2 hover:shadow-xl flex flex-col">
                             <Link href={`/training/${course.slug}`}>
                                 <div className="h-48 overflow-hidden rounded-t-xl relative">
-                                    <img 
-                                        alt={course.title} 
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                                        src={`https://api.dicebear.com/7.x/shapes/svg?seed=${course.id}&backgroundColor=002147`} 
-                                    />
+                                    {course.cover_image ? (
+                                      <img 
+                                          alt={course.title} 
+                                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                                          src={course.cover_image}
+                                      />
+                                    ) : (
+                                      <img 
+                                          alt={course.title} 
+                                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                                          src={`https://api.dicebear.com/7.x/shapes/svg?seed=${course.id}&backgroundColor=002147`} 
+                                      />
+                                    )}
                                     {course.level === 'Advanced' && (
                                         <div className="absolute top-4 left-4 bg-primary/80 backdrop-blur-md text-white text-[10px] font-label font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                                             Top Rated
@@ -152,7 +185,7 @@ export default function TrainingHubPage() {
                                     <h3 className="font-headline text-xl font-bold text-primary mb-2 line-clamp-2 min-h-[56px]">{course.title}</h3>
                                 </Link>
                                 <p className="text-sm text-on-surface-variant mb-6 flex-grow line-clamp-3">{course.short_description}</p>
-                                <div className="flex items-center justify-between mb-6 pt-4 border-t border-surface-container-low">
+                                <div className="flex items-center justify-between mb-4 pt-4 border-t border-surface-container-low">
                                     <div className="flex items-center gap-1 text-on-surface-variant">
                                         <span className="material-symbols-outlined text-sm">schedule</span>
                                         <span className="text-xs font-medium">{course.duration}</span>
@@ -161,6 +194,15 @@ export default function TrainingHubPage() {
                                         <span className="material-symbols-outlined text-sm">bar_chart</span>
                                         <span className="text-xs font-medium">{course.level}</span>
                                     </div>
+                                </div>
+                                <div className="flex items-center justify-between mb-4">
+                                  <span className="font-bold text-primary">{formatPrice(course.price, course.currency)}</span>
+                                  {course.certificate_provided && (
+                                    <span className="text-xs text-on-surface-variant flex items-center gap-1">
+                                      <span className="material-symbols-outlined text-sm">verified</span>
+                                      Certificate
+                                    </span>
+                                  )}
                                 </div>
                                 <Link href={`/training/${course.slug}`}>
                                     <button className="w-full bg-surface-container-high text-primary font-bold py-3 rounded-md group-hover:bg-on-tertiary-container group-hover:text-white transition-all">Enroll Now</button>
@@ -177,7 +219,7 @@ export default function TrainingHubPage() {
                 </div>
             </div>
         </section>
-      </FadeIn>
+      </FadeIn> 
 
       {/* Why Learn Section */}
       <FadeIn>
@@ -206,7 +248,7 @@ export default function TrainingHubPage() {
                     <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-4">
                             <div className="bg-primary p-8 rounded-xl border border-white/5 shadow-2xl">
-                                <span className="material-symbols-outlined text-4xl text-tertiary-fixed mb-4">workspace_premium</span>
+                                <span className="material-symbols-outlined text-4xl text-tertiary-fixed mb-4"> workspace_premium</span>
                                 <p className="text-white font-headline text-lg font-bold">Global Certification</p>
                                 <p className="text-xs text-on-primary-container mt-2">Recognized by major tech employers worldwide.</p>
                             </div>
@@ -232,7 +274,7 @@ export default function TrainingHubPage() {
                 </div>
             </div>
         </section>
-      </FadeIn>
+      </FadeIn> 
 
       {/* Newsletter Section */}
       <FadeIn>
@@ -290,33 +332,33 @@ export default function TrainingHubPage() {
                       }
                     }} className="flex flex-col sm:flex-row gap-4 mt-8 max-w-lg mx-auto">
                         <input 
-                          value={newsletterEmail}
-                          onChange={(e) => setNewsletterEmail(e.target.value)}
-                          className="flex-grow px-6 py-4 rounded-md bg-white border border-outline-variant focus:ring-2 focus:ring-secondary focus:outline-none transition-all" 
-                          placeholder="Your professional email" 
-                          type="email" 
-                          required 
+                            value={newsletterEmail}
+                            onChange={(e) => setNewsletterEmail(e.target.value)}
+                            className="flex-grow px-6 py-4 rounded-md bg-white border border-outline-variant focus:ring-2 focus:ring-secondary focus:outline-none transition-all" 
+                            placeholder="Your professional email" 
+                            type="email" 
+                            required 
                         />
                         <button 
-                          disabled={newsletterStatus === 'loading'}
-                          className="bg-on-tertiary-container text-white px-8 py-4 rounded-md font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg whitespace-nowrap disabled:opacity-50 flex items-center justify-center gap-2" 
-                          type="submit"
+                            disabled={newsletterStatus === 'loading'}
+                            className="bg-on-tertiary-container text-white px-8 py-4 rounded-md font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg whitespace-nowrap disabled:opacity-50 flex items-center justify-center gap-2" 
+                            type="submit"
                         >
-                          {newsletterStatus === 'loading' ? (
-                            <>
-                              <span className="material-symbols-outlined animate-spin">progress_activity</span>
-                              Subscribing...
-                            </>
-                          ) : (
-                            'Subscribe Now'
-                          )}
+                            {newsletterStatus === 'loading' ? (
+                              <>
+                                <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                                Subscribing...
+                              </>
+                            ) : (
+                              'Subscribe Now'
+                            )}
                         </button>
                     </form>
                     <p className="text-[10px] text-on-surface-variant uppercase font-label tracking-tighter mt-4">Zero spam. Only high-value tech updates.</p>
                 </div>
             </div>
         </section>
-      </FadeIn>
+      </FadeIn> 
 
     </main>
   );
