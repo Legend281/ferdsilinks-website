@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
+import { useLanguage } from '@/components/LanguageProvider';
 
 interface Course {
   id: string;
@@ -26,13 +27,15 @@ interface TrainingClientProps {
 }
 
 export default function TrainingClient({ initialCourses }: TrainingClientProps) {
+  const { t } = useLanguage();
+  const tp = t.trainingPage;
   const [activeLevel, setActiveLevel] = useState<string>('All Levels');
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [newsletterMessage, setNewsletterMessage] = useState('');
 
   const courses = initialCourses;
-  const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];
+  const levels = [tp.levels.all, tp.levels.beginner, tp.levels.intermediate, tp.levels.advanced];
 
   const filteredCourses = courses.filter(course => {
     return activeLevel === 'All Levels' || course.level === activeLevel;
@@ -62,20 +65,20 @@ export default function TrainingClient({ initialCourses }: TrainingClientProps) 
               <div className="space-y-8">
                 <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
                   <span className="material-symbols-outlined text-tertiary-fixed text-sm">school</span>
-                  <span className="font-label text-tertiary-fixed text-xs font-bold uppercase tracking-widest">The Digital Architect Academy</span>
+                  <span className="font-label text-tertiary-fixed text-xs font-bold uppercase tracking-widest">{tp.heroTag}</span>
                 </div>
                 <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05]">
-                  Master the Future of Tech in <span className="text-transparent bg-clip-text bg-gradient-to-r from-tertiary-fixed to-on-tertiary-container">Silicon Mountain</span>
+                  {tp.heroTitlePart1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-tertiary-fixed to-on-tertiary-container">{tp.heroTitlePart2}</span>
                 </h1>
                 <p className="text-lg md:text-xl text-on-primary-container max-w-xl leading-relaxed">
-                  Expert-led intensives in Data Science, AI, and Software Engineering. Built for the next generation of African tech leaders in the heart of Buea's ecosystem.
+                  {tp.heroDesc}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link href="#courses" className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
-                    Explore Courses <span className="material-symbols-outlined">arrow_forward</span>
+                    {tp.exploreBtn} <span className="material-symbols-outlined">arrow_forward</span>
                   </Link>
                   <Link href="/contact" className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all">
-                    Meet Instructors
+                    {tp.instructorsBtn}
                   </Link>
                 </div>
                 <div className="flex items-center gap-8 pt-6 border-t border-white/10">
@@ -135,7 +138,7 @@ export default function TrainingClient({ initialCourses }: TrainingClientProps) 
             <div className="container max-w-[1440px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
                     <div className="max-w-xl">
-                        <span className="font-label text-on-tertiary-container font-bold text-sm tracking-widest uppercase">Course Catalog</span>
+                        <span className="font-label text-on-tertiary-container font-bold text-sm tracking-widest uppercase">{tp.catalogTag}</span>
                         <h2 className="font-headline text-4xl font-extrabold text-primary-container mt-2">Architecture for Every Discipline</h2>
                     </div>
                     <div className="flex bg-surface-container-high p-1 rounded-lg overflow-x-auto [scrollbar-width:none]">
@@ -212,8 +215,8 @@ export default function TrainingClient({ initialCourses }: TrainingClientProps) 
                     )) : (
                         <div className="col-span-full text-center py-24 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
                             <span className="material-symbols-outlined text-4xl text-outline-variant mb-2">search_off</span>
-                            <p className="font-headline font-bold text-xl text-primary mt-4">No courses found matching this level.</p>
-                            <button onClick={() => setActiveLevel('All Levels')} className="mt-4 text-on-tertiary-container font-bold hover:underline">Clear Filters</button>
+                            <p className="font-headline font-bold text-xl text-primary mt-4">{tp.noCourses}</p>
+                            <button onClick={() => setActiveLevel(tp.levels.all)} className="mt-4 text-on-tertiary-container font-bold hover:underline">{tp.clearFilters}</button>
                         </div>
                     )}
                 </div>
@@ -228,7 +231,7 @@ export default function TrainingClient({ initialCourses }: TrainingClientProps) 
                 <div className="flex flex-col lg:flex-row gap-16 items-center">
                     <div className="lg:w-1/2 space-y-6">
                         <span className="font-label text-tertiary-fixed text-sm font-bold tracking-[0.2em] uppercase">The Architect's Advantage</span>
-                        <h2 className="font-headline text-4xl font-extrabold text-white leading-tight">Why Learn with Ferdsilinks?</h2>
+                        <h2 className="font-headline text-4xl font-extrabold text-white leading-tight">{tp.advantagesTitle}</h2>
                         <p className="text-on-primary-container text-lg leading-relaxed">We don't just teach tools; we craft architects of the digital future. Our methodology is rooted in the unique challenges and opportunities of the African tech landscape.</p>
                         <div className="space-y-6 pt-8">
                             <div className="flex items-start gap-4">
