@@ -44,8 +44,8 @@ export default function BlogClient({ posts }: BlogClientProps) {
       <main className="pt-24 min-h-screen">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-24 text-center">
           <span className="material-symbols-outlined text-6xl text-gray-300 mb-4">article</span>
-          <h1 className="text-3xl font-headline font-bold text-primary mb-4">No Blog Posts Yet</h1>
-          <p className="text-on-surface-variant mb-8">Check back soon for insights from the Ferdsilinks team.</p>
+          <h1 className="text-3xl font-headline font-bold text-primary mb-4">{bp.noInsights}</h1>
+          <p className="text-on-surface-variant mb-8">{bp.tryAdjusting}</p>
         </div>
       </main>
     );
@@ -76,7 +76,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
               <div className="relative p-12 lg:p-20 max-w-5xl w-full">
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-on-tertiary-container/80 backdrop-blur-sm rounded-full mb-6">
                   <span className="w-2 h-2 bg-tertiary-fixed rounded-full animate-pulse"></span>
-                  <span className="font-label text-xs uppercase tracking-widest text-white font-bold">Featured Insight</span>
+                  <span className="font-label text-xs uppercase tracking-widest text-white font-bold">{bp.featuredInsight}</span>
                 </div>
                 <h1 className="font-headline text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight">
                   {featuredPost.title}
@@ -86,7 +86,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
                 </p>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                   <button className="bg-on-tertiary-container text-white font-headline font-bold px-8 py-4 rounded-lg flex items-center gap-2 hover:bg-tertiary-fixed hover:text-on-tertiary-container transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
-                    Read Full Story
+                    {bp.readFullStory}
                     <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                   </button>
                   <span className="font-label text-sm text-white/60 flex items-center gap-2">
@@ -130,7 +130,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
                 <span className="material-symbols-outlined">search</span>
                 <input 
                   type="text" 
-                  placeholder="Search insights..." 
+                  placeholder={bp.searchPlaceholder} 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="bg-transparent border-none focus:ring-0 font-body text-sm text-on-surface flex-grow focus:outline-none"
@@ -235,7 +235,7 @@ export default function BlogClient({ posts }: BlogClientProps) {
                         <h4 className="font-headline text-xl font-bold text-primary mt-3 mb-2 group-hover:text-secondary transition-colors line-clamp-2">{post.title}</h4>
                         <p className="font-body text-sm text-on-surface-variant mb-4 line-clamp-2">{post.excerpt}</p>
                         <Link href={`/blog/${post.slug}`} className="text-on-tertiary-container font-bold text-xs uppercase tracking-widest flex items-center gap-1 hover:text-primary transition-colors">
-                            Read Article <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            {bp.readArticle} <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                         </Link>
                     </div>
                 </div>
