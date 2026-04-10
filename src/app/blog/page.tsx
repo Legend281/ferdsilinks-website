@@ -3,18 +3,31 @@
 import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
-import { blogPosts } from '@/data/blog';
+import { useBlogPosts } from '@/data/blog';
 import { useLanguage } from '@/components/LanguageProvider';
 
 export default function BlogPage() {
   const { t } = useLanguage();
+  const blogPosts = useBlogPosts();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>(t.blogPage.categories.all);
 
   const categories = [t.blogPage.categories.all, t.blogPage.categories.dataScience, t.blogPage.categories.ai, t.blogPage.categories.techCulture, t.blogPage.categories.softwareDevelopment, t.blogPage.categories.businessGrowth, t.blogPage.categories.companyNews, t.blogPage.categories.engineering, t.blogPage.categories.insights];
 
+  const getLocalizedCategory = (cat: string) => {
+      switch(cat) {
+          case 'Data Science': return t.blogPage.categories.dataScience;
+          case 'AI & ML': return t.blogPage.categories.ai;
+          case 'Business': return t.blogPage.categories.businessGrowth;
+          case 'Training': return t.blogPage.categories.techCulture;
+          case 'Insights': return t.blogPage.categories.insights;
+          default: return cat;
+      }
+  };
+
   const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = activeCategory === t.blogPage.categories.all || post.category === activeCategory;
+    const serializedCat = getLocalizedCategory(post.category);
+    const matchesCategory = activeCategory === t.blogPage.categories.all || serializedCat === activeCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;

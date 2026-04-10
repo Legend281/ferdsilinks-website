@@ -3,6 +3,7 @@ import { Manrope, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
+import { MainLayout } from "@/components/layout/MainLayout";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -86,7 +87,13 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className={`${manrope.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant`}>
-        {children}
+        <LanguageProvider>
+          <PageTransitionProvider>
+            <MainLayout>
+              {children}
+            </MainLayout>
+          </PageTransitionProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

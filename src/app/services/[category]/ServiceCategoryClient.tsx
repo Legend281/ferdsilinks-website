@@ -1,17 +1,13 @@
+"use client";
+
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { serviceCategories } from '@/data/services';
+import { useServices } from '@/data/services';
 import { FadeIn } from '@/components/FadeIn';
 
-export async function generateStaticParams() {
-    return serviceCategories.map((cat) => ({
-        category: cat.slug,
-    }));
-}
-
-export default async function ServiceCategoryPage({ params }: { params: Promise<{ category: string }> }) {
-    const { category } = await params;
-    const service = serviceCategories.find(c => c.slug === category);
+export default function ServiceCategoryClient({ categorySlug }: { categorySlug: string }) {
+    const serviceCategories = useServices();
+    const service = serviceCategories.find(c => c.slug === categorySlug);
 
     if (!service) {
         notFound();
