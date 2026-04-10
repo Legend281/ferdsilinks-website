@@ -17,9 +17,9 @@ export function Footer() {
 <span className="text-xl font-black text-white mb-4 block">Ferdsilinks</span>
 <p className="text-slate-400 mb-6">Leading the digital transformation of Cameroon through precision tech solutions and elite education.</p>
 <div className="flex gap-4">
-<span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-on-tertiary-container transition-colors cursor-pointer"><span className="material-symbols-outlined text-sm">language</span></span>
-<span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-on-tertiary-container transition-colors cursor-pointer"><span className="material-symbols-outlined text-sm">alternate_email</span></span>
-<span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-on-tertiary-container transition-colors cursor-pointer"><span className="material-symbols-outlined text-sm">share</span></span>
+<a href="https://www.facebook.com/share/1Zn5gjt5PA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-on-tertiary-container transition-colors cursor-pointer"><span className="material-symbols-outlined text-sm">groups</span></a>
+<a href="https://cm.linkedin.com/company/ferdsilinks-group" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-on-tertiary-container transition-colors cursor-pointer"><span className="material-symbols-outlined text-sm">share</span></a>
+<a href="https://www.instagram.com/ferdsilinks?igsh=MTF1MGRiNjE4ZTFtMg==" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-on-tertiary-container transition-colors cursor-pointer"><span className="material-symbols-outlined text-sm">alternate_email</span></a>
 </div>
 </div>
 <div>
