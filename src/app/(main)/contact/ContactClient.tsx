@@ -77,7 +77,7 @@ export default function ContactContent() {
             <Link href="#contact-form" className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
               {t.contact.sendMessage} <span className="material-symbols-outlined">arrow_forward</span>
             </Link>
-            <a href="tel:+237600000000" className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary hover:text-white transition-all inline-flex items-center gap-2">
+            <a href="tel:+237676817339" className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary hover:text-white transition-all inline-flex items-center gap-2">
               <span className="material-symbols-outlined">call</span> {t.contact.callUs}
             </a>
           </div>
@@ -259,13 +259,13 @@ export default function ContactContent() {
 <div className="pt-4">
 <h4 className="font-label text-xs font-bold uppercase text-on-surface-variant mb-6 tracking-widest">{t.contact.connectCommunity}</h4>
 <div className="flex gap-4">
-<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://www.facebook.com/ferdsilinks" target="_blank" rel="noopener noreferrer">
+<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://www.facebook.com/share/1Zn5gjt5PA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>groups</span>
 </a>
 <a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://cm.linkedin.com/company/ferdsilinks-group" target="_blank" rel="noopener noreferrer">
 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>share</span>
 </a>
-<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="#">
+<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://www.instagram.com/ferdsilinks?igsh=MTF1MGRiNjE4ZTFtMg==" target="_blank" rel="noopener noreferrer">
 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>public</span>
 </a>
 </div>
