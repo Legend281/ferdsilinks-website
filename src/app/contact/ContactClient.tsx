@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageProvider';
-import { useState, useTransition } from 'react';
-import { submitContactMessage } from '@/actions/contact';
 
 export default function ContactContent() {
   const { t } = useLanguage();
@@ -39,15 +37,15 @@ export default function ContactContent() {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormMessage(t.contact.status.success);
+        setFormMessage('Thank you! Your message has been sent. We will get back to you within 24 hours.');
         e.currentTarget.reset();
       } else {
         setFormStatus('error');
-        setFormMessage(result.error || t.contact.status.error);
+        setFormMessage(result.error || 'Something went wrong. Please try again.');
       }
     } catch {
       setFormStatus('error');
-      setFormMessage(t.contact.status.error);
+      setFormMessage('Network error. Please check your connection and try again.');
     } finally {
       setIsLoading(false);
     }
@@ -79,7 +77,7 @@ export default function ContactContent() {
             <Link href="#contact-form" className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
               {t.contact.sendMessage} <span className="material-symbols-outlined">arrow_forward</span>
             </Link>
-            <a href="tel:+237600000000" className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary hover:text-white transition-all inline-flex items-center gap-2">
+            <a href="tel:+237676817339" className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary hover:text-white transition-all inline-flex items-center gap-2">
               <span className="material-symbols-outlined">call</span> {t.contact.callUs}
             </a>
           </div>
@@ -137,7 +135,6 @@ export default function ContactContent() {
 <div className="lg:col-span-7 bg-surface-container-lowest p-8 lg:p-12 rounded-xl shadow-sm">
 <h2 className="font-headline text-3xl font-bold text-primary mb-2">{t.contact.sendMessage}</h2>
 <p className="text-on-surface-variant mb-8">We typically respond within 24 hours.</p>
-<<<<<<< HEAD
 
 {formStatus === 'success' && (
   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
@@ -171,7 +168,7 @@ export default function ContactContent() {
 <div className="grid md:grid-cols-2 gap-6">
 <div className="space-y-2">
 <label className="font-label text-xs font-bold uppercase text-on-surface-variant">Phone</label>
-<input name="phone" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="+237 6XX XXX XXX" type="tel"/>
+<input name="phone" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="+237 676 817 339" type="tel"/>
 </div>
 <div className="space-y-2">
 <label className="font-label text-xs font-bold uppercase text-on-surface-variant">Company</label>
@@ -206,41 +203,6 @@ export default function ContactContent() {
   </>
 )}
 </button>
-=======
-<form className="space-y-6" onSubmit={handleSubmit}>
-<div className="grid md:grid-cols-2 gap-6">
-<div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.fullName}</label>
-<input name="fullName" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder={t.contact.formPlaceholders.fullName} type="text"/>
-</div>
-<div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.emailAddress}</label>
-<input name="email" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder={t.contact.formPlaceholders.email} type="email"/>
-</div>
-</div>
-<div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.subject}</label>
-<select name="subject" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none">
-<option value="Data Science & AI Solutions">{t.contact.subjects.dataScience}</option>
-<option value="Software Development">{t.contact.subjects.softwareDev}</option>
-<option value="IT Consulting">{t.contact.subjects.itConsulting}</option>
-<option value="Training Programs">{t.contact.subjects.training}</option>
-<option value="General Inquiry">{t.contact.subjects.general}</option>
-</select>
-</div>
-<div className="space-y-2">
-<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.message}</label>
-<textarea name="message" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none resize-none" placeholder={t.contact.formPlaceholders.message} rows={5}></textarea>
-</div>
-<button disabled={isPending} className="w-full md:w-auto px-10 py-4 bg-on-tertiary-container text-white font-headline font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-on-tertiary-container/20 disabled:opacity-50 disabled:cursor-not-allowed" type="submit">
-                                {isPending ? t.contact.status.sending : t.contact.submitMessage}
-                            </button>
-{status && (
-  <div className={`p-4 mt-4 rounded-lg text-sm font-medium border ${status.type === 'success' ? 'bg-green-50 text-green-800 border-green-200' : 'bg-red-50 text-red-800 border-red-200'}`}>
-    {status.message}
-  </div>
-)}
->>>>>>> 488c6d1 (Complete Phase 1 localization of UI components and connect newsletter/contact forms)
 </form>
 </div>
 
@@ -273,7 +235,7 @@ export default function ContactContent() {
 </div>
 <div>
 <h4 className="font-headline font-bold text-primary">{t.contact.callUs}</h4>
-<p className="text-on-surface-variant">+237 6XX XXX XXX</p>
+<p className="text-on-surface-variant">+237 676 817 339</p>
 <p className="text-xs font-label uppercase text-on-tertiary-container font-bold mt-1">{t.contact.available24}</p>
 </div>
 </div>
@@ -297,14 +259,14 @@ export default function ContactContent() {
 <div className="pt-4">
 <h4 className="font-label text-xs font-bold uppercase text-on-surface-variant mb-6 tracking-widest">{t.contact.connectCommunity}</h4>
 <div className="flex gap-4">
-<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://www.facebook.com/ferdsilinks" target="_blank" rel="noopener noreferrer">
-<span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>groups</span>
+<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://www.facebook.com/share/1Zn5gjt5PA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
 </a>
 <a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://cm.linkedin.com/company/ferdsilinks-group" target="_blank" rel="noopener noreferrer">
-<span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>share</span>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
 </a>
-<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="#">
-<span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>public</span>
+<a className="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-full text-primary hover:bg-on-tertiary-container hover:text-white transition-all" href="https://www.instagram.com/ferdsilinks?igsh=MTF1MGRiNjE4ZTFtMg==" target="_blank" rel="noopener noreferrer">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
 </a>
 </div>
 </div>
@@ -313,22 +275,20 @@ export default function ContactContent() {
 </div>
 </section></FadeIn>
 
-{/* Interactive Map Placeholder */}
+{/* Map Section */}
 <FadeIn><section className="px-8 py-20">
 <div className="max-w-7xl mx-auto">
 <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow-xl">
-<div className="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-surface-container-low">
-<img alt="Map of Buea - Silicon Mountain" className="w-full h-full object-cover opacity-60" src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&h=600&fit=crop"/>
-</div>
-<div className="absolute inset-0 bg-primary/20 backdrop-blur-[2px]"></div>
-<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
-<div className="bg-white p-4 rounded-full shadow-2xl mb-4 inline-block animate-bounce">
-<span className="material-symbols-outlined text-on-tertiary-container text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
-</div>
-<div className="bg-white/90 backdrop-blur-md px-6 py-3 rounded-full shadow-lg">
-<p className="font-headline font-bold text-primary">{t.contact.mapTitle}</p>
-</div>
-</div>
+<iframe 
+  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3979.832!2d9.285237!3d4.159040!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sFerdsilinks%2C%20Sosoliso%2C%20Molyko%20Buea!5e0!3m2!1sen!2sCM!4v1700000000000"
+  width="100%" 
+  height="100%" 
+  style={{ border: 0 }} 
+  allowFullScreen 
+  loading="lazy" 
+  referrerPolicy="no-referrer-when-downgrade"
+  className="w-full h-full"
+></iframe>
 </div>
 </div>
 </section></FadeIn>

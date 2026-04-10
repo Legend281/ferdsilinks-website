@@ -393,7 +393,7 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                     value={formData.phone}
                     onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                     className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
-                    placeholder="+237 6XX XXX XXX"
+                    placeholder="+237 676 817 339"
                   />
                 </div>
                 
