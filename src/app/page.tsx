@@ -5,9 +5,30 @@ import { FadeIn } from '@/components/FadeIn';
 import { useLanguage } from '@/components/LanguageProvider';
 import { serviceCategories } from '@/data/services';
 import { courses } from '@/data/training';
+import { useState, useTransition } from 'react';
+import { subscribeNewsletter } from '@/actions/newsletter';
 
 export default function Home() {
   const { t } = useLanguage();
+  const [isPending, startTransition] = useTransition();
+  const [status, setStatus] = useState<{type: 'success' | 'error', message: string} | null>(null);
+
+  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus(null);
+    const formData = new FormData(e.currentTarget);
+    const formElement = e.currentTarget;
+
+    startTransition(async () => {
+      const result = await subscribeNewsletter(formData);
+      if (result.success) {
+        setStatus({ type: 'success', message: t.homePage.newsletterStatus.success });
+        formElement.reset();
+      } else {
+        setStatus({ type: 'error', message: result.error || t.homePage.newsletterStatus.error });
+      }
+    });
+  };
 
   return (
     <main className="bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant">
@@ -150,15 +171,15 @@ export default function Home() {
                     <div className="space-y-4">
                       <div className="flex items-center gap-4">
                         <span className="material-symbols-outlined text-on-tertiary-container">check_circle</span>
-                        <span className="font-bold text-primary">Scalable Architecture</span>
+                        <span className="font-bold text-primary">{t.homePage.scalableArchitecture}</span>
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="material-symbols-outlined text-on-tertiary-container">check_circle</span>
-                        <span className="font-bold text-primary">Agile Methodology</span>
+                        <span className="font-bold text-primary">{t.homePage.agileMethodology}</span>
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="material-symbols-outlined text-on-tertiary-container">check_circle</span>
-                        <span className="font-bold text-primary">DevOps Integration</span>
+                        <span className="font-bold text-primary">{t.homePage.devopsIntegration}</span>
                       </div>
                     </div>
                   </div>
@@ -188,7 +209,7 @@ export default function Home() {
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="font-label text-sm uppercase tracking-widest text-secondary font-bold mb-4 block">{t.training.trainingHub}</span>
               <h2 className="font-headline font-extrabold text-4xl md:text-5xl text-primary tracking-tighter mb-6">{t.training.buildYourFuture}</h2>
-              <p className="text-on-surface-variant text-lg">Elite professional courses led by industry practitioners in Cameroon&apos;s premier tech ecosystem.</p>
+              <p className="text-on-surface-variant text-lg">{t.homePage.eliteCourses}</p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -196,16 +217,16 @@ export default function Home() {
               <div className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all flex flex-col md:flex-row h-full">
                 <div className="w-full md:w-2/5 relative">
                   <img alt="Data Science Course" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKacQ7YvJjA5O92OMH98V5kR5hENVDFfEVTxwTABmG90ggettGszRZEpDlrcLN_nXNv4_xzSI8bDVt01n89DGrEFCBdNEI6wdk0rfjVn0Ge7PxU0BHNYP7ilMBOS9NvbJy7xvcN1qOswTfxh97G3B9X_OZ-Fp8j5LOIGrnPVtnyhKLb7cIrTYuB5jOOkooiQ3GPfi0Bv9TJ26Ro4-MKE-UlGsz6AJ8QW-X2ZxmQnIc_DHtwPeVUVQAvbith72Hej42PvZNwUDzGHkn"/>
-                  <span className="absolute top-4 left-4 bg-on-tertiary-container text-white px-4 py-1 text-xs font-bold rounded-full uppercase tracking-tighter">Bestseller</span>
+                  <span className="absolute top-4 left-4 bg-on-tertiary-container text-white px-4 py-1 text-xs font-bold rounded-full uppercase tracking-tighter">{t.homePage.bestseller}</span>
                 </div>
                 <div className="p-8 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-headline font-extrabold text-2xl text-primary mb-2">Mastering Data Science &amp; Big Data</h3>
+                    <h3 className="font-headline font-extrabold text-2xl text-primary mb-2">{t.homePage.course1Title}</h3>
                     <div className="flex items-center gap-4 mb-4 text-sm text-on-surface-variant font-medium">
-                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">schedule</span> 12 Weeks</span>
-                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">groups</span> 15 Seats</span>
+                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">schedule</span> 12 {t.homePage.weeks}</span>
+                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">groups</span> 15 {t.homePage.seats}</span>
                     </div>
-                    <p className="text-on-surface-variant mb-6 text-sm">Comprehensive hands-on training from Python basics to advanced predictive modeling.</p>
+                    <p className="text-on-surface-variant mb-6 text-sm">{t.homePage.course1Desc}</p>
                   </div>
                   <Link href="/training/applied-data-science-bootcamp" className="w-full py-3 rounded-lg border-2 border-primary font-bold hover:bg-primary hover:text-white transition-all text-center">
                     {t.training.enrollNow}
@@ -217,16 +238,16 @@ export default function Home() {
               <div className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all flex flex-col md:flex-row h-full">
                 <div className="w-full md:w-2/5 relative">
                   <img alt="Fullstack Course" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD1WQ0o9FAX8U0RJO4tjzXa36dVjTumGot8-m5wVjInZpzlNWW-4YFUOq8wE2poHB5MMRxGvf-BbMwT_qm2RXafs6W_pLpqxXDtOMUHmonBzLkjL_TCSZ8otMgR1_0t8wPBVq3cjxH0i-_Yhc2jqThe0ReatWvVZ2hR36MT88DygQNHAiQbpq7tgDJPEBSwPY8AVYCjFjO0ZtbFV6Cw7us0GC2sxjhGSxlY-BCyl2hHyRwrIkEtgxvclpG-b2u0dnjYN21DwBkt8Kn"/>
-                  <span className="absolute top-4 left-4 bg-secondary text-white px-4 py-1 text-xs font-bold rounded-full uppercase tracking-tighter">New Course</span>
+                  <span className="absolute top-4 left-4 bg-secondary text-white px-4 py-1 text-xs font-bold rounded-full uppercase tracking-tighter">{t.homePage.newCourse}</span>
                 </div>
                 <div className="p-8 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-headline font-extrabold text-2xl text-primary mb-2">Advanced Fullstack Development</h3>
+                    <h3 className="font-headline font-extrabold text-2xl text-primary mb-2">{t.homePage.course2Title}</h3>
                     <div className="flex items-center gap-4 mb-4 text-sm text-on-surface-variant font-medium">
-                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">schedule</span> 16 Weeks</span>
-                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">layers</span> Project-Based</span>
+                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">schedule</span> 16 {t.homePage.weeks}</span>
+                      <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">layers</span> {t.homePage.projectBased}</span>
                     </div>
-                    <p className="text-on-surface-variant mb-6 text-sm">Build production-ready applications using React, Node.js, and modern DevOps tools.</p>
+                    <p className="text-on-surface-variant mb-6 text-sm">{t.homePage.course2Desc}</p>
                   </div>
                   <Link href="/training/fullstack-nextjs-engineering" className="w-full py-3 rounded-lg border-2 border-primary font-bold hover:bg-primary hover:text-white transition-all text-center">
                     {t.training.enrollNow}
@@ -257,12 +278,12 @@ export default function Home() {
               <div className="order-1 lg:order-2">
                 <span className="font-label text-sm uppercase tracking-widest text-on-tertiary-container font-bold mb-6 block">{t.podcast.newEpisode}</span>
                 <h2 className="font-headline font-extrabold text-4xl md:text-5xl mb-6 tracking-tighter leading-tight">{t.podcast.africanAI} <span className="text-on-tertiary-container">{t.podcast.renaissance}</span></h2>
-                <p className="text-on-primary-container text-lg mb-10 leading-relaxed">Join CEO Tingom Ferdinand as he discusses data science, AI innovation, and building tech solutions from Cameroon&apos;s Silicon Mountain.</p>
+                <p className="text-on-primary-container text-lg mb-10 leading-relaxed">{t.homePage.podcastDesc}</p>
                 <div className="flex items-center gap-6">
                   <Link href="/podcast" className="bg-white text-primary px-8 py-4 rounded-lg font-bold flex items-center gap-3 hover:bg-tertiary-fixed transition-colors">
                     <span className="material-symbols-outlined">podcasts</span> {t.podcast.listenNow}
                   </Link>
-                  <span className="text-white/40 font-label text-sm font-bold uppercase tracking-widest">SEASON 1 &bull; 45 MINS</span>
+                  <span className="text-white/40 font-label text-sm font-bold uppercase tracking-widest">{t.homePage.seasonPlatform}</span>
                 </div>
               </div>
             </div>
@@ -287,9 +308,9 @@ export default function Home() {
                 <div className="aspect-[16/10] overflow-hidden rounded-xl mb-6">
                   <img alt="Data Science in Africa" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"/>
                 </div>
-                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">Data Science</span>
-                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">Why Cameroon is Becoming West Africa&apos;s Data Science Hub</h3>
-                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">Exploring how Silicon Mountain is emerging as a center for data innovation and AI talent.</p>
+                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">{t.homePage.blog1Category}</span>
+                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">{t.homePage.blog1Title}</h3>
+                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">{t.homePage.blog1Desc}</p>
                 <Link href="/blog" className="text-primary font-bold text-sm underline decoration-on-tertiary-container decoration-2 underline-offset-4">{t.blog.readArticle}</Link>
               </div>
 
@@ -298,9 +319,9 @@ export default function Home() {
                 <div className="aspect-[16/10] overflow-hidden rounded-xl mb-6">
                   <img alt="AI in Business" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop"/>
                 </div>
-                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">AI & Machine Learning</span>
-                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">Building AI Solutions That Work for African Businesses</h3>
-                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">How Ferdsilinks is creating locally-relevant AI applications that solve real business challenges.</p>
+                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">{t.homePage.blog2Category}</span>
+                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">{t.homePage.blog2Title}</h3>
+                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">{t.homePage.blog2Desc}</p>
                 <Link href="/blog" className="text-primary font-bold text-sm underline decoration-on-tertiary-container decoration-2 underline-offset-4">{t.blog.readArticle}</Link>
               </div>
 
@@ -309,9 +330,9 @@ export default function Home() {
                 <div className="aspect-[16/10] overflow-hidden rounded-xl mb-6">
                   <img alt="Tech Training" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop"/>
                 </div>
-                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">Training & Education</span>
-                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">From Buea to the World: How Tech Training Changes Lives</h3>
-                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">Stories of graduates who started with Ferdsilinks training and now work with global companies.</p>
+                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">{t.homePage.blog3Category}</span>
+                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">{t.homePage.blog3Title}</h3>
+                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">{t.homePage.blog3Desc}</p>
                 <Link href="/blog" className="text-primary font-bold text-sm underline decoration-on-tertiary-container decoration-2 underline-offset-4">{t.blog.readArticle}</Link>
               </div>
             </div>
@@ -390,10 +411,19 @@ export default function Home() {
               <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-secondary opacity-10 rounded-full blur-[80px]"></div>
               <h2 className="font-headline font-extrabold text-4xl md:text-5xl text-white tracking-tighter mb-6 relative z-10">{t.cta.readyToTransform}</h2>
               <p className="text-on-primary-container text-lg mb-12 max-w-2xl mx-auto relative z-10">{t.cta.studentOrCEO}</p>
-              <form className="max-w-md mx-auto flex flex-col md:flex-row gap-4 relative z-10">
-                <input className="flex-1 bg-white/10 border-0 text-white placeholder:text-on-primary-container rounded-lg px-6 py-4 focus:ring-2 focus:ring-on-tertiary-container" placeholder={t.cta.enterEmail} type="email"/>
-                <button className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold hover:opacity-90 transition-opacity whitespace-nowrap">{t.cta.joinNetwork}</button>
-              </form>
+              <div className="max-w-md mx-auto relative z-10 w-full">
+                <form onSubmit={handleNewsletterSubmit} className="flex flex-col md:flex-row gap-4">
+                  <input name="email" required disabled={isPending} className="flex-1 bg-white/10 border-0 text-white placeholder:text-on-primary-container rounded-lg px-6 py-4 focus:ring-2 focus:ring-on-tertiary-container disabled:opacity-50 outline-none" placeholder={t.cta.enterEmail} type="email"/>
+                  <button disabled={isPending} className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold hover:opacity-90 transition-opacity whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed">
+                    {isPending ? "Joining..." : t.cta.joinNetwork}
+                  </button>
+                </form>
+                {status && (
+                  <div className={`mt-4 p-3 rounded-lg text-sm font-medium text-center ${status.type === 'success' ? 'bg-green-500/20 text-green-100 border border-green-500/30' : 'bg-red-500/20 text-red-100 border border-red-500/30'}`}>
+                    {status.message}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>

@@ -4,15 +4,17 @@ import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
 import { blogPosts } from '@/data/blog';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export default function BlogPage() {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [activeCategory, setActiveCategory] = useState<string>(t.blogPage.categories.all);
 
-  const categories = ['All', 'Data Science', 'AI', 'Tech Culture', 'Software Development', 'Business Growth', 'Company News', 'Engineering', 'Insights'];
+  const categories = [t.blogPage.categories.all, t.blogPage.categories.dataScience, t.blogPage.categories.ai, t.blogPage.categories.techCulture, t.blogPage.categories.softwareDevelopment, t.blogPage.categories.businessGrowth, t.blogPage.categories.companyNews, t.blogPage.categories.engineering, t.blogPage.categories.insights];
 
   const filteredPosts = blogPosts.filter(post => {
-    const matchesCategory = activeCategory === 'All' || post.category === activeCategory;
+    const matchesCategory = activeCategory === t.blogPage.categories.all || post.category === activeCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -38,7 +40,7 @@ export default function BlogPage() {
             <div className="relative p-12 lg:p-20 max-w-5xl w-full">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-on-tertiary-container/80 backdrop-blur-sm rounded-full mb-6">
                 <span className="w-2 h-2 bg-tertiary-fixed rounded-full animate-pulse"></span>
-                <span className="font-label text-xs uppercase tracking-widest text-white font-bold">Featured Insight</span>
+                <span className="font-label text-xs uppercase tracking-widest text-white font-bold">{t.blogPage.featuredInsight}</span>
               </div>
               <h1 className="font-headline text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tight">
                 {featuredPost.title}
@@ -48,7 +50,7 @@ export default function BlogPage() {
               </p>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                 <button className="bg-on-tertiary-container text-white font-headline font-bold px-8 py-4 rounded-lg flex items-center gap-2 hover:bg-tertiary-fixed hover:text-on-tertiary-container transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
-                  Read Full Story
+                  {t.blogPage.readFullStory}
                   <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </button>
                 <span className="font-label text-sm text-white/60 flex items-center gap-2">
@@ -92,7 +94,7 @@ export default function BlogPage() {
                 <span className="material-symbols-outlined">search</span>
                 <input 
                   type="text" 
-                  placeholder="Search insights..." 
+                  placeholder={t.blogPage.searchPlaceholder} 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="bg-transparent border-none focus:ring-0 font-body text-sm text-on-surface flex-grow focus:outline-none"
@@ -124,7 +126,7 @@ export default function BlogPage() {
                         </Link>
                         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6 flex-grow line-clamp-3">{post.excerpt}</p>
                         <Link href={`/blog/${post.slug}`} className="font-headline font-bold text-sm text-on-tertiary-container flex items-center gap-2 group/link hover:text-primary transition-colors">
-                            Read Story
+                            {t.blogPage.readArticle}
                             <span className="material-symbols-outlined text-sm transform group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
                         </Link>
                     </article>
@@ -132,8 +134,8 @@ export default function BlogPage() {
             ) : (
                 <div className="col-span-full text-center py-24 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
                   <span className="material-symbols-outlined text-4xl text-outline-variant mb-2">search_off</span>
-                  <p className="font-headline font-bold text-lg text-primary">No insights found.</p>
-                  <p className="text-on-surface-variant text-sm">Try adjusting your category or search terms.</p>
+                  <p className="font-headline font-bold text-lg text-primary">{t.blogPage.noInsights}</p>
+                  <p className="text-on-surface-variant text-sm">{t.blogPage.tryAdjusting}</p>
                 </div>
             )}
           </section>
@@ -148,16 +150,16 @@ export default function BlogPage() {
             </div>
             <div className="relative px-8 py-20 lg:px-24 flex flex-col lg:flex-row items-center justify-between gap-12">
                 <div className="max-w-xl text-center lg:text-left">
-                    <span className="font-label text-xs uppercase tracking-widest text-tertiary-fixed mb-4 inline-block">Stay Ahead</span>
-                    <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-white mb-4">Join the Silicon Mountain Pulse</h2>
-                    <p className="font-body text-slate-300 text-lg leading-relaxed">Bi-weekly architectural insights into tech, data ethics, and the digital economy delivered directly to your inbox.</p>
+                    <span className="font-label text-xs uppercase tracking-widest text-tertiary-fixed mb-4 inline-block">{t.blogPage.newsletterTag}</span>
+                    <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-white mb-4">{t.blogPage.newsletterTitle}</h2>
+                    <p className="font-body text-slate-300 text-lg leading-relaxed">{t.blogPage.newsletterDesc}</p>
                 </div>
                 <div className="w-full max-w-md">
                     <form className="flex flex-col sm:flex-row gap-3" onSubmit={(e) => e.preventDefault()}>
-                        <input type="email" placeholder="Your executive email" className="flex-grow bg-white/10 border border-white/20 rounded-lg px-6 py-4 text-white font-body placeholder:text-white/40 focus:bg-white/20 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none" required />
-                        <button type="submit" className="bg-on-tertiary-container text-white font-headline font-bold px-8 py-4 rounded-lg hover:brightness-110 transition-all whitespace-nowrap shadow-lg">Subscribe</button>
+                        <input type="email" placeholder={t.blogPage.emailPlaceholder} className="flex-grow bg-white/10 border border-white/20 rounded-lg px-6 py-4 text-white font-body placeholder:text-white/40 focus:bg-white/20 focus:ring-2 focus:ring-on-tertiary-container transition-all outline-none" required />
+                        <button type="submit" className="bg-on-tertiary-container text-white font-headline font-bold px-8 py-4 rounded-lg hover:brightness-110 transition-all whitespace-nowrap shadow-lg">{t.blogPage.subscribeBtn}</button>
                     </form>
-                    <p className="font-label text-[10px] text-white/40 mt-4 text-center lg:text-left">By subscribing, you agree to our Data Ethics policy.</p>
+                    <p className="font-label text-[10px] text-white/40 mt-4 text-center lg:text-left">{t.blogPage.dataEthicsPolicy}</p>
                 </div>
             </div>
           </section>
@@ -180,7 +182,7 @@ export default function BlogPage() {
                         <h4 className="font-headline text-xl font-bold text-primary mt-3 mb-2 group-hover:text-secondary transition-colors line-clamp-2">{post.title}</h4>
                         <p className="font-body text-sm text-on-surface-variant mb-4 line-clamp-2">{post.excerpt}</p>
                         <Link href={`/blog/${post.slug}`} className="text-on-tertiary-container font-bold text-xs uppercase tracking-widest flex items-center gap-1 hover:text-primary transition-colors">
-                            Read Article <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            {t.blogPage.readArticle} <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                         </Link>
                     </div>
                 </div>

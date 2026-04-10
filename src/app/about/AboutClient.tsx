@@ -8,10 +8,10 @@ export default function AboutContent() {
   const { t } = useLanguage();
   
   const milestones = [
-    { year: '2019', title: 'The Foundation', description: 'Ferdsilinks founded in Buea, Cameroon by Tingom Ferdinand with a vision to bridge data research and industrial application.' },
-    { year: '2020', title: 'First Major Project', description: 'Partnered with regional leaders to deploy large-scale data architecture systems, proving our precision-led approach.' },
-    { year: '2022', title: 'Training Hub Launch', description: 'Launched specialized training programs to cultivate the next generation of Cameroon\'s tech professionals.' },
-    { year: '2024', title: 'Silicon Mountain Leader', description: 'Established as a key player in Cameroon\'s tech ecosystem, expanding services across Central Africa.' },
+    t.about.milestones.foundation,
+    t.about.milestones.project,
+    t.about.milestones.training,
+    t.about.milestones.leader,
   ];
 
   return (
@@ -39,7 +39,7 @@ export default function AboutContent() {
             {t.about.ourStory}
           </h1>
           <p className="text-on-primary-container text-lg md:text-xl max-w-xl leading-relaxed">
-            From the foothills of Mount Fako, we engineer the future. Our mission is to lead Africa&apos;s tech revolution, transforming Buea into a global beacon of precision data science and innovative tech infrastructure.
+            {t.about.heroDesc}
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/contact" className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
@@ -67,7 +67,7 @@ export default function AboutContent() {
             <div className="absolute -top-4 -right-4 bg-surface-container-lowest p-4 rounded-lg shadow-xl">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-on-tertiary-container">verified</span>
-                <span className="font-label text-xs font-bold text-primary uppercase">Certified Excellence</span>
+                <span className="font-label text-xs font-bold text-primary uppercase">{t.about.certifiedExcellence}</span>
               </div>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function AboutContent() {
 </div>
 <div>
 <h4 className="font-headline font-bold text-xl mb-2">{t.about.researchLed}</h4>
-<p className="text-on-primary-container leading-relaxed">Our solutions are architected based on deep research and rigorous testing, not just assumptions.</p>
+<p className="text-on-primary-container leading-relaxed">{t.about.researchLedDesc}</p>
 </div>
 </div>
 <div className="flex gap-6 items-start">
@@ -157,7 +157,7 @@ export default function AboutContent() {
 </div>
 <div>
 <h4 className="font-headline font-bold text-xl mb-2">{t.about.localExpertise}</h4>
-<p className="text-on-primary-container leading-relaxed">Deep understanding of the African business landscape combined with international engineering standards.</p>
+<p className="text-on-primary-container leading-relaxed">{t.about.localExpertiseDesc}</p>
 </div>
 </div>
 <div className="flex gap-6 items-start">
@@ -166,7 +166,7 @@ export default function AboutContent() {
 </div>
 <div>
 <h4 className="font-headline font-bold text-xl mb-2">{t.about.highTrust}</h4>
-<p className="text-on-primary-container leading-relaxed">We prioritize data sovereignty and secure infrastructure for long-term institutional reliability.</p>
+<p className="text-on-primary-container leading-relaxed">{t.about.highTrustDesc}</p>
 </div>
 </div>
 </div>
@@ -177,15 +177,15 @@ export default function AboutContent() {
 <div className="relative z-10">
 <span className="material-symbols-outlined text-5xl text-on-tertiary-container mb-6" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
 <p className="text-2xl font-headline italic leading-relaxed mb-8">
-                                    "Ferdsilinks transformed our data infrastructure. Their precision and expertise helped us make better decisions faster."
+                                    {t.about.testimonialDesc}
                                 </p>
 <div className="flex items-center gap-4">
 <div className="w-12 h-12 rounded-full bg-surface-container-high overflow-hidden">
 <img className="w-full h-full object-cover" alt="Client testimonial" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" />
 </div>
 <div>
-<p className="font-bold">Business Client</p>
-<p className="text-xs font-label uppercase text-on-primary-container">Regional Enterprise, Cameroon</p>
+<p className="font-bold">{t.about.testimonialAuthor}</p>
+<p className="text-xs font-label uppercase text-on-primary-container">{t.about.testimonialRole}</p>
 </div>
 </div>
 </div>

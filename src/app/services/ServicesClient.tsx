@@ -25,13 +25,13 @@ export default function ServicesContent() {
               <div className="space-y-8">
                 <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
                   <span className="w-2 h-2 bg-on-tertiary-container rounded-full animate-pulse"></span>
-                  <span className="font-label text-tertiary-fixed text-xs font-bold uppercase tracking-widest">{t.services.innovationArchitecture}</span>
+                  <span className="font-label text-tertiary-fixed text-xs font-bold uppercase tracking-widest">{t.servicesPage.innovationArchitecture}</span>
                 </div>
                 <h1 className="font-headline text-5xl md:text-7xl font-extrabold text-white leading-[1.05] tracking-tight">
-                  {t.services.ourExpertise}
+                  {t.servicesPage.ourExpertise}
                 </h1>
                 <p className="font-body text-on-primary-container text-lg md:text-xl max-w-xl leading-relaxed">
-                  From Silicon Mountain to the world — we deliver AI-powered solutions, custom software, and OHADA-compliant ERP systems trusted by 1000+ businesses across Africa.
+                  {t.servicesPage.heroDesc}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/contact" className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
@@ -44,15 +44,15 @@ export default function ServicesContent() {
                 <div className="flex items-center gap-8 pt-6 border-t border-white/10">
                   <div>
                     <p className="text-3xl font-bold font-headline text-white">1000+</p>
-                    <p className="text-xs font-label uppercase text-white/60">Businesses Served</p>
+                    <p className="text-xs font-label uppercase text-white/60">{t.servicesPage.stats.businesses}</p>
                   </div>
                   <div>
                     <p className="text-3xl font-bold font-headline text-white">75%</p>
-                    <p className="text-xs font-label uppercase text-white/60">Recommendation Rate</p>
+                    <p className="text-xs font-label uppercase text-white/60">{t.servicesPage.stats.rate}</p>
                   </div>
                   <div>
                     <p className="text-3xl font-bold font-headline text-white">6+</p>
-                    <p className="text-xs font-label uppercase text-white/60">Years Experience</p>
+                    <p className="text-xs font-label uppercase text-white/60">{t.servicesPage.stats.experience}</p>
                   </div>
                 </div>
               </div>
@@ -62,19 +62,19 @@ export default function ServicesContent() {
                   <div className="relative grid grid-cols-2 gap-4">
                     <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
                       <span className="material-symbols-outlined text-4xl text-tertiary-fixed mb-4 block">neurology</span>
-                      <p className="font-bold text-white text-lg">AI & Data</p>
+                      <p className="font-bold text-white text-lg">{t.servicesPage.categories.aiData}</p>
                     </div>
                     <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all mt-8">
                       <span className="material-symbols-outlined text-4xl text-secondary mb-4 block">code</span>
-                      <p className="font-bold text-white text-lg">Software</p>
+                      <p className="font-bold text-white text-lg">{t.servicesPage.categories.software}</p>
                     </div>
                     <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
                       <span className="material-symbols-outlined text-4xl text-on-tertiary-container mb-4 block">cloud</span>
-                      <p className="font-bold text-white text-lg">Cloud IT</p>
+                      <p className="font-bold text-white text-lg">{t.servicesPage.categories.cloudIT}</p>
                     </div>
                     <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all mt-8">
                       <span className="material-symbols-outlined text-4xl text-primary-fixed mb-4 block">school</span>
-                      <p className="font-bold text-white text-lg">Training</p>
+                      <p className="font-bold text-white text-lg">{t.servicesPage.categories.training}</p>
                     </div>
                   </div>
                 </div>
@@ -97,27 +97,27 @@ export default function ServicesContent() {
                           <div>
                               <div className="flex items-center gap-3 mb-8">
                                   <span className="material-symbols-outlined text-on-tertiary-container text-4xl">neurology</span>
-                                  <h2 className="font-headline text-3xl font-bold text-primary group-hover:text-secondary transition-colors">Data Science &amp; AI</h2>
+                                  <h2 className="font-headline text-3xl font-bold text-primary group-hover:text-secondary transition-colors">{t.servicesPage.categories.aiData}</h2>
                               </div>
                               <p className="font-body text-on-surface-variant text-lg mb-8 max-w-xl">
-                                  Turn your data into decisions. We build machine learning models and AI solutions that solve real business problems across Africa.
+                                  {t.servicesPage.dataScience.desc}
                               </p>
                               <div className="grid grid-cols-2 gap-4">
                                   <div className="flex items-center gap-2">
                                       <span className="material-symbols-outlined text-secondary">psychology</span>
-                                      <span className="font-label text-xs uppercase tracking-wider font-bold">Machine Learning</span>
+                                      <span className="font-label text-xs uppercase tracking-wider font-bold">{t.servicesPage.dataScience.ml}</span>
                                   </div>
                                   <div className="flex items-center gap-2">
                                       <span className="material-symbols-outlined text-secondary">insights</span>
-                                      <span className="font-label text-xs uppercase tracking-wider font-bold">Predictive Analytics</span>
+                                      <span className="font-label text-xs uppercase tracking-wider font-bold">{t.servicesPage.dataScience.predictive}</span>
                                   </div>
                                   <div className="flex items-center gap-2">
                                       <span className="material-symbols-outlined text-secondary">auto_awesome</span>
-                                      <span className="font-label text-xs uppercase tracking-wider font-bold">Generative AI</span>
+                                      <span className="font-label text-xs uppercase tracking-wider font-bold">{t.servicesPage.dataScience.genAi}</span>
                                   </div>
                                   <div className="flex items-center gap-2">
                                       <span className="material-symbols-outlined text-secondary">analytics</span>
-                                      <span className="font-label text-xs uppercase tracking-wider font-bold">Business Intelligence</span>
+                                      <span className="font-label text-xs uppercase tracking-wider font-bold">{t.servicesPage.dataScience.bi}</span>
                                   </div>
                               </div>
                           </div>
@@ -128,23 +128,23 @@ export default function ServicesContent() {
                           <div className="relative z-10">
                               <div className="flex items-center gap-3 mb-6">
                                   <span className="material-symbols-outlined text-tertiary-fixed text-4xl">account_balance</span>
-                                  <h2 className="font-headline text-3xl font-bold text-white group-hover:text-tertiary-fixed transition-colors">OHADA Solutions</h2>
+                                  <h2 className="font-headline text-3xl font-bold text-white group-hover:text-tertiary-fixed transition-colors">{t.servicesPage.ohada.title}</h2>
                               </div>
                               <p className="font-body text-primary-fixed-dim text-md mb-10">
-                                  Africa's First AI-Powered OHADA-Compliant ERP. Trusted by 1000+ businesses across the continent.
+                                  {t.servicesPage.ohada.desc}
                               </p>
                               <ul className="space-y-4">
                                   <li className="flex items-center gap-3 text-white">
                                       <span className="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
-                                      <span className="font-body font-semibold">Solafide ERP</span>
+                                      <span className="font-body font-semibold">{t.servicesPage.ohada.erp}</span>
                                   </li>
                                   <li className="flex items-center gap-3 text-white">
                                       <span className="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
-                                      <span className="font-body font-semibold">Accounting &amp; Finance</span>
+                                      <span className="font-body font-semibold">{t.servicesPage.ohada.finance}</span>
                                   </li>
                                   <li className="flex items-center gap-3 text-white">
                                       <span className="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
-                                      <span className="font-body font-semibold">Inventory Management</span>
+                                      <span className="font-body font-semibold">{t.servicesPage.ohada.inventory}</span>
                                   </li>
                               </ul>
                           </div>
@@ -154,14 +154,14 @@ export default function ServicesContent() {
                       <Link href="/services/software-development" className="md:col-span-4 bg-surface-container-high p-10 rounded-xl group hover:shadow-md transition-all border border-transparent hover:border-outline-variant/30">
                           <div className="flex items-center gap-3 mb-6">
                               <span className="material-symbols-outlined text-on-tertiary-container text-4xl">code</span>
-                              <h2 className="font-headline text-2xl font-bold text-primary group-hover:text-secondary transition-colors">Software Development</h2>
+                              <h2 className="font-headline text-2xl font-bold text-primary group-hover:text-secondary transition-colors">{t.servicesPage.softwareDev.title}</h2>
                           </div>
                           <p className="font-body text-on-surface-variant text-md mb-8">
-                              Custom web and mobile applications built with modern frameworks. From startups to enterprises — we engineer solutions that scale.
+                              {t.servicesPage.softwareDev.desc}
                           </p>
                           <div className="bg-white p-6 rounded-lg shadow-sm">
-                              <h4 className="font-label text-xs font-bold text-on-tertiary-container uppercase mb-2">Focus Areas</h4>
-                              <p className="font-body text-sm text-primary font-semibold">Web Apps, Mobile Apps, Cloud Infrastructure</p>
+                              <h4 className="font-label text-xs font-bold text-on-tertiary-container uppercase mb-2">{t.servicesPage.softwareDev.focus}</h4>
+                              <p className="font-body text-sm text-primary font-semibold">{t.servicesPage.softwareDev.focusItems}</p>
                           </div>
                       </Link>
 
@@ -170,13 +170,13 @@ export default function ServicesContent() {
                           <div className="flex-1">
                               <div className="flex items-center gap-3 mb-6">
                                   <span className="material-symbols-outlined text-on-tertiary-container text-4xl">school</span>
-                                  <h2 className="font-headline text-3xl font-bold text-primary group-hover:text-secondary transition-colors">Ferdsilinks Academy</h2>
+                                  <h2 className="font-headline text-3xl font-bold text-primary group-hover:text-secondary transition-colors">{t.servicesPage.academy.title}</h2>
                               </div>
                               <p className="font-body text-on-surface-variant text-lg mb-6 max-w-xl">
-                                  Train the next generation of African tech talent. Data science, software development, AI — from beginner to professional programs.
+                                  {t.servicesPage.academy.desc}
                               </p>
                               <span className="font-label text-sm font-bold text-secondary flex items-center gap-2">
-                                  Explore Training <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                  {t.servicesPage.academy.explore} <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
                               </span>
                           </div>
                           <div className="hidden md:block w-48 h-48 rounded-xl overflow-hidden shadow-xl bg-surface-container-high">
@@ -193,8 +193,8 @@ export default function ServicesContent() {
           <section className="py-24 bg-surface-container-low border-y border-outline-variant/10">
               <div className="max-w-7xl mx-auto px-6 lg:px-8">
                   <div className="text-center mb-20">
-                      <span className="font-label text-on-tertiary-container tracking-widest uppercase text-sm font-bold">The Blueprint</span>
-                      <h2 className="font-headline text-4xl md:text-5xl font-black text-primary mt-4 tracking-tight">Our Process</h2>
+                      <span className="font-label text-on-tertiary-container tracking-widest uppercase text-sm font-bold">{t.servicesPage.process.blueprint}</span>
+                      <h2 className="font-headline text-4xl md:text-5xl font-black text-primary mt-4 tracking-tight">{t.servicesPage.process.title}</h2>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
                       {/* Connector Line (Desktop) */}
@@ -206,8 +206,8 @@ export default function ServicesContent() {
                               <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">01</span>
                               <span className="material-symbols-outlined text-on-tertiary-container text-3xl">search</span>
                           </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Discovery</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Deep diving into your business ecosystem to identify gaps and opportunities.</p>
+                          <h3 className="font-headline text-xl font-bold text-primary mb-3">{t.servicesPage.process.discovery}</h3>
+                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">{t.servicesPage.process.discoveryDesc}</p>
                       </div>
                       
                       {/* Step 2 */}
@@ -216,8 +216,8 @@ export default function ServicesContent() {
                               <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">02</span>
                               <span className="material-symbols-outlined text-on-tertiary-container text-3xl">architecture</span>
                           </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Strategy</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Architecting a technical roadmap aligned with your long-term growth goals.</p>
+                          <h3 className="font-headline text-xl font-bold text-primary mb-3">{t.servicesPage.process.strategy}</h3>
+                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">{t.servicesPage.process.strategyDesc}</p>
                       </div>
                       
                       {/* Step 3 */}
@@ -226,8 +226,8 @@ export default function ServicesContent() {
                               <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">03</span>
                               <span className="material-symbols-outlined text-on-tertiary-container text-3xl">code</span>
                           </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Implementation</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Agile development and execution with a focus on precision and performance.</p>
+                          <h3 className="font-headline text-xl font-bold text-primary mb-3">{t.servicesPage.process.implementation}</h3>
+                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">{t.servicesPage.process.implementationDesc}</p>
                       </div>
                       
                       {/* Step 4 */}
@@ -236,8 +236,8 @@ export default function ServicesContent() {
                               <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">04</span>
                               <span className="material-symbols-outlined text-on-tertiary-container text-3xl">speed</span>
                           </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Optimization</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Continuous data monitoring and refinement to ensure peak efficiency.</p>
+                          <h3 className="font-headline text-xl font-bold text-primary mb-3">{t.servicesPage.process.optimization}</h3>
+                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">{t.servicesPage.process.optimizationDesc}</p>
                       </div>
                   </div>
               </div>
@@ -251,9 +251,9 @@ export default function ServicesContent() {
                   <div className="bg-primary rounded-xl p-12 md:p-20 relative overflow-hidden flex flex-col items-center text-center">
                       <div className="absolute inset-0 bg-gradient-to-tr from-primary to-[#002147] -z-10"></div>
                       <div className="absolute -right-24 -top-24 w-96 h-96 bg-on-tertiary-container/10 rounded-full blur-3xl"></div>
-                      <h2 className="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 tracking-tighter">Ready to Transform Your Business?</h2>
+                      <h2 className="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 tracking-tighter">{t.servicesPage.cta.title}</h2>
                       <p className="font-body text-primary-fixed-dim text-lg mb-12 max-w-2xl leading-relaxed">
-                          Whether you need AI-powered solutions, an OHADA-compliant ERP system, or custom software — we're here to help 1000+ businesses across Africa succeed.
+                          {t.servicesPage.cta.desc}
                       </p>
                       <div className="flex flex-col md:flex-row gap-4">
                           <Link href="/contact">

@@ -2,8 +2,10 @@
 
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export default function PodcastContent() {
+  const { t } = useLanguage();
   return (
     <main className="pt-24 space-y-4">
       
@@ -25,17 +27,17 @@ export default function PodcastContent() {
         <div className="space-y-8">
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-on-tertiary-container/80 backdrop-blur-sm rounded-full w-fit">
             <span className="w-2 h-2 bg-tertiary-fixed rounded-full animate-pulse"></span>
-            <span className="font-label text-xs font-bold uppercase tracking-widest text-white">New Episode</span>
+            <span className="font-label text-xs font-bold uppercase tracking-widest text-white">{t.podcastPage.newEpisode}</span>
             <span className="w-1 h-1 bg-white/40 rounded-full"></span>
-            <span className="font-label text-xs font-bold text-white/80">Season 4, Ep 12</span>
+            <span className="font-label text-xs font-bold text-white/80">{t.podcastPage.season} 4, {t.podcastPage.ep} 12</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-headline font-extrabold text-white leading-[1] tracking-tight">
-            The African AI <br/> <span className="text-on-tertiary-container">Renaissance</span>
+            {t.podcastPage.titlePart1} <br/> <span className="text-on-tertiary-container">{t.podcastPage.titlePart2}</span>
           </h1>
           
           <p className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed">
-            Join Ferdinand S. as he sits down with the architects of Silicon Mountain to discuss how localized machine learning models are reshaping the continent&apos;s tech ecosystem.
+            {t.podcastPage.heroDesc}
           </p>
           
           <div className="flex flex-wrap gap-6 items-center">
@@ -43,10 +45,10 @@ export default function PodcastContent() {
               <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
             </button>
             <div className="flex flex-col">
-              <span className="text-white font-bold text-lg">Listen Now</span>
+              <span className="text-white font-bold text-lg">{t.podcastPage.listenNow}</span>
               <span className="text-white/60 text-sm flex items-center gap-2">
                 <span className="material-symbols-outlined text-sm">schedule</span>
-                48 minutes • Featured pioneers
+                {t.podcastPage.duration}
               </span>
             </div>
           </div>
@@ -54,11 +56,11 @@ export default function PodcastContent() {
           <div className="flex flex-wrap gap-4 pt-4">
             <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg flex items-center gap-3 transition-colors backdrop-blur-md border border-white/10">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13.85 17c-1.25-1.32-2.97-2.1-4.85-2.1-2.65 0-4.99 1.54-6.2 3.77l-1.05-1.05c1.7-2.5 4.55-4.02 7.75-4.02 3.65 0 6.72 2.4 7.7 5.7l2.05-2.05c-1.4-1.77-3.31-3.06-5.52-3.62z"/></svg>
-              <span className="font-bold">Apple Podcasts</span>
+              <span className="font-bold">{t.podcastPage.applePodcasts}</span>
             </button>
             <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg flex items-center gap-3 transition-colors backdrop-blur-md border border-white/10">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-              <span className="font-bold">Listen on Spotify</span>
+              <span className="font-bold">{t.podcastPage.listenSpotify}</span>
             </button>
           </div>
         </div>
@@ -75,13 +77,13 @@ export default function PodcastContent() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
             </div>
             <div className="absolute -bottom-6 -left-6 bg-on-tertiary-container p-6 rounded-xl shadow-2xl -rotate-2">
-              <p className="text-white font-headline font-bold text-xl">#BueaTech</p>
-              <p className="text-white/70 text-sm">Innovating at the peak</p>
+              <p className="text-white font-headline font-bold text-xl">{t.podcastPage.bueaTech}</p>
+              <p className="text-white/70 text-sm">{t.podcastPage.innovatingPeak}</p>
             </div>
             <div className="absolute -top-4 -right-4 bg-tertiary-fixed p-4 rounded-lg shadow-xl">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-on-tertiary-fixed text-lg">podcasts</span>
-                <span className="font-label text-xs font-bold text-primary">12K+ Listeners</span>
+                <span className="font-label text-xs font-bold text-primary">{t.podcastPage.listeners}</span>
               </div>
             </div>
           </div>
@@ -97,19 +99,19 @@ export default function PodcastContent() {
 {/* Subscription Bar */}
 <FadeIn><section className="bg-surface-container-low py-8">
 <div className="max-w-[1440px] mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-8">
-<p className="font-label text-sm font-bold tracking-[0.2em] text-on-surface-variant uppercase">Available Platforms</p>
+<p className="font-label text-sm font-bold tracking-[0.2em] text-on-surface-variant uppercase">{t.podcastPage.availablePlatforms}</p>
 <div className="flex flex-wrap justify-center gap-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
 <Link className="flex items-center gap-2 font-headline font-bold text-primary" href="#">
 <span className="material-symbols-outlined">google</span>
-                        Google Podcasts
+                        {t.podcastPage.googlePodcasts}
                     </Link>
 <Link className="flex items-center gap-2 font-headline font-bold text-primary" href="#">
 <span className="material-symbols-outlined">rss_feed</span>
-                        RSS Feed
+                        {t.podcastPage.rssFeed}
                     </Link>
 <Link className="flex items-center gap-2 font-headline font-bold text-primary" href="#">
 <span className="material-symbols-outlined">play_circle</span>
-                        YouTube
+                        {t.podcastPage.youtube}
                     </Link>
 </div>
 <div className="h-8 w-[1px] bg-outline-variant hidden md:block"></div>
@@ -123,7 +125,7 @@ export default function PodcastContent() {
 </div>
 <div className="w-10 h-10 rounded-full border-2 border-surface bg-on-tertiary-container flex items-center justify-center text-white text-xs font-bold">+12k</div>
 </div>
-<p className="text-xs font-label font-bold text-on-surface-variant">Active Listeners</p>
+<p className="text-xs font-label font-bold text-on-surface-variant">{t.podcastPage.activeListeners}</p>
 </div>
 </div>
 </section></FadeIn>
@@ -132,23 +134,23 @@ export default function PodcastContent() {
 <div className="max-w-[1440px] mx-auto px-12">
 <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
 <div className="max-w-2xl">
-<h2 className="text-5xl font-headline font-bold text-primary-container mb-4">Episode Archive</h2>
-<p className="text-on-surface-variant text-lg">Dive deep into the insights from Africa&apos;s most innovative tech minds.</p>
+<h2 className="text-5xl font-headline font-bold text-primary-container mb-4">{t.podcastPage.episodeArchive}</h2>
+<p className="text-on-surface-variant text-lg">{t.podcastPage.archiveDesc}</p>
 </div>
 <div className="w-full md:w-auto">
 <div className="bg-surface-container-high rounded-lg p-2 flex items-center gap-4">
 <span className="material-symbols-outlined pl-4 text-on-surface-variant">search</span>
-<input className="bg-transparent border-none focus:ring-0 w-full md:w-64 font-body text-on-surface" placeholder="Search topics, guests..." type="text"/>
+<input className="bg-transparent border-none focus:ring-0 w-full md:w-64 font-body text-on-surface" placeholder={t.podcastPage.searchPlaceholder} type="text"/>
 </div>
 </div>
 </div>
 {/* Filters */}
 <div className="flex flex-wrap gap-3 mb-12">
-<button className="px-6 py-2 bg-primary text-white rounded font-label text-sm uppercase tracking-wider">All Episodes</button>
-<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">Data Science</button>
-<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">Tech Culture</button>
-<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">Entrepreneurship</button>
-<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">AI Ethics</button>
+<button className="px-6 py-2 bg-primary text-white rounded font-label text-sm uppercase tracking-wider">{t.podcastPage.filters.all}</button>
+<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">{t.podcastPage.filters.dataScience}</button>
+<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">{t.podcastPage.filters.techCulture}</button>
+<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">{t.podcastPage.filters.entrepreneurship}</button>
+<button className="px-6 py-2 bg-surface-container-high hover:bg-surface-container-highest transition-colors rounded font-label text-sm uppercase tracking-wider">{t.podcastPage.filters.aiEthics}</button>
 </div>
 {/* Bento Grid of Episodes */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -167,7 +169,7 @@ export default function PodcastContent() {
 <h3 className="text-2xl font-headline font-bold text-primary group-hover:text-secondary transition-colors mb-4">The Truth About Data Sovereignty in Cameroon</h3>
 <p className="text-on-surface-variant text-sm line-clamp-2 leading-relaxed">Exploring the legal and ethical framework for protecting local data while fostering open-source innovation.</p>
 <button className="mt-6 flex items-center gap-2 text-on-tertiary-container font-bold group-hover:gap-4 transition-all">
-<span>Listen to Episode</span>
+<span>{t.podcastPage.listenEpisode}</span>
 <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 </div>
@@ -187,7 +189,7 @@ export default function PodcastContent() {
 <h3 className="text-2xl font-headline font-bold text-primary group-hover:text-secondary transition-colors mb-4">Beyond Buea: Scaling Silicon Mountain Startups</h3>
 <p className="text-on-surface-variant text-sm line-clamp-2 leading-relaxed">Lessons from three founders who successfully expanded their Buea-based tech firms to international markets.</p>
 <button className="mt-6 flex items-center gap-2 text-on-tertiary-container font-bold group-hover:gap-4 transition-all">
-<span>Listen to Episode</span>
+<span>{t.podcastPage.listenEpisode}</span>
 <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 </div>
@@ -207,7 +209,7 @@ export default function PodcastContent() {
 <h3 className="text-2xl font-headline font-bold text-primary group-hover:text-secondary transition-colors mb-4">Bias in the Machine: Decolonizing AI Datasets</h3>
 <p className="text-on-surface-variant text-sm line-clamp-2 leading-relaxed">Why cultural context matters in model training and how African researchers are correcting historical biases.</p>
 <button className="mt-6 flex items-center gap-2 text-on-tertiary-container font-bold group-hover:gap-4 transition-all">
-<span>Listen to Episode</span>
+<span>{t.podcastPage.listenEpisode}</span>
 <span className="material-symbols-outlined">arrow_forward</span>
 </button>
 </div>
@@ -215,7 +217,7 @@ export default function PodcastContent() {
 </div>
 <div className="mt-20 text-center">
 <button className="px-12 py-5 border border-primary-container text-primary-container font-headline font-bold rounded-lg hover:bg-primary-container hover:text-white transition-all">
-                        Load More Episodes
+                        {t.podcastPage.loadMore}
                     </button>
 </div>
 </div>
@@ -229,19 +231,19 @@ export default function PodcastContent() {
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 p-16 md:p-24 items-center">
 <div className="space-y-8 z-10">
 <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-white leading-tight">
-                            Silicon Mountain Pulse
+                            {t.podcastPage.newsletterTitle}
                         </h2>
 <p className="text-primary-fixed/70 text-lg md:text-xl leading-relaxed">
-                            Join over 5,000 tech professionals receiving weekly insights, exclusive podcast outtakes, and data-driven trends from Buea&apos;s thriving tech hub.
+                            {t.podcastPage.newsletterDesc}
                         </p>
 <div className="flex flex-col md:flex-row gap-4">
-<input className="flex-grow bg-white/5 border border-white/20 rounded px-6 py-4 text-white focus:ring-secondary focus:border-secondary" placeholder="Enter your business email" type="email"/>
+<input className="flex-grow bg-white/5 border border-white/20 rounded px-6 py-4 text-white focus:ring-secondary focus:border-secondary" placeholder={t.podcastPage.emailPlaceholder} type="email"/>
 <button className="bg-on-tertiary-container text-white px-10 py-4 rounded font-headline font-bold hover:bg-tertiary-fixed hover:text-on-tertiary-fixed transition-all">
-                                Subscribe Now
+                                {t.podcastPage.subscribeBtn}
                             </button>
 </div>
 <p className="text-white/40 text-xs font-label uppercase tracking-widest">
-                            No spam. Unsubscribe anytime.
+                            {t.podcastPage.noSpam}
                         </p>
 </div>
 <div className="hidden lg:flex justify-end">
@@ -249,19 +251,19 @@ export default function PodcastContent() {
 <div className="space-y-6">
 <div className="flex items-center gap-4 text-white">
 <span className="material-symbols-outlined text-on-tertiary-container">check_circle</span>
-<span className="font-bold">Weekly Tech Digests</span>
+<span className="font-bold">{t.podcastPage.perks.weekly}</span>
 </div>
 <div className="flex items-center gap-4 text-white">
 <span className="material-symbols-outlined text-on-tertiary-container">check_circle</span>
-<span className="font-bold">Exclusive Data Reports</span>
+<span className="font-bold">{t.podcastPage.perks.reports}</span>
 </div>
 <div className="flex items-center gap-4 text-white">
 <span className="material-symbols-outlined text-on-tertiary-container">check_circle</span>
-<span className="font-bold">Event Invitations</span>
+<span className="font-bold">{t.podcastPage.perks.events}</span>
 </div>
 <div className="pt-6">
-<p className="text-white/60 italic">"The definitive guide to innovation in Silicon Mountain."</p>
-<p className="text-on-tertiary-container font-bold mt-2">— TechAfrica Quarterly</p>
+<p className="text-white/60 italic">{t.podcastPage.testimonialQuote}</p>
+<p className="text-on-tertiary-container font-bold mt-2">{t.podcastPage.testimonialAuthor}</p>
 </div>
 </div>
 </div>

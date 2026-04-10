@@ -97,6 +97,20 @@ export const en = {
     foundedIn: 'Silicon Mountain, Buea',
     missionText: 'Empowering African businesses and communities through innovative technology solutions, data science, and AI that create measurable impact and sustainable growth.',
     visionText: 'To be Central Africa\'s leading technology hub — transforming Buea into a recognized center of excellence for data-driven innovation, AI, and digital transformation.',
+    heroDesc: 'From the foothills of Mount Fako, we engineer the future. Our mission is to lead Africa\'s tech revolution, transforming Buea into a global beacon of precision data science and innovative tech infrastructure.',
+    certifiedExcellence: 'Certified Excellence',
+    milestones: {
+      foundation: { year: '2019', title: 'The Foundation', description: 'Ferdsilinks founded in Buea, Cameroon by Tingom Ferdinand with a vision to bridge data research and industrial application.' },
+      project: { year: '2020', title: 'First Major Project', description: 'Partnered with regional leaders to deploy large-scale data architecture systems, proving our precision-led approach.' },
+      training: { year: '2022', title: 'Training Hub Launch', description: 'Launched specialized training programs to cultivate the next generation of Cameroon\'s tech professionals.' },
+      leader: { year: '2024', title: 'Silicon Mountain Leader', description: 'Established as a key player in Cameroon\'s tech ecosystem, expanding services across Central Africa.' },
+    },
+    researchLedDesc: 'Our solutions are architected based on deep research and rigorous testing, not just assumptions.',
+    localExpertiseDesc: 'Deep understanding of the African business landscape combined with international engineering standards.',
+    highTrustDesc: 'We prioritize data sovereignty and secure infrastructure for long-term institutional reliability.',
+    testimonialDesc: '"Ferdsilinks transformed our data infrastructure. Their precision and expertise helped us make better decisions faster."',
+    testimonialAuthor: 'Business Client',
+    testimonialRole: 'Regional Enterprise, Cameroon',
   },
   blog: {
     latestFromLab: 'Latest Insights',
@@ -222,6 +236,24 @@ export const en = {
     buesaCameroon: 'Buea, Cameroon',
     silionMountainHub: 'Silicon Mountain Hub',
     available24: 'Response in 24hrs',
+    formPlaceholders: {
+      fullName: 'John Doe',
+      email: 'john@company.cm',
+      message: 'Tell us about your project or inquiry...',
+    },
+    subjects: {
+      dataScience: 'Data Science & AI Solutions',
+      softwareDev: 'Software Development',
+      itConsulting: 'IT Consulting',
+      training: 'Training Programs',
+      general: 'General Inquiry',
+    },
+    status: {
+      sending: 'Sending...',
+      success: 'Message sent successfully! We will get back to you shortly.',
+      error: 'Failed to send message.'
+    },
+    mapTitle: 'Ferdsilinks HQ, Silicon Mountain, Buea',
   },
   team: {
     ourCollectiveVision: 'Our Vision',
@@ -241,12 +273,88 @@ export const en = {
     chiefTechnical: 'Chief Technology Officer',
     leadDataArchitect: 'Lead Data Architect',
   },
+  servicesPage: {
+    innovationArchitecture: 'Innovation & Architecture',
+    ourExpertise: 'Our Technical Expertise',
+    heroDesc: 'From Silicon Mountain to the world — we deliver AI-powered solutions, custom software, and OHADA-compliant ERP systems trusted by 1000+ businesses across Africa.',
+    stats: { businesses: 'Businesses Served', rate: 'Recommendation Rate', experience: 'Years Experience' },
+    categories: { aiData: 'AI & Data', software: 'Software', cloudIT: 'Cloud IT', training: 'Training' },
+    dataScience: {
+      desc: 'Turn your data into decisions. We build machine learning models and AI solutions that solve real business problems across Africa.',
+      ml: 'Machine Learning', predictive: 'Predictive Analytics', genAi: 'Generative AI', bi: 'Business Intelligence'
+    },
+    ohada: {
+      title: 'OHADA Solutions',
+      desc: "Africa's First AI-Powered OHADA-Compliant ERP. Trusted by 1000+ businesses across the continent.",
+      erp: 'Solafide ERP', finance: 'Accounting & Finance', inventory: 'Inventory Management'
+    },
+    softwareDev: {
+      title: 'Software Development',
+      desc: 'Custom web and mobile applications built with modern frameworks. From startups to enterprises — we engineer solutions that scale.',
+      focus: 'Focus Areas', focusItems: 'Web Apps, Mobile Apps, Cloud Infrastructure'
+    },
+    academy: {
+      title: 'Ferdsilinks Academy',
+      desc: 'Train the next generation of African tech talent. Data science, software development, AI — from beginner to professional programs.',
+      explore: 'Explore Training'
+    },
+    process: {
+      blueprint: 'The Blueprint', title: 'Our Process',
+      discovery: 'Discovery', discoveryDesc: 'Deep diving into your business ecosystem to identify gaps and opportunities.',
+      strategy: 'Strategy', strategyDesc: 'Architecting a technical roadmap aligned with your long-term growth goals.',
+      implementation: 'Implementation', implementationDesc: 'Agile development and execution with a focus on precision and performance.',
+      optimization: 'Optimization', optimizationDesc: 'Continuous data monitoring and refinement to ensure peak efficiency.'
+    },
+    cta: {
+      title: 'Ready to Transform Your Business?',
+      desc: "Whether you need AI-powered solutions, an OHADA-compliant ERP system, or custom software — we're here to help 1000+ businesses across Africa succeed."
+    }
+  },
   footer: {
     allRights: 'All rights reserved.',
     architecturalData: 'Built with purpose in Buea, Cameroon. Pioneering the Silicon Mountain tech ecosystem since 2019.',
-    privacy: 'Privacy',
-    terms: 'Terms',
+    privacy: 'Privacy Policy',
+    terms: 'Terms of Service',
     contact: 'Contact',
+    chat: 'Chat with us',
+    description: 'Leading the digital transformation of Cameroon through precision tech solutions and elite education.',
+    servicesTitle: 'Services',
+    companyTitle: 'Company & Resources',
+    officeTitle: 'Office',
+    officeAddressLine1: 'Tech District, Molyko',
+    officeAddressLine2: 'Buea, SW Region',
+    officeAddressLine3: 'Cameroon',
+    getDirections: 'Get Directions',
+    copyright: '© 2024 Ferdsilinks. Precision in Data, Excellence in Tech. Buea, Cameroon.',
+  },
+  portfolioPage: {
+    heroTag: 'Our Work', heroTitlePart1: 'Real Solutions for Real Businesses: ', heroTitlePart2: 'Our Impact',
+    heroDesc: "From AI-powered accounting to data analytics platforms — see how we're transforming African enterprises with technology built in Silicon Mountain.",
+    caseStudiesBtn: 'View Case Studies', startProjectBtn: 'Start a Project',
+    categories: { dataScienceTitle: 'Data Science', dataScienceDesc: 'AI & ML Solutions', softwareTitle: 'Software Dev', softwareDesc: 'Custom Applications', cloudTitle: 'Cloud & IT', cloudDesc: 'Infrastructure Setup', analyticsTitle: 'Analytics', analyticsDesc: 'Business Intelligence' },
+    featuredTitle: 'Featured Project', featuredName: "Solafide ERP — Africa's First AI-Powered OHADA-Compliant Platform", featuredDesc: 'Built by Ferdsilinks, Solafide is transforming financial management for 1000+ businesses across Africa with AI-powered accounting, inventory, and compliance tools designed for the OHADA accounting system.',
+    tags: { ohada: 'OHADA Compliant', ai: 'AI-Powered', businesses: '1000+ Businesses' }, visitSite: 'Visit Solafide',
+    card1: { category: 'Data Science', title: 'AI & Machine Learning Solutions', desc: 'Custom ML models and AI solutions for African businesses.', link: 'View Services' },
+    card2: { category: 'Community Impact', title: 'WiDS Cameroon Partnership', desc: 'Empowering women in data science across Cameroon.', link: 'Learn More' },
+    card3: { category: 'Training', title: 'Ferdsilinks Academy', desc: 'Building the next generation of African tech talent.', link: 'Explore Courses' },
+    methodologyTag: 'Methodology', methodologyTitle: 'Our Process: From Research to Results', methodologyDesc: 'A scientific approach to building digital solutions that survive and thrive in real-world conditions.',
+    process: { discovery: 'Discovery', discoveryDesc: 'Deep immersion into your business logic, market dynamics, and operational bottlenecks.', architecture: 'Architecture', architectureDesc: 'Designing the technical blueprint and data structures that ensure infinite scalability.', execution: 'Execution', executionDesc: 'Agile development cycles with rigorous testing and continuous performance tuning.', evolution: 'Evolution', evolutionDesc: 'Data-driven optimization and support to ensure your solution grows with your impact.' },
+    stats: { businessesNum: '1000+', businessesLabel: 'Businesses Served', rateNum: '75%', rateLabel: 'Recommendation Rate', foundedNum: '2019', foundedLabel: 'Founded', expNum: '6+', expLabel: 'Years Experience' },
+    ctaTitle: 'Ready to Start Your Project?', ctaDesc: "Let's discuss how we can help solve your technology challenges — from AI solutions to custom software and tech training.", ctaQuote: 'Get a Quote', ctaServices: 'View Services'
+  },
+  trainingPage: {
+    heroTag: 'The Digital Architect Academy', heroTitlePart1: 'Master the Future of Tech in ', heroTitlePart2: 'Silicon Mountain',
+    heroDesc: "Expert-led intensives in Data Science, AI, and Software Engineering. Built for the next generation of African tech leaders in the heart of Buea's ecosystem.",
+    exploreBtn: 'Explore Courses', instructorsBtn: 'Meet Instructors',
+    stats: { alumniNum: '500+', alumniLabel: 'Alumni', partnersNum: '40+', partnersLabel: 'Tech Partners', hireNum: '92%', hireLabel: 'Hire Rate' },
+    cohortStarts: 'Next Cohort Starts', cohortDate: 'January 2025', certifiedPrograms: 'Certified Programs',
+    catalogTag: 'Course Catalog', catalogTitle: 'Architecture for Every Discipline', topRated: 'Top Rated', enrollBtn: 'Enroll Now',
+    noCourses: 'No courses found matching this level.', clearFilters: 'Clear Filters',
+    advantagesTag: "The Architect's Advantage", advantagesTitle: 'Why Learn with Ferdsilinks?', advantagesDesc: "We don't just teach tools; we craft architects of the digital future. Our methodology is rooted in the unique challenges and opportunities of the African tech landscape.",
+    advantages: { community: 'Elite Community', communityDesc: "Join a curated network of Buea's most ambitious engineers and designers.", experts: 'Industry Experts', expertsDesc: 'Mentorship from leads at top Silicon Mountain firms and global tech giants.', projectBased: 'Project-Based Learning', projectBasedDesc: 'Build real-world solutions that tackle local infrastructure and business needs.' },
+    features: { cert: 'Global Certification', certDesc: 'Recognized by major tech employers worldwide.', career: 'Career Launchpad', careerDesc: 'Dedicated placement services and portfolio reviews.', hub: 'Innovation Hub', hubDesc: '24/7 access to our physical tech labs in Buea.', alumni: 'Alumni Network', alumniDesc: 'Direct referrals and lifelong career support.' },
+    newsletterTag: 'Stay Informed', newsletterTitle: 'Join the Silicon Mountain Pulse', newsletterDesc: 'Get notified about new curriculum drops, exclusive scholarship opportunities, and local tech ecosystem events.', emailPlaceholder: 'Your professional email', subscribeBtn: 'Subscribe Now', noSpam: 'Zero spam. Only high-value tech updates.',
+    levels: { all: 'All Levels', beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
   },
   cta: {
     readyToTransform: 'Ready to Transform Your Business?',
@@ -257,6 +365,37 @@ export const en = {
   testimonials: {
     storiesImpact: 'What Our Clients Say',
     directFeedback: 'Real feedback from businesses and professionals who\'ve worked with Ferdsilinks.',
+  },
+  homePage: {
+    scalableArchitecture: 'Scalable Architecture',
+    agileMethodology: 'Agile Methodology',
+    devopsIntegration: 'DevOps Integration',
+    eliteCourses: 'Elite professional courses led by industry practitioners in Cameroon\'s premier tech ecosystem.',
+    bestseller: 'Bestseller',
+    newCourse: 'New Course',
+    weeks: 'Weeks',
+    seats: 'Seats',
+    projectBased: 'Project-Based',
+    course1Title: 'Mastering Data Science & Big Data',
+    course1Desc: 'Comprehensive hands-on training from Python basics to advanced predictive modeling.',
+    course2Title: 'Advanced Fullstack Development',
+    course2Desc: 'Build production-ready applications using React, Node.js, and modern DevOps tools.',
+    podcastDesc: 'Join CEO Tingom Ferdinand as he discusses data science, AI innovation, and building tech solutions from Cameroon\'s Silicon Mountain.',
+    seasonPlatform: 'SEASON 1 • 45 MINS',
+    blog1Category: 'Data Science',
+    blog1Title: 'Why Cameroon is Becoming West Africa\'s Data Science Hub',
+    blog1Desc: 'Exploring how Silicon Mountain is emerging as a center for data innovation and AI talent.',
+    blog2Category: 'AI & Machine Learning',
+    blog2Title: 'Building AI Solutions That Work for African Businesses',
+    blog2Desc: 'How Ferdsilinks is creating locally-relevant AI applications that solve real business challenges.',
+    blog3Category: 'Training & Education',
+    blog3Title: 'From Buea to the World: How Tech Training Changes Lives',
+    blog3Desc: 'Stories of graduates who started with Ferdsilinks training and now work with global companies.',
+    newsletterStatus: {
+      joining: 'Joining...',
+      success: 'Thanks for subscribing!',
+      error: 'Subscription failed.'
+    }
   },
   common: {
     learnMore: 'Learn More',
@@ -279,4 +418,40 @@ export const en = {
     required: 'Required',
     optional: 'Optional',
   },
+  teamPageExtras: {
+    joinTeamTitle: 'Want to Join Our Team?',
+    joinTeamDesc: "We're always looking for talented individuals who share our vision of transforming Africa through technology. If you're passionate about data, software, and innovation — we'd love to hear from you.",
+    viewOpenPositions: 'View Open Positions'
+  },
+  teamMembers: [
+    { name: 'Tingom Ferdinand', role: 'Chief Executive Officer & Founder', bio: 'Data analysis expert and visionary leader. Founded Ferdsilinks in 2019 with a mission to transform African businesses through technology.' },
+    { name: 'Ngong Charlotte Nabain', role: 'Director, Ferdsilinks Academy', bio: 'Marketing Manager, Data Analyst, and Founder of WiDS Cameroon. Passionate about STEAM education and developing tech talent in Africa.' },
+    { name: 'Ngong Marinus', role: 'Software Engineer', bio: 'Full-stack software engineer with expertise in building scalable web applications. 3+ years of experience in modern development.' },
+    { name: 'Yuven Brian', role: 'Co-Founder', bio: 'Full-stack developer and tech lead. Building products that solve real problems across Africa.' }
+  ],
+  podcastPage: {
+    newEpisode: 'New Episode', season: 'Season', ep: 'Ep',
+    titlePart1: 'The African AI', titlePart2: 'Renaissance',
+    heroDesc: "Join Ferdinand S. as he sits down with the architects of Silicon Mountain to discuss how localized machine learning models are reshaping the continent's tech ecosystem.",
+    listenNow: 'Listen Now', duration: '48 minutes • Featured pioneers',
+    applePodcasts: 'Apple Podcasts', listenSpotify: 'Listen on Spotify',
+    bueaTech: '#BueaTech', innovatingPeak: 'Innovating at the peak', listeners: '12K+ Listeners',
+    availablePlatforms: 'Available Platforms', googlePodcasts: 'Google Podcasts', rssFeed: 'RSS Feed', youtube: 'YouTube', activeListeners: 'Active Listeners',
+    episodeArchive: 'Episode Archive', archiveDesc: "Dive deep into the insights from Africa's most innovative tech minds.", searchPlaceholder: 'Search topics, guests...',
+    filters: { all: 'All Episodes', dataScience: 'Data Science', techCulture: 'Tech Culture', entrepreneurship: 'Entrepreneurship', aiEthics: 'AI Ethics' },
+    listenEpisode: 'Listen to Episode', loadMore: 'Load More Episodes',
+    newsletterTag: 'Silicon Mountain Pulse', newsletterTitle: 'Silicon Mountain Pulse',
+    newsletterDesc: "Join over 5,000 tech professionals receiving weekly insights, exclusive podcast outtakes, and data-driven trends from Buea's thriving tech hub.",
+    emailPlaceholder: 'Enter your business email', subscribeBtn: 'Subscribe Now', noSpam: 'No spam. Unsubscribe anytime.',
+    perks: { weekly: 'Weekly Tech Digests', reports: 'Exclusive Data Reports', events: 'Event Invitations' },
+    testimonialQuote: '"The definitive guide to innovation in Silicon Mountain."', testimonialAuthor: '— TechAfrica Quarterly'
+  },
+  blogPage: {
+    featuredInsight: 'Featured Insight', readFullStory: 'Read Full Story',
+    searchPlaceholder: 'Search insights...', noInsights: 'No insights found.', tryAdjusting: 'Try adjusting your category or search terms.',
+    newsletterTag: 'Stay Ahead', newsletterTitle: 'Join the Silicon Mountain Pulse',
+    newsletterDesc: 'Bi-weekly architectural insights into tech, data ethics, and the digital economy delivered directly to your inbox.',
+    emailPlaceholder: 'Your executive email', subscribeBtn: 'Subscribe', dataEthicsPolicy: 'By subscribing, you agree to our Data Ethics policy.',
+    readArticle: 'Read Article', categories: { all: 'All', dataScience: 'Data Science', ai: 'AI', techCulture: 'Tech Culture', softwareDevelopment: 'Software Development', businessGrowth: 'Business Growth', companyNews: 'Company News', engineering: 'Engineering', insights: 'Insights' }
+  }
 };

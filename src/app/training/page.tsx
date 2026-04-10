@@ -12,10 +12,10 @@ export default function TrainingHubPage() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [newsletterMessage, setNewsletterMessage] = useState('');
-  const levels = ['All Levels', 'Beginner', 'Intermediate', 'Advanced'];
+  const levels = [t.trainingPage.levels.all, t.trainingPage.levels.beginner, t.trainingPage.levels.intermediate, t.trainingPage.levels.advanced];
 
   const filteredCourses = courses.filter(course => {
-    return activeLevel === 'All Levels' || course.level === activeLevel;
+    return activeLevel === t.trainingPage.levels.all || course.level === activeLevel;
   });
 
   return (
@@ -37,34 +37,34 @@ export default function TrainingHubPage() {
               <div className="space-y-8">
                 <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
                   <span className="material-symbols-outlined text-tertiary-fixed text-sm">school</span>
-                  <span className="font-label text-tertiary-fixed text-xs font-bold uppercase tracking-widest">The Digital Architect Academy</span>
+                  <span className="font-label text-tertiary-fixed text-xs font-bold uppercase tracking-widest">{t.trainingPage.heroTag}</span>
                 </div>
                 <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05]">
-                  Master the Future of Tech in <span className="text-transparent bg-clip-text bg-gradient-to-r from-tertiary-fixed to-on-tertiary-container">Silicon Mountain</span>
+                  {t.trainingPage.heroTitlePart1}<span className="text-transparent bg-clip-text bg-gradient-to-r from-tertiary-fixed to-on-tertiary-container">{t.trainingPage.heroTitlePart2}</span>
                 </h1>
                 <p className="text-lg md:text-xl text-on-primary-container max-w-xl leading-relaxed">
-                  Expert-led intensives in Data Science, AI, and Software Engineering. Built for the next generation of African tech leaders in the heart of Buea's ecosystem.
+                  {t.trainingPage.heroDesc}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link href="#courses" className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
-                    Explore Courses <span className="material-symbols-outlined">arrow_forward</span>
+                    {t.trainingPage.exploreBtn} <span className="material-symbols-outlined">arrow_forward</span>
                   </Link>
                   <Link href="/contact" className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all">
-                    Meet Instructors
+                    {t.trainingPage.instructorsBtn}
                   </Link>
                 </div>
                 <div className="flex items-center gap-8 pt-6 border-t border-white/10">
                   <div>
-                    <p className="text-3xl font-bold font-headline">500+</p>
-                    <p className="text-xs font-label uppercase text-white/60">Alumni</p>
+                    <p className="text-3xl font-bold font-headline">{t.trainingPage.stats.alumniNum}</p>
+                    <p className="text-xs font-label uppercase text-white/60">{t.trainingPage.stats.alumniLabel}</p>
                   </div>
                   <div>
-                    <p className="text-3xl font-bold font-headline">40+</p>
-                    <p className="text-xs font-label uppercase text-white/60">Tech Partners</p>
+                    <p className="text-3xl font-bold font-headline">{t.trainingPage.stats.partnersNum}</p>
+                    <p className="text-xs font-label uppercase text-white/60">{t.trainingPage.stats.partnersLabel}</p>
                   </div>
                   <div>
-                    <p className="text-3xl font-bold font-headline">92%</p>
-                    <p className="text-xs font-label uppercase text-white/60">Hire Rate</p>
+                    <p className="text-3xl font-bold font-headline">{t.trainingPage.stats.hireNum}</p>
+                    <p className="text-xs font-label uppercase text-white/60">{t.trainingPage.stats.hireLabel}</p>
                   </div>
                 </div>
               </div>
@@ -84,14 +84,14 @@ export default function TrainingHubPage() {
                       <span className="material-symbols-outlined">trending_up</span>
                     </div>
                     <div>
-                      <p className="font-bold text-sm text-primary">Next Cohort Starts</p>
-                      <p className="text-xs text-on-surface-variant">January 2025</p>
+                      <p className="font-bold text-sm text-primary">{t.trainingPage.cohortStarts}</p>
+                      <p className="text-xs text-on-surface-variant">{t.trainingPage.cohortDate}</p>
                     </div>
                   </div>
                   <div className="absolute -top-4 -right-4 bg-tertiary-fixed p-4 rounded-lg shadow-xl">
                     <div className="flex items-center gap-2">
                       <span className="material-symbols-outlined text-on-tertiary-fixed">workspace_premium</span>
-                      <span className="font-label text-xs font-bold text-primary uppercase">Certified Programs</span>
+                      <span className="font-label text-xs font-bold text-primary uppercase">{t.trainingPage.certifiedPrograms}</span>
                     </div>
                   </div>
                 </div>
@@ -110,8 +110,8 @@ export default function TrainingHubPage() {
             <div className="container max-w-[1440px] mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-16">
                     <div className="max-w-xl">
-                        <span className="font-label text-on-tertiary-container font-bold text-sm tracking-widest uppercase">Course Catalog</span>
-                        <h2 className="font-headline text-4xl font-extrabold text-primary-container mt-2">Architecture for Every Discipline</h2>
+                        <span className="font-label text-on-tertiary-container font-bold text-sm tracking-widest uppercase">{t.trainingPage.catalogTag}</span>
+                        <h2 className="font-headline text-4xl font-extrabold text-primary-container mt-2">{t.trainingPage.catalogTitle}</h2>
                     </div>
                     <div className="flex bg-surface-container-high p-1 rounded-lg overflow-x-auto [scrollbar-width:none]">
                         {levels.map(level => (
@@ -142,7 +142,7 @@ export default function TrainingHubPage() {
                                     />
                                     {course.level === 'Advanced' && (
                                         <div className="absolute top-4 left-4 bg-primary/80 backdrop-blur-md text-white text-[10px] font-label font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                                            Top Rated
+                                            {t.trainingPage.topRated}
                                         </div>
                                     )}
                                 </div>
@@ -163,15 +163,15 @@ export default function TrainingHubPage() {
                                     </div>
                                 </div>
                                 <Link href={`/training/${course.slug}`}>
-                                    <button className="w-full bg-surface-container-high text-primary font-bold py-3 rounded-md group-hover:bg-on-tertiary-container group-hover:text-white transition-all">Enroll Now</button>
+                                    <button className="w-full bg-surface-container-high text-primary font-bold py-3 rounded-md group-hover:bg-on-tertiary-container group-hover:text-white transition-all">{t.trainingPage.enrollBtn}</button>
                                 </Link>
                             </div>
                         </div>
                     )) : (
                         <div className="col-span-full text-center py-24 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
                             <span className="material-symbols-outlined text-4xl text-outline-variant mb-2">search_off</span>
-                            <p className="font-headline font-bold text-xl text-primary mt-4">No courses found matching this level.</p>
-                            <button onClick={() => setActiveLevel('All Levels')} className="mt-4 text-on-tertiary-container font-bold hover:underline">Clear Filters</button>
+                            <p className="font-headline font-bold text-xl text-primary mt-4">{t.trainingPage.noCourses}</p>
+                            <button onClick={() => setActiveLevel(t.trainingPage.levels.all)} className="mt-4 text-on-tertiary-container font-bold hover:underline">{t.trainingPage.clearFilters}</button>
                         </div>
                     )}
                 </div>
@@ -185,21 +185,21 @@ export default function TrainingHubPage() {
             <div className="container max-w-[1440px] mx-auto px-8">
                 <div className="flex flex-col lg:flex-row gap-16 items-center">
                     <div className="lg:w-1/2 space-y-6">
-                        <span className="font-label text-tertiary-fixed text-sm font-bold tracking-[0.2em] uppercase">The Architect's Advantage</span>
-                        <h2 className="font-headline text-4xl font-extrabold text-white leading-tight">Why Learn with Ferdsilinks?</h2>
-                        <p className="text-on-primary-container text-lg leading-relaxed">We don't just teach tools; we craft architects of the digital future. Our methodology is rooted in the unique challenges and opportunities of the African tech landscape.</p>
+                        <span className="font-label text-tertiary-fixed text-sm font-bold tracking-[0.2em] uppercase">{t.trainingPage.advantagesTag}</span>
+                        <h2 className="font-headline text-4xl font-extrabold text-white leading-tight">{t.trainingPage.advantagesTitle}</h2>
+                        <p className="text-on-primary-container text-lg leading-relaxed">{t.trainingPage.advantagesDesc}</p>
                         <div className="space-y-6 pt-8">
                             <div className="flex items-start gap-4">
                                 <div className="mt-1 bg-white/10 p-2 rounded-lg"><span className="material-symbols-outlined text-[#cf7000]">groups</span></div>
-                                <div><h4 className="text-white font-bold mb-1">Elite Community</h4><p className="text-sm text-on-primary-container">Join a curated network of Buea's most ambitious engineers and designers.</p></div>
+                                <div><h4 className="text-white font-bold mb-1">{t.trainingPage.advantages.community}</h4><p className="text-sm text-on-primary-container">{t.trainingPage.advantages.communityDesc}</p></div>
                             </div>
                             <div className="flex items-start gap-4">
                                 <div className="mt-1 bg-white/10 p-2 rounded-lg"><span className="material-symbols-outlined text-[#cf7000]">psychology</span></div>
-                                <div><h4 className="text-white font-bold mb-1">Industry Experts</h4><p className="text-sm text-on-primary-container">Mentorship from leads at top Silicon Mountain firms and global tech giants.</p></div>
+                                <div><h4 className="text-white font-bold mb-1">{t.trainingPage.advantages.experts}</h4><p className="text-sm text-on-primary-container">{t.trainingPage.advantages.expertsDesc}</p></div>
                             </div>
                             <div className="flex items-start gap-4">
                                 <div className="mt-1 bg-white/10 p-2 rounded-lg"><span className="material-symbols-outlined text-[#cf7000]">terminal</span></div>
-                                <div><h4 className="text-white font-bold mb-1">Project-Based Learning</h4><p className="text-sm text-on-primary-container">Build real-world solutions that tackle local infrastructure and business needs.</p></div>
+                                <div><h4 className="text-white font-bold mb-1">{t.trainingPage.advantages.projectBased}</h4><p className="text-sm text-on-primary-container">{t.trainingPage.advantages.projectBasedDesc}</p></div>
                             </div>
                         </div>
                     </div>
@@ -207,25 +207,25 @@ export default function TrainingHubPage() {
                         <div className="space-y-4">
                             <div className="bg-primary p-8 rounded-xl border border-white/5 shadow-2xl">
                                 <span className="material-symbols-outlined text-4xl text-tertiary-fixed mb-4">workspace_premium</span>
-                                <p className="text-white font-headline text-lg font-bold">Global Certification</p>
-                                <p className="text-xs text-on-primary-container mt-2">Recognized by major tech employers worldwide.</p>
+                                <p className="text-white font-headline text-lg font-bold">{t.trainingPage.features.cert}</p>
+                                <p className="text-xs text-on-primary-container mt-2">{t.trainingPage.features.certDesc}</p>
                             </div>
                             <div className="bg-primary/50 p-8 rounded-xl border border-white/5">
                                 <span className="material-symbols-outlined text-4xl text-[#cf7000] mb-4">rocket_launch</span>
-                                <p className="text-white font-headline text-lg font-bold">Career Launchpad</p>
-                                <p className="text-xs text-on-primary-container mt-2">Dedicated placement services and portfolio reviews.</p>
+                                <p className="text-white font-headline text-lg font-bold">{t.trainingPage.features.career}</p>
+                                <p className="text-xs text-on-primary-container mt-2">{t.trainingPage.features.careerDesc}</p>
                             </div>
                         </div>
                         <div className="space-y-4 sm:mt-8">
                             <div className="bg-primary/50 p-8 rounded-xl border border-white/5">
                                 <span className="material-symbols-outlined text-4xl text-[#cf7000] mb-4">hub</span>
-                                <p className="text-white font-headline text-lg font-bold">Innovation Hub</p>
-                                <p className="text-xs text-on-primary-container mt-2">24/7 access to our physical tech labs in Buea.</p>
+                                <p className="text-white font-headline text-lg font-bold">{t.trainingPage.features.hub}</p>
+                                <p className="text-xs text-on-primary-container mt-2">{t.trainingPage.features.hubDesc}</p>
                             </div>
                             <div className="bg-primary p-8 rounded-xl border border-white/5 shadow-2xl">
                                 <span className="material-symbols-outlined text-4xl text-tertiary-fixed mb-4">diversity_3</span>
-                                <p className="text-white font-headline text-lg font-bold">Alumni Network</p>
-                                <p className="text-xs text-on-primary-container mt-2">Direct referrals and lifelong career support.</p>
+                                <p className="text-white font-headline text-lg font-bold">{t.trainingPage.features.alumni}</p>
+                                <p className="text-xs text-on-primary-container mt-2">{t.trainingPage.features.alumniDesc}</p>
                             </div>
                         </div>
                     </div>
@@ -240,9 +240,9 @@ export default function TrainingHubPage() {
             <div className="container mx-auto max-w-4xl bg-surface-container-low rounded-2xl p-12 relative overflow-hidden">
                 <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-tertiary-fixed/30 rounded-full blur-3xl"></div>
                 <div className="relative z-10 text-center space-y-6">
-                    <span className="font-label text-on-tertiary-container font-bold text-sm tracking-widest uppercase">Stay Informed</span>
-                    <h2 className="font-headline text-4xl font-extrabold text-primary">Join the Silicon Mountain Pulse</h2>
-                    <p className="text-on-surface-variant max-w-xl mx-auto">Get notified about new curriculum drops, exclusive scholarship opportunities, and local tech ecosystem events.</p>
+                    <span className="font-label text-on-tertiary-container font-bold text-sm tracking-widest uppercase">{t.trainingPage.newsletterTag}</span>
+                    <h2 className="font-headline text-4xl font-extrabold text-primary">{t.trainingPage.newsletterTitle}</h2>
+                    <p className="text-on-surface-variant max-w-xl mx-auto">{t.trainingPage.newsletterDesc}</p>
                     
                     {newsletterStatus === 'success' && (
                       <div className="max-w-lg mx-auto p-4 bg-green-50 border border-green-200 rounded-lg">
@@ -293,7 +293,7 @@ export default function TrainingHubPage() {
                           value={newsletterEmail}
                           onChange={(e) => setNewsletterEmail(e.target.value)}
                           className="flex-grow px-6 py-4 rounded-md bg-white border border-outline-variant focus:ring-2 focus:ring-secondary focus:outline-none transition-all" 
-                          placeholder="Your professional email" 
+                          placeholder={t.trainingPage.emailPlaceholder} 
                           type="email" 
                           required 
                         />
@@ -305,14 +305,13 @@ export default function TrainingHubPage() {
                           {newsletterStatus === 'loading' ? (
                             <>
                               <span className="material-symbols-outlined animate-spin">progress_activity</span>
-                              Subscribing...
                             </>
                           ) : (
-                            'Subscribe Now'
+                            t.trainingPage.subscribeBtn
                           )}
                         </button>
                     </form>
-                    <p className="text-[10px] text-on-surface-variant uppercase font-label tracking-tighter mt-4">Zero spam. Only high-value tech updates.</p>
+                    <p className="text-[10px] text-on-surface-variant uppercase font-label tracking-tighter mt-4">{t.trainingPage.noSpam}</p>
                 </div>
             </div>
         </section>

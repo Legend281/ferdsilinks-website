@@ -115,38 +115,40 @@ export default function TeamContent() {
 <div className="h-px bg-outline-variant flex-grow mb-4 hidden md:block opacity-30"></div>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-{teamMembers.map((member, index) => (
+{teamMembers.map((member, index) => {
+    const localMember = t.teamMembers[index] || member;
+    return (
 <div key={index} className="bg-surface-container-lowest rounded-xl p-6 transition-all duration-300 hover:shadow-[0px_24px_48px_rgba(0,33,71,0.08)] group">
 <div className="aspect-[4/5] overflow-hidden rounded-lg mb-6">
 <img 
   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-  alt={member.name} 
+  alt={localMember.name} 
   src={member.image}
 />
 </div>
 <div className="flex justify-between items-start mb-4">
 <div>
-<h3 className="font-headline text-xl font-bold text-primary">{member.name}</h3>
-<p className="font-label text-sm text-on-tertiary-container uppercase font-bold tracking-tight">{member.role}</p>
+<h3 className="font-headline text-xl font-bold text-primary">{localMember.name}</h3>
+<p className="font-label text-sm text-on-tertiary-container uppercase font-bold tracking-tight">{localMember.role}</p>
 </div>
 <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary transition-colors">
 <span className="material-symbols-outlined">open_in_new</span>
 </a>
 </div>
-<p className="text-on-surface-variant text-sm leading-relaxed">{member.bio}</p>
+<p className="text-on-surface-variant text-sm leading-relaxed">{localMember.bio}</p>
 </div>
-))}
+)})}
 </div>
 </section></FadeIn>
 {/* Join CTA */}
 <FadeIn><section className="py-24 bg-surface-container-low">
 <div className="max-w-4xl mx-auto px-8 text-center">
-<h2 className="font-headline text-4xl font-bold text-primary mb-6">Want to Join Our Team?</h2>
+<h2 className="font-headline text-4xl font-bold text-primary mb-6">{t.teamPageExtras.joinTeamTitle}</h2>
 <p className="text-on-surface-variant text-lg mb-10 max-w-2xl mx-auto">
-We&apos;re always looking for talented individuals who share our vision of transforming Africa through technology. If you&apos;re passionate about data, software, and innovation — we&apos;d love to hear from you.
+{t.teamPageExtras.joinTeamDesc}
 </p>
 <Link href="/careers" className="inline-flex items-center gap-2 bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
-View Open Positions <span className="material-symbols-outlined">arrow_forward</span>
+{t.teamPageExtras.viewOpenPositions} <span className="material-symbols-outlined">arrow_forward</span>
 </Link>
 </div>
 </section></FadeIn>

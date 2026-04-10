@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageProvider';
+import { useState, useTransition } from 'react';
+import { submitContactMessage } from '@/actions/contact';
 
 export default function ContactContent() {
   const { t } = useLanguage();
@@ -37,15 +39,15 @@ export default function ContactContent() {
 
       if (response.ok) {
         setFormStatus('success');
-        setFormMessage('Thank you! Your message has been sent. We will get back to you within 24 hours.');
+        setFormMessage(t.contact.status.success);
         e.currentTarget.reset();
       } else {
         setFormStatus('error');
-        setFormMessage(result.error || 'Something went wrong. Please try again.');
+        setFormMessage(result.error || t.contact.status.error);
       }
     } catch {
       setFormStatus('error');
-      setFormMessage('Network error. Please check your connection and try again.');
+      setFormMessage(t.contact.status.error);
     } finally {
       setIsLoading(false);
     }
@@ -135,6 +137,7 @@ export default function ContactContent() {
 <div className="lg:col-span-7 bg-surface-container-lowest p-8 lg:p-12 rounded-xl shadow-sm">
 <h2 className="font-headline text-3xl font-bold text-primary mb-2">{t.contact.sendMessage}</h2>
 <p className="text-on-surface-variant mb-8">We typically respond within 24 hours.</p>
+<<<<<<< HEAD
 
 {formStatus === 'success' && (
   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
@@ -203,6 +206,41 @@ export default function ContactContent() {
   </>
 )}
 </button>
+=======
+<form className="space-y-6" onSubmit={handleSubmit}>
+<div className="grid md:grid-cols-2 gap-6">
+<div className="space-y-2">
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.fullName}</label>
+<input name="fullName" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder={t.contact.formPlaceholders.fullName} type="text"/>
+</div>
+<div className="space-y-2">
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.emailAddress}</label>
+<input name="email" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder={t.contact.formPlaceholders.email} type="email"/>
+</div>
+</div>
+<div className="space-y-2">
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.subject}</label>
+<select name="subject" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none">
+<option value="Data Science & AI Solutions">{t.contact.subjects.dataScience}</option>
+<option value="Software Development">{t.contact.subjects.softwareDev}</option>
+<option value="IT Consulting">{t.contact.subjects.itConsulting}</option>
+<option value="Training Programs">{t.contact.subjects.training}</option>
+<option value="General Inquiry">{t.contact.subjects.general}</option>
+</select>
+</div>
+<div className="space-y-2">
+<label className="font-label text-xs font-bold uppercase text-on-surface-variant">{t.contact.message}</label>
+<textarea name="message" required className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none resize-none" placeholder={t.contact.formPlaceholders.message} rows={5}></textarea>
+</div>
+<button disabled={isPending} className="w-full md:w-auto px-10 py-4 bg-on-tertiary-container text-white font-headline font-bold rounded-lg hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-on-tertiary-container/20 disabled:opacity-50 disabled:cursor-not-allowed" type="submit">
+                                {isPending ? t.contact.status.sending : t.contact.submitMessage}
+                            </button>
+{status && (
+  <div className={`p-4 mt-4 rounded-lg text-sm font-medium border ${status.type === 'success' ? 'bg-green-50 text-green-800 border-green-200' : 'bg-red-50 text-red-800 border-red-200'}`}>
+    {status.message}
+  </div>
+)}
+>>>>>>> 488c6d1 (Complete Phase 1 localization of UI components and connect newsletter/contact forms)
 </form>
 </div>
 
@@ -288,7 +326,7 @@ export default function ContactContent() {
 <span className="material-symbols-outlined text-on-tertiary-container text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
 </div>
 <div className="bg-white/90 backdrop-blur-md px-6 py-3 rounded-full shadow-lg">
-<p className="font-headline font-bold text-primary">Ferdsilinks HQ, Silicon Mountain, Buea</p>
+<p className="font-headline font-bold text-primary">{t.contact.mapTitle}</p>
 </div>
 </div>
 </div>
