@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
+import { useLanguage } from '@/components/LanguageProvider';
 
 interface BlogPost {
   id: string;
@@ -22,6 +23,8 @@ interface BlogClientProps {
 }
 
 export default function BlogClient({ posts }: BlogClientProps) {
+  const { t } = useLanguage();
+  const bp = t.blogPage;
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
