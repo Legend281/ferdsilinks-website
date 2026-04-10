@@ -168,7 +168,7 @@ export default function ContactContent() {
 <div className="grid md:grid-cols-2 gap-6">
 <div className="space-y-2">
 <label className="font-label text-xs font-bold uppercase text-on-surface-variant">Phone</label>
-<input name="phone" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="+237 6XX XXX XXX" type="tel"/>
+<input name="phone" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="+237 676 817 339" type="tel"/>
 </div>
 <div className="space-y-2">
 <label className="font-label text-xs font-bold uppercase text-on-surface-variant">Company</label>
@@ -235,7 +235,7 @@ export default function ContactContent() {
 </div>
 <div>
 <h4 className="font-headline font-bold text-primary">{t.contact.callUs}</h4>
-<p className="text-on-surface-variant">+237 6XX XXX XXX</p>
+<p className="text-on-surface-variant">+237 676 817 339</p>
 <p className="text-xs font-label uppercase text-on-tertiary-container font-bold mt-1">{t.contact.available24}</p>
 </div>
 </div>

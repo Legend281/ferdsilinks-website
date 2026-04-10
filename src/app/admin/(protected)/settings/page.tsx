@@ -17,7 +17,7 @@ export default function SettingsPage() {
     siteName: 'Ferdsilinks',
     siteDescription: 'Innovation & Digital Architecture',
     contactEmail: 'contact@ferdsilinks.com',
-    phone: '+237 6XX XXX XXX',
+    phone: '+237 676 817 339',
     address: 'Silicon Mountain, Buea, Cameroon',
     socialLinks: {
       linkedin: 'https://linkedin.com/company/ferdsilinks',
