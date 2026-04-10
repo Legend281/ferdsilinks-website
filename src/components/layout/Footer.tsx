@@ -31,10 +31,10 @@ export function Footer() {
 <div>
 <h4 className="font-headline font-bold text-white mb-6 uppercase tracking-widest text-xs">Services</h4>
 <ul className="space-y-4 text-slate-400">
-<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/data-science">Data Science Lab</Link></li>
-<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/ai-integration">AI Integration</Link></li>
-<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/cloud-systems">Cloud Systems</Link></li>
-<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/software-architecture">Software Architecture</Link></li>
+<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/data-ai">Data Science & AI</Link></li>
+<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/it-software">IT & Software</Link></li>
+<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/training-research">Training & Research</Link></li>
+<li><Link className="hover:text-[#ffdcc3] transition-colors hover:translate-x-1 inline-block transition-transform duration-200" href="/services/consulting-print">Consulting</Link></li>
 </ul>
 </div>
 <div>
