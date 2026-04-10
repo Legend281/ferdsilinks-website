@@ -280,7 +280,7 @@ export default function ContactContent() {
 <div className="max-w-7xl mx-auto">
 <div className="relative w-full h-[500px] rounded-xl overflow-hidden shadow-xl">
 <iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.886468084674!2d9.285237!3d4.159040!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDg4JzE3LjYiTiA5wrAxNic3LjQiRQ!5e0!3m2!1sen!2sCM!4v1600000000000!5m2!1sen!2sCM"
+  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3979.832!2d9.285237!3d4.159040!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sFerdsilinks%2C%20Sosoliso%2C%20Molyko%20Buea!5e0!3m2!1sen!2sCM!4v1700000000000"
   width="100%" 
   height="100%" 
   style={{ border: 0 }} 
