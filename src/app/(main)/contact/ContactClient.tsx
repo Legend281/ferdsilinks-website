@@ -217,7 +217,7 @@ export default function ContactContent() {
 </div>
 <div>
 <h4 className="font-headline font-bold text-primary">{t.contact.officeAddress}</h4>
-<p className="text-on-surface-variant leading-relaxed">Molyko, Buea<br/>Southwest Region, Cameroon</p>
+<p className="text-on-surface-variant leading-relaxed">Ferdsilinks, Sosoliso, Molyko<br/>Buea, Southwest Region, Cameroon</p>
 </div>
 </div>
 <div className="flex gap-6 items-start">
