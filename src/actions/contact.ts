@@ -1,9 +1,10 @@
 "use server";
 
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/supabase-server-client";
 
 export async function submitContactMessage(formData: FormData) {
   try {
+    const supabase = await createClient();
     const fullName = formData.get("fullName")?.toString() || "";
     const email = formData.get("email")?.toString() || "";
     const subject = formData.get("subject")?.toString() || "";
