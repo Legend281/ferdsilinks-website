@@ -2,11 +2,15 @@
 
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export default function PodcastContent() {
+  const { t } = useLanguage();
+  const tp = t.podcastPage;
+
   return (
     <main className="pt-24 space-y-4">
-      
+       
 {/* Hero Section: Featured Episode - Background Image Hero */}
 <FadeIn>
   <section className="relative bg-primary overflow-hidden min-h-[85vh] flex items-center">
@@ -25,17 +29,17 @@ export default function PodcastContent() {
         <div className="space-y-8">
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-on-tertiary-container/80 backdrop-blur-sm rounded-full w-fit">
             <span className="w-2 h-2 bg-tertiary-fixed rounded-full animate-pulse"></span>
-            <span className="font-label text-xs font-bold uppercase tracking-widest text-white">New Episode</span>
+            <span className="font-label text-xs font-bold uppercase tracking-widest text-white">{tp.newEpisode}</span>
             <span className="w-1 h-1 bg-white/40 rounded-full"></span>
             <span className="font-label text-xs font-bold text-white/80">Season 4, Ep 12</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-headline font-extrabold text-white leading-[1] tracking-tight">
-            The African AI <br/> <span className="text-on-tertiary-container">Renaissance</span>
+            {tp.titlePart1} <br/> <span className="text-on-tertiary-container">{tp.titlePart2}</span>
           </h1>
           
           <p className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed">
-            Join Ferdinand S. as he sits down with the architects of Silicon Mountain to discuss how localized machine learning models are reshaping the continent&apos;s tech ecosystem.
+            {tp.heroDesc}
           </p>
           
           <div className="flex flex-wrap gap-6 items-center">
@@ -43,10 +47,10 @@ export default function PodcastContent() {
               <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
             </button>
             <div className="flex flex-col">
-              <span className="text-white font-bold text-lg">Listen Now</span>
+              <span className="text-white font-bold text-lg">{tp.listenNow}</span>
               <span className="text-white/60 text-sm flex items-center gap-2">
                 <span className="material-symbols-outlined text-sm">schedule</span>
-                48 minutes • Featured pioneers
+                {tp.duration}
               </span>
             </div>
           </div>
