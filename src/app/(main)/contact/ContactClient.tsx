@@ -172,7 +172,7 @@ export default function ContactContent() {
 </div>
 <div className="space-y-2">
 <label className="font-label text-xs font-bold uppercase text-on-surface-variant">Company</label>
-<input name="company" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder="Your Company Ltd" type="text"/>
+<input name="company" className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 focus:ring-2 focus:ring-secondary/20 transition-all outline-none" placeholder={t.contact.formPlaceholders.company} type="text"/>
 </div>
 </div>
 <div className="space-y-2">

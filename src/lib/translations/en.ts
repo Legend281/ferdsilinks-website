@@ -240,6 +240,7 @@ export const en = {
     formPlaceholders: {
       fullName: 'John Doe',
       email: 'john@company.cm',
+      company: 'Your Company Ltd',
       message: 'Tell us about your project or inquiry...',
     },
     subjects: {
@@ -439,6 +440,7 @@ export const en = {
     bueaTech: '#BueaTech', innovatingPeak: 'Innovating at the peak', listeners: '12K+ Listeners',
     availablePlatforms: 'Available Platforms', googlePodcasts: 'Google Podcasts', rssFeed: 'RSS Feed', youtube: 'YouTube', activeListeners: 'Active Listeners',
     episodeArchive: 'Episode Archive', archiveDesc: "Dive deep into the insights from Africa's most innovative tech minds.", searchPlaceholder: 'Search topics, guests...',
+    newsletter: { emailPlaceholder: 'Your executive email', subscribeBtn: 'Subscribe Now' },
     filters: { all: 'All Episodes', dataScience: 'Data Science', techCulture: 'Tech Culture', entrepreneurship: 'Entrepreneurship', aiEthics: 'AI Ethics' },
     listenEpisode: 'Listen to Episode', loadMore: 'Load More Episodes',
     newsletterTag: 'Silicon Mountain Pulse', newsletterTitle: 'Silicon Mountain Pulse',

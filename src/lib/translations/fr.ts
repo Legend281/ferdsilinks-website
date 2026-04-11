@@ -240,6 +240,7 @@ export const fr = {
     formPlaceholders: {
       fullName: 'Jean Dupont',
       email: 'jean@entreprise.cm',
+      company: 'Votre Entreprise',
       message: 'Parlez-nous de votre projet ou de votre demande...',
     },
     subjects: {
