@@ -43,13 +43,11 @@ async function getPost(slug: string) {
       .eq('status', 'published')
       .single();
     
-    if (error) {
-      console.error('Error fetching post:', error);
+    if (error || !data) {
       return null;
     }
     return data;
-  } catch (error) {
-    console.error('Error fetching post:', error);
+  } catch {
     return null;
   }
 }
@@ -65,13 +63,11 @@ async function getRelatedPosts(currentId: string, category: string) {
       .neq('id', currentId)
       .limit(2);
     
-    if (error) {
-      console.error('Error fetching related posts:', error);
+    if (error || !data) {
       return [];
     }
     return data || [];
-  } catch (error) {
-    console.error('Error fetching related posts:', error);
+  } catch {
     return [];
   }
 }
