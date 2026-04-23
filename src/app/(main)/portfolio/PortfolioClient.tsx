@@ -11,63 +11,115 @@ export default function PortfolioContent() {
   return (
     <main className="pt-24 space-y-4">
       
-{/* Hero Section - Split Hero */}
+{/* Hero Section - Redesigned with Background Image */}
 <FadeIn>
-  <section className="relative min-h-[80vh] flex items-center overflow-hidden bg-surface">
-    <div className="absolute inset-0 bg-gradient-to-br from-surface via-surface to-surface-container-low/50"></div>
-    <div className="absolute -right-20 top-20 w-[600px] h-[600px] bg-secondary-container/10 rounded-full blur-3xl -z-10"></div>
-    <div className="absolute -left-20 bottom-20 w-[400px] h-[400px] bg-on-tertiary-container/5 rounded-full blur-3xl -z-10"></div>
+  <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+    {/* Background Image */}
+    <div className="absolute inset-0">
+      <img 
+        className="w-full h-full object-cover" 
+        src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1920&h=1080&fit=crop"
+        alt="Tech team collaboration"
+      />
+      <div className="absolute inset-0 bg-primary/85"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary"></div>
+    </div>
     
-    <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+    {/* Decorative Elements */}
+    <div className="absolute top-0 right-0 w-[50%] h-full overflow-hidden">
+      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-on-tertiary-container/10 rounded-full blur-[100px]"></div>
+      <div className="absolute bottom-1/4 right-20 w-64 h-64 bg-tertiary-fixed/10 rounded-full blur-[80px]"></div>
+    </div>
+    <div className="absolute -left-20 bottom-20 w-[400px] h-[400px] bg-on-tertiary-container/10 rounded-full blur-[100px]"></div>
+    
+    <div className="max-w-7xl mx-auto px-6 relative z-10 w-full py-12">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Left Content */}
         <div className="space-y-8">
-          <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary-container/10 rounded-full border border-primary-container/20">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
             <span className="material-symbols-outlined text-on-tertiary-container text-sm">architecture</span>
-            <span className="font-label text-on-tertiary-container text-xs font-bold uppercase tracking-widest">{tp.heroTag}</span>
+            <span className="font-label text-xs font-bold uppercase tracking-widest text-white">{tp.heroTag}</span>
           </div>
-          <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary tracking-tighter leading-[1.05]">
+          
+          <h1 className="font-headline text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter leading-[1.05]">
             {tp.heroTitlePart1} <span className="text-on-tertiary-container">{tp.heroTitlePart2}</span>
           </h1>
-          <p className="text-xl text-on-surface-variant max-w-xl leading-relaxed">
+          
+          <p className="text-xl text-white/80 max-w-xl leading-relaxed">
             {tp.heroDesc}
           </p>
+          
           <div className="flex flex-wrap gap-4">
-            <Link href="#case-studies" className="bg-on-tertiary-container text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-0.5 transition-all inline-flex items-center gap-2">
+            <Link 
+              href="#case-studies" 
+              className="inline-flex items-center gap-2 bg-on-tertiary-container text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-on-tertiary-container/30 hover:-translate-y-1 transition-all duration-300"
+            >
               {tp.caseStudiesBtn} <span className="material-symbols-outlined">arrow_forward</span>
             </Link>
-            <Link href="/contact" className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary hover:text-white transition-all">
+            <Link 
+              href="/contact" 
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white border border-white/20 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white hover:text-primary transition-all duration-300"
+            >
+              <span className="material-symbols-outlined">handshake</span>
               {tp.startProjectBtn}
             </Link>
           </div>
+          
+          {/* Stats */}
+          <div className="flex flex-wrap gap-8 pt-4">
+            <div>
+              <p className="font-headline text-4xl font-extrabold text-white">50+</p>
+              <p className="text-white/60 text-sm font-medium">Projects Delivered</p>
+            </div>
+            <div className="w-px bg-white/20"></div>
+            <div>
+              <p className="font-headline text-4xl font-extrabold text-white">1000+</p>
+              <p className="text-white/60 text-sm font-medium">Clients Served</p>
+            </div>
+            <div className="w-px bg-white/20"></div>
+            <div>
+              <p className="font-headline text-4xl font-extrabold text-white">98%</p>
+              <p className="text-white/60 text-sm font-medium">Success Rate</p>
+            </div>
+          </div>
         </div>
+        
+        {/* Right Content - Service Cards */}
         <div className="relative hidden lg:block">
-          <div className="relative">
-            <div className="absolute -inset-4 bg-secondary-container/20 rounded-full blur-3xl"></div>
-            <div className="relative grid grid-cols-2 gap-4">
-              <div className="bg-primary-container p-8 rounded-2xl text-white space-y-4">
-                <span className="material-symbols-outlined text-4xl text-tertiary-fixed">neurology</span>
-                <p className="font-bold text-lg">{tp.categories.dataScienceTitle}</p>
-                <p className="text-sm text-white/70">{tp.categories.dataScienceDesc}</p>
+          <div className="absolute -inset-4 bg-on-tertiary-container/10 rounded-full blur-3xl"></div>
+          <div className="relative space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-1 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-6 text-white hover:bg-white/20 transition-all">
+                <span className="material-symbols-outlined text-3xl text-on-tertiary-container mb-4 block">neurology</span>
+                <h3 className="font-bold text-lg mb-2">{tp.categories.dataScienceTitle}</h3>
+                <p className="text-white/60 text-sm">{tp.categories.dataScienceDesc}</p>
               </div>
-              <div className="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/20 mt-8">
-                <span className="material-symbols-outlined text-4xl text-secondary mb-4 block">code</span>
-                <p className="font-bold text-lg text-primary">{tp.categories.softwareTitle}</p>
-                <p className="text-sm text-on-surface-variant">{tp.categories.softwareDesc}</p>
+              <div className="flex-1 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-6 text-white mt-8 hover:bg-white/20 transition-all">
+                <span className="material-symbols-outlined text-3xl text-on-tertiary-container mb-4 block">code</span>
+                <h3 className="font-bold text-lg mb-2">{tp.categories.softwareTitle}</h3>
+                <p className="text-white/60 text-sm">{tp.categories.softwareDesc}</p>
               </div>
-              <div className="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/20">
-                <span className="material-symbols-outlined text-4xl text-on-tertiary-container mb-4 block">cloud</span>
-                <p className="font-bold text-lg text-primary">{tp.categories.cloudTitle}</p>
-                <p className="text-sm text-on-surface-variant">{tp.categories.cloudDesc}</p>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex-1 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-6 text-white hover:bg-white/20 transition-all">
+                <span className="material-symbols-outlined text-3xl text-on-tertiary-container mb-4 block">cloud</span>
+                <h3 className="font-bold text-lg mb-2">{tp.categories.cloudTitle}</h3>
+                <p className="text-white/60 text-sm">{tp.categories.cloudDesc}</p>
               </div>
-              <div className="bg-primary-container p-8 rounded-2xl text-white mt-8">
-                <span className="material-symbols-outlined text-4xl text-on-tertiary-container mb-4 block">analytics</span>
-                <p className="font-bold text-lg">{tp.categories.analyticsTitle}</p>
-                <p className="text-sm text-white/70">{tp.categories.analyticsDesc}</p>
+              <div className="flex-1 bg-white/10 backdrop-blur-lg border border-white/10 rounded-2xl p-6 text-white mt-8 hover:bg-white/20 transition-all">
+                <span className="material-symbols-outlined text-3xl text-on-tertiary-container mb-4 block">analytics</span>
+                <h3 className="font-bold text-lg mb-2">{tp.categories.analyticsTitle}</h3>
+                <p className="text-white/60 text-sm">{tp.categories.analyticsDesc}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    
+    {/* Scroll Indicator */}
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 animate-bounce">
+      <span className="material-symbols-outlined text-3xl">keyboard_double_arrow_down</span>
     </div>
   </section>
 </FadeIn>

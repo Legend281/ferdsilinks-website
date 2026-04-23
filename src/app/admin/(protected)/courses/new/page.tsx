@@ -101,25 +101,25 @@ export default function NewCoursePage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-[#002147]">Add Course</h1>
-          <p className="text-gray-500">Create a new Academy course</p>
+          <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Add Course</h1>
+          <p className="text-slate-500">Create a new Academy course</p>
         </div>
         <Link
           href="/admin/courses"
-          className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg">arrow_back</span>
           Back to Courses
         </Link>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-slate-100">
         <div className="p-6 space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Course Title <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -127,14 +127,14 @@ export default function NewCoursePage() {
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="Introduction to Data Science"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     URL Slug <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -142,7 +142,7 @@ export default function NewCoursePage() {
                     name="slug"
                     value={formData.slug}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="introduction-data-science"
                     required
                   />
@@ -150,7 +150,7 @@ export default function NewCoursePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Short Description
                 </label>
                 <input
@@ -158,13 +158,13 @@ export default function NewCoursePage() {
                   name="short_description"
                   value={formData.short_description}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   placeholder="Brief summary for course cards"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Full Description
                 </label>
                 <textarea
@@ -172,13 +172,13 @@ export default function NewCoursePage() {
                   value={formData.description}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none resize-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none resize-none"
                   placeholder="Detailed course description..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Curriculum
                 </label>
                 <textarea
@@ -186,16 +186,16 @@ export default function NewCoursePage() {
                   value={formData.curriculum}
                   onChange={handleChange}
                   rows={8}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none resize-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none resize-none"
                   placeholder="Enter each topic on a new line..."
                 />
-                <p className="text-xs text-gray-500 mt-1">What students will learn (one topic per line)</p>
+                <p className="text-xs text-slate-500 mt-1">What students will learn (one topic per line)</p>
               </div>
             </div>
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Cover Image
                 </label>
                 <ImageUpload
@@ -207,7 +207,7 @@ export default function NewCoursePage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Price
                   </label>
                   <input
@@ -217,19 +217,19 @@ export default function NewCoursePage() {
                     onChange={handleChange}
                     min="0"
                     step="1000"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="0"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Currency
                   </label>
                   <select
                     name="currency"
                     value={formData.currency}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   >
                     <option value="XAF">XAF</option>
                     <option value="USD">USD</option>
@@ -239,14 +239,14 @@ export default function NewCoursePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Category
                 </label>
                 <select
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 >
                   <option value="">Select category</option>
                   {CATEGORIES.map(cat => (
@@ -257,14 +257,14 @@ export default function NewCoursePage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Level
                   </label>
                   <select
                     name="level"
                     value={formData.level}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   >
                     {LEVELS.map(level => (
                       <option key={level} value={level}>{level}</option>
@@ -272,7 +272,7 @@ export default function NewCoursePage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Duration
                   </label>
                   <input
@@ -280,14 +280,14 @@ export default function NewCoursePage() {
                     name="duration"
                     value={formData.duration}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="e.g. 8 weeks"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Instructor Name
                 </label>
                 <input
@@ -295,7 +295,7 @@ export default function NewCoursePage() {
                   name="instructor_name"
                   value={formData.instructor_name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   placeholder="Tingom Ferdinand"
                 />
               </div>
@@ -307,9 +307,9 @@ export default function NewCoursePage() {
                   id="is_online"
                   checked={formData.is_online}
                   onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-300 text-[#cf7000] focus:ring-[#cf7000]"
+                  className="w-5 h-5 rounded border-slate-300 text-[#ef0d11] focus:ring-[#ef0d11]"
                 />
-                <label htmlFor="is_online" className="text-sm font-medium text-gray-700">
+                <label htmlFor="is_online" className="text-sm font-medium text-slate-700">
                   Online Course
                 </label>
               </div>
@@ -321,9 +321,9 @@ export default function NewCoursePage() {
                   id="certificate_provided"
                   checked={formData.certificate_provided}
                   onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-300 text-[#cf7000] focus:ring-[#cf7000]"
+                  className="w-5 h-5 rounded border-slate-300 text-[#ef0d11] focus:ring-[#ef0d11]"
                 />
-                <label htmlFor="certificate_provided" className="text-sm font-medium text-gray-700">
+                <label htmlFor="certificate_provided" className="text-sm font-medium text-slate-700">
                   Certificate Provided
                 </label>
               </div>
@@ -335,22 +335,22 @@ export default function NewCoursePage() {
                   id="featured"
                   checked={formData.featured}
                   onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-300 text-[#cf7000] focus:ring-[#cf7000]"
+                  className="w-5 h-5 rounded border-slate-300 text-[#ef0d11] focus:ring-[#ef0d11]"
                 />
-                <label htmlFor="featured" className="text-sm font-medium text-gray-700">
+                <label htmlFor="featured" className="text-sm font-medium text-slate-700">
                   Featured Course
                 </label>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Status
                 </label>
                 <select
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 >
                   <option value="draft">Draft</option>
                   <option value="published">Published</option>
@@ -360,17 +360,17 @@ export default function NewCoursePage() {
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-end gap-3">
+        <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-3">
           <Link
             href="/admin/courses"
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all"
+            className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2 bg-[#cf7000] text-white rounded-lg font-medium hover:bg-[#b86300] transition-all flex items-center gap-2 disabled:opacity-50"
+            className="px-6 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>

@@ -56,6 +56,28 @@ export default function BlogManagementPage() {
     }
   };
 
+  const handleFeaturedChange = async (id: string, featured: boolean) => {
+    try {
+      const response = await fetch(`/api/admin/blog/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ featured }),
+      });
+      
+      if (response.ok) {
+        setPosts(posts.map(post => 
+          post.id === id ? { ...post, featured } : { ...post, featured: false }
+        ));
+        toast.success(featured ? 'Featured post' : 'Removed from featured');
+      } else {
+        toast.error('Failed to update');
+      }
+    } catch (error) {
+      console.error('Error updating:', error);
+      toast.error('Failed to update');
+    }
+  };
+
   const handleStatusChange = async (id: string, newStatus: 'published' | 'draft') => {
     try {
       const response = await fetch(`/api/admin/blog/${id}`, {
@@ -119,7 +141,7 @@ export default function BlogManagementPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-[#cf7000] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -128,25 +150,25 @@ export default function BlogManagementPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-[#002147]">Blog Posts</h1>
-          <p className="text-gray-500">Create and manage blog posts</p>
+          <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Blog Posts</h1>
+          <p className="text-slate-500">Create and manage blog posts</p>
         </div>
         <Link
           href="/admin/content/blog/new"
-          className="px-4 py-2 bg-[#cf7000] text-white rounded-lg font-medium hover:bg-[#b86300] transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg">add</span>
           New Post
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-100">
+        <div className="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => handleFilterChange('all')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'all' ? 'bg-[#002147] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'all' ? 'bg-[#0302cb] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               All ({posts.length})
@@ -154,7 +176,7 @@ export default function BlogManagementPage() {
             <button
               onClick={() => handleFilterChange('published')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'published' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'published' ? 'bg-green-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Published ({posts.filter(p => p.status === 'published').length})
@@ -162,7 +184,7 @@ export default function BlogManagementPage() {
             <button
               onClick={() => handleFilterChange('draft')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'draft' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'draft' ? 'bg-yellow-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Drafts ({posts.filter(p => p.status === 'draft').length})
@@ -170,37 +192,39 @@ export default function BlogManagementPage() {
           </div>
           
           <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
             <input
               type="text"
               placeholder="Search posts..."
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none w-full md:w-64"
+              className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none w-full md:w-64"
             />
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <div className="overflow-x-auto w-full">
+              <table className="w-full min-w-[800px]">
             <thead>
-              <tr className="bg-gray-50 text-left">
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Post</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <tr className="bg-slate-50 text-left">
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Post</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Category</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Featured</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-slate-100">
               {paginatedPosts.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-12 text-center">
-                    <span className="material-symbols-outlined text-gray-300 text-4xl">article</span>
-                    <p className="text-gray-500 mt-2">No posts found</p>
+                    <span className="material-symbols-outlined text-slate-300 text-4xl">article</span>
+                    <p className="text-slate-500 mt-2">No posts found</p>
                     <Link
                       href="/admin/content/blog/new"
-                      className="text-[#cf7000] hover:underline text-sm mt-1 inline-block"
+                      className="text-[#ef0d11] hover:underline text-sm mt-1 inline-block"
                     >
                       Create your first post
                     </Link>
@@ -208,10 +232,10 @@ export default function BlogManagementPage() {
                 </tr>
               ) : (
                 paginatedPosts.map((post) => (
-                  <tr key={post.id} className="hover:bg-gray-50 transition-all">
+                  <tr key={post.id} className="hover:bg-slate-50 transition-all">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-[#002147] rounded-lg flex items-center justify-center overflow-hidden">
+                        <div className="w-12 h-12 bg-[#0302cb] rounded-lg flex items-center justify-center overflow-hidden">
                           {post.cover_image ? (
                             <img src={post.cover_image} alt="" className="w-full h-full object-cover" />
                           ) : (
@@ -219,15 +243,28 @@ export default function BlogManagementPage() {
                           )}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900 line-clamp-1">{post.title}</p>
-                          <p className="text-sm text-gray-500 line-clamp-1">{post.excerpt}</p>
+                          <p className="font-medium text-slate-900 line-clamp-1">{post.title}</p>
+                          <p className="text-sm text-slate-500 line-clamp-1">{post.excerpt}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded">
                         {post.category || 'Uncategorized'}
                       </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <button
+                        onClick={() => handleFeaturedChange(post.id, !post.featured)}
+                        className={`p-2 rounded-lg transition-all ${
+                          post.featured 
+                            ? 'bg-yellow-100 text-yellow-600' 
+                            : 'bg-slate-100 text-slate-400 hover:text-yellow-500 hover:bg-yellow-50'
+                        }`}
+                        title={post.featured ? 'Remove from featured' : 'Set as featured'}
+                      >
+                        <span className="material-symbols-outlined text-lg">star</span>
+                      </button>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
@@ -239,7 +276,7 @@ export default function BlogManagementPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-slate-500">
                         {formatDate(post.published_at || post.created_at)}
                       </p>
                     </td>
@@ -247,7 +284,7 @@ export default function BlogManagementPage() {
                       <div className="flex items-center gap-1">
                         <Link
                           href={`/admin/content/blog/${post.id}`}
-                          className="p-2 text-gray-400 hover:text-[#cf7000] hover:bg-[#cf7000]/10 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-[#ef0d11] hover:bg-[#ef0d11]/10 rounded-lg transition-all"
                           title="Edit"
                         >
                           <span className="material-symbols-outlined text-lg">edit</span>
@@ -255,7 +292,7 @@ export default function BlogManagementPage() {
                         {post.status === 'draft' ? (
                           <button
                             onClick={() => handleStatusChange(post.id, 'published')}
-                            className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
                             title="Publish"
                           >
                             <span className="material-symbols-outlined text-lg">publish</span>
@@ -263,7 +300,7 @@ export default function BlogManagementPage() {
                         ) : (
                           <button
                             onClick={() => handleStatusChange(post.id, 'draft')}
-                            className="p-2 text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-all"
                             title="Unpublish"
                           >
                             <span className="material-symbols-outlined text-lg">unpublished</span>
@@ -272,14 +309,14 @@ export default function BlogManagementPage() {
                         <Link
                           href={`/blog/${post.slug}`}
                           target="_blank"
-                          className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
                           title="View"
                         >
                           <span className="material-symbols-outlined text-lg">visibility</span>
                         </Link>
                         <button
                           onClick={() => handleDelete(post.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                           title="Delete"
                         >
                           <span className="material-symbols-outlined text-lg">delete</span>
@@ -291,6 +328,7 @@ export default function BlogManagementPage() {
               )}
             </tbody>
           </table>
+            </div>
         </div>
 
         <Pagination

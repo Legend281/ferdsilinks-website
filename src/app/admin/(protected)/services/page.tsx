@@ -85,7 +85,7 @@ export default function ServicesManagementPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-[#cf7000] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -94,25 +94,25 @@ export default function ServicesManagementPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-[#002147]">Services</h1>
-          <p className="text-gray-500">Manage your service offerings</p>
+          <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Services</h1>
+          <p className="text-slate-500">Manage your service offerings</p>
         </div>
         <Link
           href="/admin/services/new"
-          className="px-4 py-2 bg-[#cf7000] text-white rounded-lg font-medium hover:bg-[#b86300] transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg">add</span>
           Add Service
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-100">
+        <div className="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setFilter('all')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'all' ? 'bg-[#002147] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'all' ? 'bg-[#0302cb] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               All ({services.length})
@@ -120,7 +120,7 @@ export default function ServicesManagementPage() {
             <button
               onClick={() => setFilter('active')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'active' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'active' ? 'bg-green-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Active ({services.filter(s => s.status === 'active').length})
@@ -128,7 +128,7 @@ export default function ServicesManagementPage() {
             <button
               onClick={() => setFilter('inactive')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'inactive' ? 'bg-gray-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'inactive' ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Inactive ({services.filter(s => s.status === 'inactive').length})
@@ -136,37 +136,38 @@ export default function ServicesManagementPage() {
           </div>
           
           <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
             <input
               type="text"
               placeholder="Search services..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none w-full md:w-64"
+              className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none w-full md:w-64"
             />
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <div className="overflow-x-auto w-full">
+              <table className="w-full min-w-[800px]">
             <thead>
-              <tr className="bg-gray-50 text-left">
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Featured</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <tr className="bg-slate-50 text-left">
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Service</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Category</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Featured</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-slate-100">
               {filteredServices.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-12 text-center">
-                    <span className="material-symbols-outlined text-gray-300 text-4xl">miscellaneous_services</span>
-                    <p className="text-gray-500 mt-2">No services found</p>
+                    <span className="material-symbols-outlined text-slate-300 text-4xl">miscellaneous_services</span>
+                    <p className="text-slate-500 mt-2">No services found</p>
                     <Link
                       href="/admin/services/new"
-                      className="text-[#cf7000] hover:underline text-sm mt-1 inline-block"
+                      className="text-[#ef0d11] hover:underline text-sm mt-1 inline-block"
                     >
                       Add your first service
                     </Link>
@@ -174,10 +175,10 @@ export default function ServicesManagementPage() {
                 </tr>
               ) : (
                 filteredServices.map((service) => (
-                  <tr key={service.id} className="hover:bg-gray-50 transition-all">
+                  <tr key={service.id} className="hover:bg-slate-50 transition-all">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-[#002147] rounded-lg flex items-center justify-center overflow-hidden">
+                        <div className="w-12 h-12 bg-[#0302cb] rounded-lg flex items-center justify-center overflow-hidden">
                           {service.icon ? (
                             <span className="material-symbols-outlined text-white text-xl">{service.icon}</span>
                           ) : service.cover_image ? (
@@ -187,19 +188,19 @@ export default function ServicesManagementPage() {
                           )}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900 line-clamp-1">{service.title}</p>
-                          <p className="text-sm text-gray-500 line-clamp-1">{service.short_description || service.description?.slice(0, 50)}</p>
+                          <p className="font-medium text-slate-900 line-clamp-1">{service.title}</p>
+                          <p className="text-sm text-slate-500 line-clamp-1">{service.short_description || service.description?.slice(0, 50)}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded">
                         {service.category || 'General'}
                       </span>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
-                        service.highlight ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-500'
+                        service.highlight ? 'bg-yellow-100 text-yellow-700' : 'bg-slate-100 text-slate-500'
                       }`}>
                         {service.highlight ? 'Featured' : 'Normal'}
                       </span>
@@ -208,7 +209,7 @@ export default function ServicesManagementPage() {
                       <span className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
                         service.status === 'active' 
                           ? 'bg-green-100 text-green-700' 
-                          : 'bg-gray-100 text-gray-700'
+                          : 'bg-slate-100 text-slate-700'
                       }`}>
                         {service.status}
                       </span>
@@ -217,7 +218,7 @@ export default function ServicesManagementPage() {
                       <div className="flex items-center gap-1">
                         <Link
                           href={`/admin/services/${service.id}`}
-                          className="p-2 text-gray-400 hover:text-[#cf7000] hover:bg-[#cf7000]/10 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-[#ef0d11] hover:bg-[#ef0d11]/10 rounded-lg transition-all"
                           title="Edit"
                         >
                           <span className="material-symbols-outlined text-lg">edit</span>
@@ -225,7 +226,7 @@ export default function ServicesManagementPage() {
                         {service.status === 'active' ? (
                           <button
                             onClick={() => handleStatusChange(service.id, 'inactive')}
-                            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all"
                             title="Deactivate"
                           >
                             <span className="material-symbols-outlined text-lg">visibility_off</span>
@@ -233,7 +234,7 @@ export default function ServicesManagementPage() {
                         ) : (
                           <button
                             onClick={() => handleStatusChange(service.id, 'active')}
-                            className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
                             title="Activate"
                           >
                             <span className="material-symbols-outlined text-lg">visibility</span>
@@ -241,7 +242,7 @@ export default function ServicesManagementPage() {
                         )}
                         <button
                           onClick={() => handleDelete(service.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                           title="Delete"
                         >
                           <span className="material-symbols-outlined text-lg">delete</span>
@@ -253,6 +254,7 @@ export default function ServicesManagementPage() {
               )}
             </tbody>
           </table>
+            </div>
         </div>
       </div>
     </div>

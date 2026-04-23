@@ -21,8 +21,8 @@ export default async function ServiceCategoryPage({ params }: { params: Promise<
         <main className="font-body text-on-surface antialiased bg-surface min-h-screen">
             {/* Hero Section - Full Width */}
             <FadeIn>
-                <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-primary architect-grid">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-container to-primary opacity-90"></div>
+                <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-[#111827] architect-grid">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#111827] via-[#111827]/90 to-[#111827]/80 opacity-90"></div>
                     <div className="absolute right-0 top-0 w-1/2 h-full opacity-20 pointer-events-none">
                         <img className="w-full h-full object-cover" alt={service.title} src={service.heroImage} />
                     </div>

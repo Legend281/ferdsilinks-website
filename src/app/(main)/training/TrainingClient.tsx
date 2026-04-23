@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageProvider';
@@ -26,10 +26,13 @@ interface TrainingClientProps {
   initialCourses: Course[];
 }
 
+const COURSES_PER_PAGE = 6;
+
 export default function TrainingClient({ initialCourses }: TrainingClientProps) {
   const { t } = useLanguage();
   const tp = t.trainingPage;
   const [activeLevel, setActiveLevel] = useState<string>('All Levels');
+  const [currentPage, setCurrentPage] = useState(1);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [newsletterMessage, setNewsletterMessage] = useState('');
@@ -40,6 +43,13 @@ export default function TrainingClient({ initialCourses }: TrainingClientProps) 
   const filteredCourses = courses.filter(course => {
     return activeLevel === 'All Levels' || course.level === activeLevel;
   });
+
+  // Pagination
+  const totalPages = Math.ceil(filteredCourses.length / COURSES_PER_PAGE);
+  const paginatedCourses = useMemo(() => {
+    const start = (currentPage - 1) * COURSES_PER_PAGE;
+    return filteredCourses.slice(start, start + COURSES_PER_PAGE);
+  }, [filteredCourses, currentPage]);
 
   const formatPrice = (price: number, currency: string) => {
     if (price === 0) return 'Free';
@@ -158,8 +168,9 @@ export default function TrainingClient({ initialCourses }: TrainingClientProps) 
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {filteredCourses.length > 0 ? filteredCourses.map(course => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {paginatedCourses.length > 0 ? (
+                      paginatedCourses.map(course => (
                         <div key={course.id} className="group bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 transition-all hover:-translate-y-2 hover:shadow-xl flex flex-col">
                             <Link href={`/training/${course.slug}`}>
                                 <div className="h-48 overflow-hidden rounded-t-xl relative">
@@ -207,22 +218,58 @@ export default function TrainingClient({ initialCourses }: TrainingClientProps) 
                                     </span>
                                   )}
                                 </div>
-                                <Link href={`/training/${course.slug}`}>
+<Link href={`/training/${course.slug}`}>
                                     <button className="w-full bg-surface-container-high text-primary font-bold py-3 rounded-md group-hover:bg-on-tertiary-container group-hover:text-white transition-all">Enroll Now</button>
-                                </Link>
+                                  </Link>
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="col-span-full text-center py-24 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
+                              <span className="material-symbols-outlined text-4xl text-outline-variant mb-2">search_off</span>
+                              <p className="font-headline font-bold text-xl text-primary mt-4">{tp.noCourses}</p>
+                              <button onClick={() => setActiveLevel(tp.levels.all)} className="mt-4 text-on-tertiary-container font-bold hover:underline">{tp.clearFilters}</button>
                             </div>
+                          )}
                         </div>
-                    )) : (
-                        <div className="col-span-full text-center py-24 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
-                            <span className="material-symbols-outlined text-4xl text-outline-variant mb-2">search_off</span>
-                            <p className="font-headline font-bold text-xl text-primary mt-4">{tp.noCourses}</p>
-                            <button onClick={() => setActiveLevel(tp.levels.all)} className="mt-4 text-on-tertiary-container font-bold hover:underline">{tp.clearFilters}</button>
-                        </div>
+                      </div>
+                    </section>
+                    
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                      <div className="flex items-center justify-center gap-2 mt-12">
+                        <button
+                          onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                          disabled={currentPage === 1}
+                          className="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:bg-surface-container-low transition-colors"
+                        >
+                          <span className="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                          <button
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                            className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+                              currentPage === page 
+                                ? 'bg-primary text-white' 
+                                : 'border border-outline-variant hover:bg-surface-container-low'
+                            }`}
+                          >
+                            {page}
+                          </button>
+                        ))}
+                        
+                        <button
+                          onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                          disabled={currentPage === totalPages}
+                          className="w-10 h-10 rounded-lg border border-outline-variant flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:bg-surface-container-low transition-colors"
+                        >
+                          <span className="material-symbols-outlined">chevron_right</span>
+                        </button>
+                      </div>
                     )}
-                </div>
-            </div>
-        </section>
-      </FadeIn> 
+                  </FadeIn>
 
       {/* Why Learn Section */}
       <FadeIn>

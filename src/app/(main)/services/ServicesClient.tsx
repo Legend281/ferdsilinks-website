@@ -11,7 +11,7 @@ export default function ServicesContent() {
       
       {/* Hero Section - Split Hero */}
       <FadeIn>
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-primary">
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#111827]">
           <div className="absolute inset-0 opacity-20">
             <img 
               className="w-full h-full object-cover" 
@@ -19,7 +19,7 @@ export default function ServicesContent() {
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuQyIFL8A3nBg5h0cgZnMCaPi55zAUzwFxOkBoWHdqs01lW0RbbIWLjXAPewLyZ6TsgaEvn7qGIF1MCroqRmCrxvZRc7aM5z6VywNmZmfSkMNKRPLE7n2U_GMg4Q72wrEh0I8s9N2xtLWvj_vuLsZqzV3g_ehFAOief4tKmz37Rfqh8cnD7WW6vT9bRdduGGuynZtedV6N6tXVrT_1DYDoTlofMybr56R_t3VCioqPi0kGTshXy9lEGDMveXrXtz2ODmgjuXqEsKaw"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111827] via-[#111827]/90 to-[#111827]/60"></div>
           <div className="relative max-w-7xl mx-auto px-6 w-full">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-8">

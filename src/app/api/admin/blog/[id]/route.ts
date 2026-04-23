@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/supabase-server-client';
+import { createServiceClient } from '@/lib/supabase/supabase-server-client';
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     
     const { data, error } = await supabase
       .from('blog_posts')
@@ -31,7 +31,7 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params;
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const body = await request.json();
 
     const updateData: Record<string, unknown> = {};
@@ -44,6 +44,7 @@ export async function PATCH(
     if (body.tags !== undefined) updateData.tags = body.tags;
     if (body.cover_image !== undefined) updateData.cover_image = body.cover_image;
     if (body.author_name !== undefined) updateData.author_name = body.author_name;
+    if (body.featured !== undefined) updateData.featured = body.featured;
     if (body.status !== undefined) {
       updateData.status = body.status;
       if (body.status === 'published') {
@@ -76,7 +77,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     
     const { error } = await supabase
       .from('blog_posts')

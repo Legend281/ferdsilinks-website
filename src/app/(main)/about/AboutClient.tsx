@@ -19,7 +19,7 @@ export default function AboutContent() {
       
 {/* Hero: Our Story - Split Hero */}
 <FadeIn>
-  <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-primary">
+  <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-[#111827]">
     <div className="absolute inset-0 opacity-30">
       <img 
         className="w-full h-full object-cover" 

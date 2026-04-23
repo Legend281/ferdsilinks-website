@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/supabase-server-client';
+import { createServiceClient } from '@/lib/supabase/supabase-server-client';
 import { NextResponse } from 'next/server';
 
 export async function GET(
@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const { data, error } = await supabase
       .from('podcasts')
       .select('*')
@@ -32,14 +32,14 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
 
     const updateData: Record<string, unknown> = {};
     const allowedFields = [
-      'title', 'slug', 'description', 'episode_number', 'season_number',
-      'duration', 'audio_url', 'cover_image', 'guest_name', 'guest_role',
-      'guest_bio', 'guest_image', 'published_date', 'category', 'tags',
-      'featured', 'status'
+      'title', 'slug', 'description', 'youtube_url', 'video_id',
+      'episode_number', 'season_number', 'duration', 'cover_image', 
+      'guest_name', 'guest_role', 'guest_bio', 'guest_image', 
+      'published_date', 'category', 'featured', 'status'
     ];
 
     for (const field of allowedFields) {
@@ -60,7 +60,7 @@ export async function PATCH(
     if (error) {
       console.error('Podcast update error:', error);
       return NextResponse.json(
-        { error: 'Failed to update podcast' },
+        { error: error.message },
         { status: 500 }
       );
     }
@@ -78,7 +78,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const { error } = await supabase
       .from('podcasts')
       .delete()
@@ -87,7 +87,7 @@ export async function DELETE(
     if (error) {
       console.error('Podcast delete error:', error);
       return NextResponse.json(
-        { error: 'Failed to delete podcast' },
+        { error: error.message },
         { status: 500 }
       );
     }

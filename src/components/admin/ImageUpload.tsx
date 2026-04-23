@@ -107,7 +107,7 @@ export default function ImageUpload({
     <div className={`space-y-2 ${className}`}>
       {value ? (
         <div className="relative group">
-          <div className="rounded-lg overflow-hidden bg-gray-100 border-2 border-gray-200">
+          <div className="rounded-lg overflow-hidden bg-slate-100 border-2 border-slate-200">
             <img
               src={value}
               alt="Preview"
@@ -115,7 +115,7 @@ export default function ImageUpload({
             />
           </div>
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 rounded-lg">
-            <label className="px-3 py-2 bg-white text-gray-700 rounded-lg cursor-pointer text-sm font-medium hover:bg-gray-100 transition-colors">
+            <label className="px-3 py-2 bg-white text-slate-700 rounded-lg cursor-pointer text-sm font-medium hover:bg-slate-100 transition-colors">
               Change
               <input
                 type="file"
@@ -143,8 +143,8 @@ export default function ImageUpload({
         <div
           className={`relative border-2 border-dashed rounded-lg transition-colors ${
             dragOver
-              ? 'border-[#cf7000] bg-[#cf7000]/5'
-              : 'border-gray-300 hover:border-gray-400'
+              ? 'border-[#ef0d11] bg-[#ef0d11]/5'
+              : 'border-slate-300 hover:border-slate-400'
           }`}
           onDragOver={(e) => {
             e.preventDefault();
@@ -154,13 +154,13 @@ export default function ImageUpload({
           onDrop={handleDrop}
         >
           <div className="p-8 text-center">
-            <span className="material-symbols-outlined text-4xl text-gray-400 mb-2">
+            <span className="material-symbols-outlined text-4xl text-slate-400 mb-2">
               cloud_upload
             </span>
-            <p className="text-sm text-gray-600 mb-2">
+            <p className="text-sm text-slate-600 mb-2">
               Drag and drop an image here, or
             </p>
-            <label className="px-4 py-2 bg-[#002147] text-white rounded-lg cursor-pointer text-sm font-medium hover:bg-[#001a3a] transition-colors inline-flex items-center gap-2">
+            <label className="px-4 py-2 bg-[#0302cb] text-white rounded-lg cursor-pointer text-sm font-medium hover:bg-[#001a3a] transition-colors inline-flex items-center gap-2">
               {uploading ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -180,7 +180,7 @@ export default function ImageUpload({
                 disabled={uploading}
               />
             </label>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-slate-500 mt-2">
               PNG, JPG, GIF up to 5MB
             </p>
           </div>

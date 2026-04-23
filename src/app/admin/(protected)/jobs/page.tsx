@@ -112,8 +112,8 @@ export default function JobsManagementPage() {
     switch (status) {
       case 'published': return 'bg-green-100 text-green-700';
       case 'draft': return 'bg-yellow-100 text-yellow-700';
-      case 'closed': return 'bg-gray-100 text-gray-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'closed': return 'bg-slate-100 text-slate-700';
+      default: return 'bg-slate-100 text-slate-700';
     }
   };
 
@@ -124,13 +124,13 @@ export default function JobsManagementPage() {
       'contract': 'bg-orange-100 text-orange-700',
       'internship': 'bg-pink-100 text-pink-700',
     };
-    return colors[type] || 'bg-gray-100 text-gray-700';
+    return colors[type] || 'bg-slate-100 text-slate-700';
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-[#cf7000] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -139,25 +139,25 @@ export default function JobsManagementPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-[#002147]">Job Listings</h1>
-          <p className="text-gray-500">Manage career opportunities</p>
+          <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Job Listings</h1>
+          <p className="text-slate-500">Manage career opportunities</p>
         </div>
         <Link
           href="/admin/jobs/new"
-          className="px-4 py-2 bg-[#cf7000] text-white rounded-lg font-medium hover:bg-[#b86300] transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg">add</span>
           Add Job
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-100">
+        <div className="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => handleFilterChange('all')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'all' ? 'bg-[#002147] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'all' ? 'bg-[#0302cb] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               All ({jobs.length})
@@ -165,7 +165,7 @@ export default function JobsManagementPage() {
             <button
               onClick={() => handleFilterChange('published')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'published' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'published' ? 'bg-green-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Published ({jobs.filter(j => j.status === 'published').length})
@@ -173,7 +173,7 @@ export default function JobsManagementPage() {
             <button
               onClick={() => handleFilterChange('draft')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'draft' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'draft' ? 'bg-yellow-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Drafts ({jobs.filter(j => j.status === 'draft').length})
@@ -181,7 +181,7 @@ export default function JobsManagementPage() {
             <button
               onClick={() => handleFilterChange('closed')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'closed' ? 'bg-gray-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'closed' ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Closed ({jobs.filter(j => j.status === 'closed').length})
@@ -189,38 +189,39 @@ export default function JobsManagementPage() {
           </div>
           
           <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
             <input
               type="text"
               placeholder="Search jobs..."
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none w-full md:w-64"
+              className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none w-full md:w-64"
             />
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <div className="overflow-x-auto w-full">
+              <table className="w-full min-w-[800px]">
             <thead>
-              <tr className="bg-gray-50 text-left">
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Department</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <tr className="bg-slate-50 text-left">
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Position</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Department</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Location</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Type</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-slate-100">
               {paginatedJobs.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center">
-                    <span className="material-symbols-outlined text-gray-300 text-4xl">work_off</span>
-                    <p className="text-gray-500 mt-2">No job listings found</p>
+                    <span className="material-symbols-outlined text-slate-300 text-4xl">work_off</span>
+                    <p className="text-slate-500 mt-2">No job listings found</p>
                     <Link
                       href="/admin/jobs/new"
-                      className="text-[#cf7000] hover:underline text-sm mt-1 inline-block"
+                      className="text-[#ef0d11] hover:underline text-sm mt-1 inline-block"
                     >
                       Create your first job listing
                     </Link>
@@ -228,20 +229,20 @@ export default function JobsManagementPage() {
                 </tr>
               ) : (
                 paginatedJobs.map((job) => (
-                  <tr key={job.id} className="hover:bg-gray-50 transition-all">
+                  <tr key={job.id} className="hover:bg-slate-50 transition-all">
                     <td className="px-6 py-4">
                       <div>
-                        <p className="font-medium text-gray-900">{job.title}</p>
-                        <p className="text-sm text-gray-500 line-clamp-1">{job.description}</p>
+                        <p className="font-medium text-slate-900">{job.title}</p>
+                        <p className="text-sm text-slate-500 line-clamp-1">{job.description}</p>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded">
                         {job.department}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2 text-sm text-slate-600">
                         <span className="material-symbols-outlined text-sm">{job.remote ? 'home_work' : 'location_on'}</span>
                         {job.location}
                       </div>
@@ -260,7 +261,7 @@ export default function JobsManagementPage() {
                       <div className="flex items-center gap-1">
                         <Link
                           href={`/admin/jobs/${job.id}`}
-                          className="p-2 text-gray-400 hover:text-[#cf7000] hover:bg-[#cf7000]/10 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-[#ef0d11] hover:bg-[#ef0d11]/10 rounded-lg transition-all"
                           title="Edit"
                         >
                           <span className="material-symbols-outlined text-lg">edit</span>
@@ -268,7 +269,7 @@ export default function JobsManagementPage() {
                         {job.status === 'draft' && (
                           <button
                             onClick={() => handleStatusChange(job.id, 'published')}
-                            className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
                             title="Publish"
                           >
                             <span className="material-symbols-outlined text-lg">publish</span>
@@ -277,7 +278,7 @@ export default function JobsManagementPage() {
                         {job.status === 'published' && (
                           <button
                             onClick={() => handleStatusChange(job.id, 'draft')}
-                            className="p-2 text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-yellow-600 hover:bg-yellow-50 rounded-lg transition-all"
                             title="Unpublish"
                           >
                             <span className="material-symbols-outlined text-lg">unpublished</span>
@@ -286,7 +287,7 @@ export default function JobsManagementPage() {
                         {job.status !== 'closed' && (
                           <button
                             onClick={() => handleStatusChange(job.id, 'closed')}
-                            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all"
                             title="Close"
                           >
                             <span className="material-symbols-outlined text-lg">lock</span>
@@ -295,14 +296,14 @@ export default function JobsManagementPage() {
                         <Link
                           href={`/careers#${job.id}`}
                           target="_blank"
-                          className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
                           title="View"
                         >
                           <span className="material-symbols-outlined text-lg">visibility</span>
                         </Link>
                         <button
                           onClick={() => handleDelete(job.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                           title="Delete"
                         >
                           <span className="material-symbols-outlined text-lg">delete</span>
@@ -314,6 +315,7 @@ export default function JobsManagementPage() {
               )}
             </tbody>
           </table>
+            </div>
         </div>
 
         <Pagination

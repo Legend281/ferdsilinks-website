@@ -26,8 +26,8 @@ export default async function EnrollmentsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-headline font-bold text-[#002147]">Enrollments</h1>
-        <p className="text-gray-500">Manage course enrollments and registrations.</p>
+        <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Enrollments</h1>
+        <p className="text-slate-500">Manage course enrollments and registrations.</p>
       </div>
 
       <EnrollmentsTable initialEnrollments={enrollments} />

@@ -14,6 +14,7 @@ export default function ProtectedAdminLayout({
 }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -32,17 +33,17 @@ export default function ProtectedAdminLayout({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-[#cf7000] border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="text-gray-500 mt-4">Loading...</p>
+          <div className="w-12 h-12 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-slate-500 mt-4">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50">
       <Toaster 
         position="top-right"
         toastOptions={{
@@ -67,10 +68,10 @@ export default function ProtectedAdminLayout({
           },
         }}
       />
-      <AdminSidebar />
-      <div className="pl-64">
-        <AdminHeader />
-        <main className="p-6">
+      <AdminSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <div className="lg:pl-72 pl-0 transition-all duration-300">
+        <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} />
+        <main className="p-4 md:p-6 lg:p-8">
           {children}
         </main>
       </div>

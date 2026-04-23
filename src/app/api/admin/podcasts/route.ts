@@ -1,9 +1,9 @@
-import { createClient } from '@/lib/supabase/supabase-server-client';
+import { createServiceClient } from '@/lib/supabase/supabase-server-client';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const { data, error } = await supabase
       .from('podcasts')
       .select('*')
@@ -24,17 +24,18 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const body = await request.json();
 
     const {
       title,
       slug,
       description,
+      youtube_url,
+      video_id,
       episode_number,
       season_number,
       duration,
-      audio_url,
       cover_image,
       guest_name,
       guest_role,
@@ -42,7 +43,6 @@ export async function POST(request: Request) {
       guest_image,
       published_date,
       category,
-      tags,
       featured,
       status,
     } = body;
@@ -60,10 +60,11 @@ export async function POST(request: Request) {
         title,
         slug,
         description,
+        youtube_url,
+        video_id,
         episode_number: episode_number || null,
         season_number: season_number || null,
         duration,
-        audio_url,
         cover_image,
         guest_name,
         guest_role,
@@ -71,7 +72,6 @@ export async function POST(request: Request) {
         guest_image,
         published_date: published_date || null,
         category,
-        tags: tags || [],
         featured: featured || false,
         status: status || 'draft',
       })
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     if (error) {
       console.error('Podcast creation error:', error);
       return NextResponse.json(
-        { error: 'Failed to create podcast' },
+        { error: error.message },
         { status: 500 }
       );
     }

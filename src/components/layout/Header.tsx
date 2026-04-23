@@ -46,7 +46,7 @@ export function Header() {
                 className={`transition-colors ${
                   isActive 
                     ? 'text-on-tertiary-container border-b-2 border-on-tertiary-container pb-1' 
-                    : 'text-primary hover:text-on-tertiary-container'
+                    : 'text-[#111827] hover:text-[#2563EB]'
                 }`}
               >
                 {link.name}

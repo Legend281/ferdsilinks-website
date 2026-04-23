@@ -1,19 +1,53 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/supabase-server-client';
+import { createServiceClient } from '@/lib/supabase/supabase-server-client';
+import { newsletterSchema } from '@/lib/validation';
+import { sendNewsletterAlert } from '@/lib/email';
+
+// Rate limiting
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 3;
+const RATE_WINDOW = 60 * 1000;
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+    return true;
+  }
+  if (record.count >= RATE_LIMIT) return false;
+  record.count++;
+  return true;
+}
+
+function getClientIP(request: NextRequest): string {
+  return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() 
+    || request.headers.get('x-real-ip')?.trim()
+    || 'unknown';
+}
 
 export async function POST(request: NextRequest) {
   try {
+    const clientIP = getClientIP(request);
+    if (!checkRateLimit(clientIP)) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    }
+    
     const body = await request.json();
-    const { email, name } = body;
-
-    if (!email) {
+    
+    const result = newsletterSchema.safeParse(body);
+    
+    if (!result.success) {
+      const errors = result.error.issues.map((e: { message: string }) => e.message);
       return NextResponse.json(
-        { error: 'Email is required' },
+        { error: errors[0], errors },
         { status: 400 }
       );
     }
 
-    const supabase = await createClient();
+    const { email, name } = result.data;
+
+    const supabase = await createServiceClient();
 
     const { data: existing } = await supabase
       .from('subscribers')
@@ -70,6 +104,13 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Send email alert
+    await sendNewsletterAlert({
+      email,
+      name: name || undefined,
+      source: 'Website',
+    });
 
     return NextResponse.json(
       { success: true, message: 'Successfully subscribed!', data },

@@ -1,19 +1,62 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/supabase-server-client';
+import { createServiceClient } from '@/lib/supabase/supabase-server-client';
+import { contactSchema } from '@/lib/validation';
+import { sendContactAlert } from '@/lib/email';
+
+// Simple in-memory rate limiting (for production, use Redis or Upstash)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 5; // max requests
+const RATE_WINDOW = 60 * 1000; // 1 minute
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+    return true;
+  }
+  
+  if (record.count >= RATE_LIMIT) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
+}
+
+function getClientIP(request: NextRequest): string {
+  return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() 
+    || request.headers.get('x-real-ip')?.trim()
+    || 'unknown';
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, phone, company, service_interest, message } = body;
-
-    if (!name || !email || !message) {
+    // Rate limiting
+    const clientIP = getClientIP(request);
+    if (!checkRateLimit(clientIP)) {
       return NextResponse.json(
-        { error: 'Name, email, and message are required' },
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    const body = await request.json();
+    
+    const result = contactSchema.safeParse(body);
+    
+    if (!result.success) {
+      const errors = result.error.issues.map((e: { message: string }) => e.message);
+      return NextResponse.json(
+        { error: errors[0], errors },
         { status: 400 }
       );
     }
 
-    const supabase = await createClient();
+    const { name, email, phone, company, service_interest, message } = result.data;
+
+    const supabase = await createServiceClient();
 
     const { data, error } = await supabase
       .from('leads')
@@ -39,6 +82,14 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Send email alert
+    await sendContactAlert({
+      name,
+      email,
+      phone: phone || undefined,
+      message,
+    });
 
     return NextResponse.json(
       { success: true, data },

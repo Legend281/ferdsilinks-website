@@ -92,13 +92,13 @@ export default function EnrollmentsTable({ initialEnrollments }: EnrollmentsTabl
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-      <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-100">
+      <div className="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={() => handleFilterChange('all')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'all' ? 'bg-[#002147] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'all' ? 'bg-[#0302cb] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             All ({enrollments.length})
@@ -106,7 +106,7 @@ export default function EnrollmentsTable({ initialEnrollments }: EnrollmentsTabl
           <button
             onClick={() => handleFilterChange('pending')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'pending' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'pending' ? 'bg-yellow-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             Pending ({enrollments.filter(e => e.status === 'pending').length})
@@ -114,7 +114,7 @@ export default function EnrollmentsTable({ initialEnrollments }: EnrollmentsTabl
           <button
             onClick={() => handleFilterChange('confirmed')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'confirmed' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'confirmed' ? 'bg-green-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             Confirmed ({enrollments.filter(e => e.status === 'confirmed').length})
@@ -122,7 +122,7 @@ export default function EnrollmentsTable({ initialEnrollments }: EnrollmentsTabl
           <button
             onClick={() => handleFilterChange('completed')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'completed' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'completed' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             Completed ({enrollments.filter(e => e.status === 'completed').length})
@@ -132,78 +132,79 @@ export default function EnrollmentsTable({ initialEnrollments }: EnrollmentsTabl
         <div className="flex items-center gap-3">
           <button
             onClick={handleExport}
-            className="px-4 py-2 bg-[#002147] text-white rounded-lg font-medium hover:bg-[#001a3a] transition-all flex items-center gap-2"
+            className="px-4 py-2 bg-[#0302cb] text-white rounded-lg font-medium hover:bg-[#001a3a] transition-all flex items-center gap-2"
           >
             <span className="material-symbols-outlined">download</span>
             Export CSV
           </button>
           
           <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
             <input
               type="text"
               placeholder="Search enrollments..."
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none w-full md:w-64"
+              className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none w-full md:w-64"
             />
           </div>
         </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <div className="overflow-x-auto w-full">
+              <table className="w-full min-w-[800px]">
           <thead>
-            <tr className="bg-gray-50 text-left">
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Student</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Background</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            <tr className="bg-slate-50 text-left">
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Student</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Course</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Contact</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Background</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-slate-100">
             {paginatedEnrollments.length === 0 ? (
               <tr>
                 <td colSpan={7} className="px-6 py-12 text-center">
-                  <span className="material-symbols-outlined text-gray-300 text-4xl">school</span>
-                  <p className="text-gray-500 mt-2">No enrollments found</p>
+                  <span className="material-symbols-outlined text-slate-300 text-4xl">school</span>
+                  <p className="text-slate-500 mt-2">No enrollments found</p>
                 </td>
               </tr>
             ) : (
               paginatedEnrollments.map((enrollment) => (
-                <tr key={enrollment.id} className="hover:bg-gray-50 transition-all">
+                <tr key={enrollment.id} className="hover:bg-slate-50 transition-all">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#cf7000] rounded-full flex items-center justify-center text-white font-medium">
+                      <div className="w-10 h-10 bg-[#ef0d11] rounded-full flex items-center justify-center text-white font-medium">
                         {enrollment.full_name.charAt(0)}
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{enrollment.full_name}</p>
+                        <p className="font-medium text-slate-900">{enrollment.full_name}</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm font-medium text-gray-900">{enrollment.course_title}</p>
+                    <p className="text-sm font-medium text-slate-900">{enrollment.course_title}</p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm text-gray-900">{enrollment.email}</p>
+                    <p className="text-sm text-slate-900">{enrollment.email}</p>
                     {enrollment.phone && (
-                      <p className="text-sm text-gray-500">{enrollment.phone}</p>
+                      <p className="text-sm text-slate-500">{enrollment.phone}</p>
                     )}
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-slate-600">
                       {enrollment.education_level || 'N/A'}
                     </p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-slate-400">
                       {enrollment.experience_level || 'N/A'}
                     </p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-slate-500">
                       {new Date(enrollment.created_at).toLocaleDateString()}
                     </p>
                   </td>
@@ -228,7 +229,7 @@ export default function EnrollmentsTable({ initialEnrollments }: EnrollmentsTabl
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => window.location.href = `mailto:${enrollment.email}`}
-                        className="p-2 text-gray-400 hover:text-[#cf7000] hover:bg-[#cf7000]/10 rounded-lg transition-all"
+                        className="p-2 text-slate-400 hover:text-[#ef0d11] hover:bg-[#ef0d11]/10 rounded-lg transition-all"
                         title="Send email"
                       >
                         <span className="material-symbols-outlined text-lg">mail</span>
@@ -240,6 +241,7 @@ export default function EnrollmentsTable({ initialEnrollments }: EnrollmentsTabl
             )}
           </tbody>
         </table>
+            </div>
       </div>
 
       <Pagination

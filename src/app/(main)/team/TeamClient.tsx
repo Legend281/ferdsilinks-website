@@ -63,16 +63,10 @@ export default function TeamContent({ initialMembers = [] }: TeamClientProps) {
       
 {/* Leadership Hero Section */}
 <FadeIn>
-  <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-primary">
-    <div className="absolute inset-0 z-0">
-      <img 
-        className="w-full h-full object-cover opacity-40" 
-        alt="Buea cityscape" 
-        src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1920&h=1080&fit=crop"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/60"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
-    </div>
+  <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#111827]">
+    <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+    <div className="absolute inset-0 bg-gradient-to-r from-[#111827] via-[#111827]/95 to-transparent"></div>
+    <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
     
     <div className="max-w-7xl mx-auto px-6 py-24 relative z-10 w-full">
       <div className="max-w-3xl">

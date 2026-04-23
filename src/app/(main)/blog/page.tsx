@@ -1,9 +1,9 @@
-import { createClient } from '@/lib/supabase/supabase-server-client';
+import { createServiceClient } from '@/lib/supabase/supabase-server-client';
 import BlogClient from './BlogClient';
 
 async function getPublishedPosts() {
   try {
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*')
@@ -24,7 +24,16 @@ async function getPublishedPosts() {
 export default async function BlogPage() {
   const posts = await getPublishedPosts();
   
-  const formattedPosts = posts.map(post => ({
+  // Find the featured post first (marked as featured)
+  const featuredPost = posts.find(p => p.featured === true);
+  
+  // If there's a featured post, put it first; otherwise use the first published post
+  let sortedPosts = [...posts];
+  if (featuredPost) {
+    sortedPosts = [featuredPost, ...posts.filter(p => p.id !== featuredPost.id)];
+  }
+  
+  const formattedPosts = sortedPosts.map(post => ({
     id: post.id,
     slug: post.slug,
     title: post.title,
@@ -37,6 +46,7 @@ export default async function BlogPage() {
     author: post.author_name || 'Ferdsilinks Team',
     authorRole: 'Content Team',
     cover_image: post.cover_image,
+    featured: post.featured === true,
   }));
 
   return <BlogClient posts={formattedPosts} />;

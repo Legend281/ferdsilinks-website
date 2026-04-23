@@ -1,13 +1,42 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FadeIn } from '@/components/FadeIn';
 import { useLanguage } from '@/components/LanguageProvider';
 import { serviceCategories } from '@/data/services';
 import { courses } from '@/data/training';
 
+interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  cover_image: string | null;
+  author_name: string;
+  published_at: string;
+}
+
 export default function Home() {
   const { t } = useLanguage();
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchBlogPosts() {
+      try {
+        const res = await fetch('/api/public/blog');
+        const data = await res.json();
+        setBlogPosts(data.posts || []);
+      } catch (error) {
+        console.error('Failed to fetch blog posts:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchBlogPosts();
+  }, []);
 
   return (
     <main className="bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant">
@@ -240,7 +269,7 @@ export default function Home() {
 
       {/* Podcast Feature */}
       <FadeIn>
-        <section className="py-24 bg-primary text-white overflow-hidden relative">
+        <section className="py-24 bg-[#111827] text-white overflow-hidden relative">
           <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
             <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-on-tertiary-container via-transparent to-transparent"></div>
           </div>
@@ -281,40 +310,37 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Post 1 */}
-              <div className="group">
-                <div className="aspect-[16/10] overflow-hidden rounded-xl mb-6">
-                  <img alt="Data Science in Africa" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"/>
-                </div>
-                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">Data Science</span>
-                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">Why Cameroon is Becoming West Africa&apos;s Data Science Hub</h3>
-                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">Exploring how Silicon Mountain is emerging as a center for data innovation and AI talent.</p>
-                <Link href="/blog" className="text-primary font-bold text-sm underline decoration-on-tertiary-container decoration-2 underline-offset-4">{t.blog.readArticle}</Link>
+            {isLoading ? (
+              <div className="grid md:grid-cols-3 gap-8">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="aspect-[16/10] bg-surface-container-high rounded-xl mb-6"></div>
+                    <div className="h-4 bg-surface-container-high rounded w-20 mb-3"></div>
+                    <div className="h-6 bg-surface-container-high rounded w-full mb-2"></div>
+                    <div className="h-6 bg-surface-container-high rounded w-3/4 mb-4"></div>
+                    <div className="h-4 bg-surface-container-high rounded w-full"></div>
+                  </div>
+                ))}
               </div>
-
-              {/* Post 2 */}
-              <div className="group">
-                <div className="aspect-[16/10] overflow-hidden rounded-xl mb-6">
-                  <img alt="AI in Business" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop"/>
-                </div>
-                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">AI & Machine Learning</span>
-                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">Building AI Solutions That Work for African Businesses</h3>
-                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">How Ferdsilinks is creating locally-relevant AI applications that solve real business challenges.</p>
-                <Link href="/blog" className="text-primary font-bold text-sm underline decoration-on-tertiary-container decoration-2 underline-offset-4">{t.blog.readArticle}</Link>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-8">
+                {blogPosts.map((post) => (
+                  <div key={post.id} className="group">
+                    <div className="aspect-[16/10] overflow-hidden rounded-xl mb-6">
+                      <img 
+                        alt={post.title} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                        src={post.cover_image || `https://api.dicebear.com/7.x/shapes/svg?seed=${post.id}&backgroundColor=002147`}
+                      />
+                    </div>
+                    <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">{post.category}</span>
+                    <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">{post.title}</h3>
+                    <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">{post.excerpt}</p>
+                    <Link href={`/blog/${post.slug}`} className="text-primary font-bold text-sm underline decoration-on-tertiary-container decoration-2 underline-offset-4">{t.blog.readArticle}</Link>
+                  </div>
+                ))}
               </div>
-
-              {/* Post 3 */}
-              <div className="group">
-                <div className="aspect-[16/10] overflow-hidden rounded-xl mb-6">
-                  <img alt="Tech Training" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop"/>
-                </div>
-                <span className="text-on-tertiary-container font-label text-xs font-bold uppercase mb-3 block tracking-widest">Training & Education</span>
-                <h3 className="font-headline font-bold text-xl text-primary mb-4 group-hover:text-secondary transition-colors">From Buea to the World: How Tech Training Changes Lives</h3>
-                <p className="text-on-surface-variant text-sm mb-6 line-clamp-2">Stories of graduates who started with Ferdsilinks training and now work with global companies.</p>
-                <Link href="/blog" className="text-primary font-bold text-sm underline decoration-on-tertiary-container decoration-2 underline-offset-4">{t.blog.readArticle}</Link>
-              </div>
-            </div>
+            )}
           </div>
         </section>
       </FadeIn>

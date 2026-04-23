@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/supabase-server-client';
 import { notFound } from 'next/navigation';
 import CourseDetailClient from './CourseDetailClient';
+import { courses as staticCourses } from '@/data/training';
 import type { Metadata } from 'next';
 
 type Props = {
@@ -9,13 +10,8 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const supabase = await createClient();
-  const { data: course } = await supabase
-    .from('courses')
-    .select('title, short_description, cover_image')
-    .eq('slug', slug)
-    .eq('status', 'published')
-    .single();
+  
+  const course = await getCourse(slug);
 
   if (!course) {
     return { title: 'Course Not Found' };
@@ -42,15 +38,38 @@ async function getCourse(slug: string) {
       .eq('status', 'published')
       .single();
     
-    if (error) {
-      console.error('Error fetching course:', error);
-      return null;
+    if (!error && data) {
+      return data;
     }
-    return data;
-  } catch (error) {
-    console.error('Error fetching course:', error);
-    return null;
+  } catch (error: any) {
+    console.error('Database error, falling back to static data:', error?.message || error);
   }
+  
+  const staticCourse = staticCourses.find(c => c.slug === slug);
+  if (staticCourse) {
+    return {
+      id: staticCourse.id,
+      slug: staticCourse.slug,
+      title: staticCourse.title,
+      short_description: staticCourse.short_description,
+      description: staticCourse.long_description,
+      cover_image: null,
+      duration: staticCourse.duration,
+      level: staticCourse.level,
+      category: staticCourse.category,
+      curriculum: staticCourse.curriculum.flatMap(m => [m.title, ...m.topics]),
+      price: 0,
+      currency: 'USD',
+      instructor_name: 'Ferdsilinks Academy',
+      max_students: null,
+      certificate_provided: true,
+      is_online: false,
+      location: null,
+      enrollment_deadline: null,
+    };
+  }
+  
+  return null;
 }
 
 export default async function CoursePage({ params }: { params: Promise<{ slug: string }> }) {

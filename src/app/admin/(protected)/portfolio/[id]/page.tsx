@@ -122,7 +122,7 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
   if (fetching) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-[#cf7000] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -146,25 +146,25 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-[#002147]">Edit Portfolio Project</h1>
-          <p className="text-gray-500">Update project details</p>
+          <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Edit Portfolio Project</h1>
+          <p className="text-slate-500">Update project details</p>
         </div>
         <Link
           href="/admin/portfolio"
-          className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg">arrow_back</span>
           Back to Portfolio
         </Link>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-slate-100">
         <div className="p-6 space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Project Title <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -172,14 +172,14 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="E-commerce Platform for RetailCo"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     URL Slug <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -187,7 +187,7 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                     name="slug"
                     value={formData.slug}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="ecommerce-platform-retailco"
                     required
                   />
@@ -196,7 +196,7 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Client Name
                   </label>
                   <input
@@ -204,13 +204,13 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                     name="client_name"
                     value={formData.client_name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="RetailCo Ltd"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Industry
                   </label>
                   <input
@@ -218,14 +218,14 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                     name="industry"
                     value={formData.industry}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="Retail & E-commerce"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Short Description
                 </label>
                 <input
@@ -233,13 +233,13 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                   name="short_description"
                   value={formData.short_description}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   placeholder="Brief summary for project cards"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Full Description
                 </label>
                 <textarea
@@ -247,14 +247,14 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                   value={formData.description}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none resize-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none resize-none"
                   placeholder="Detailed project description..."
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Technologies Used
                   </label>
                   <input
@@ -262,12 +262,12 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                     name="technologies"
                     value={formData.technologies}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="React, Node.js, PostgreSQL (comma separated)"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Project URL
                   </label>
                   <input
@@ -275,7 +275,7 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                     name="project_url"
                     value={formData.project_url}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="https://example.com"
                   />
                 </div>
@@ -284,7 +284,7 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Cover Image
                 </label>
                 <ImageUpload
@@ -295,14 +295,14 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Category
                 </label>
                 <select
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 >
                   <option value="">Select category</option>
                   {categoryOptions.map(cat => (
@@ -312,7 +312,7 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Display Order
                 </label>
                 <input
@@ -321,7 +321,7 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                   value={formData.order_index}
                   onChange={handleChange}
                   min="0"
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 />
               </div>
 
@@ -332,33 +332,33 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
                   id="featured"
                   checked={formData.featured}
                   onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-300 text-[#cf7000] focus:ring-[#cf7000]"
+                  className="w-5 h-5 rounded border-slate-300 text-[#ef0d11] focus:ring-[#ef0d11]"
                 />
-                <label htmlFor="featured" className="text-sm font-medium text-gray-700">
+                <label htmlFor="featured" className="text-sm font-medium text-slate-700">
                   Featured Project
                 </label>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Status
                 </label>
                 <select
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 >
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                 </select>
               </div>
 
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-xs text-gray-500">
+              <div className="p-4 bg-slate-50 rounded-lg">
+                <p className="text-xs text-slate-500">
                   Created: {new Date(item.created_at).toLocaleDateString()}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-slate-500">
                   Last updated: {new Date(item.updated_at).toLocaleDateString()}
                 </p>
               </div>
@@ -366,17 +366,17 @@ export default function EditPortfolioPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-end gap-3">
+        <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-3">
           <Link
             href="/admin/portfolio"
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all"
+            className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2 bg-[#cf7000] text-white rounded-lg font-medium hover:bg-[#b86300] transition-all flex items-center gap-2 disabled:opacity-50"
+            className="px-6 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>

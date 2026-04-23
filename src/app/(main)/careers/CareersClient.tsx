@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import { useLanguage } from '@/components/LanguageProvider';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 interface Job {
   id: string;
@@ -26,6 +27,18 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
   const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [showCVModal, setShowCVModal] = useState(false);
+  const [cvFormData, setCvFormData] = useState({
+    full_name: '',
+    email: '',
+    phone: '',
+    linkedin_url: '',
+    cover_letter: '',
+    message: ''
+  });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
   
   const jobs = initialJobs.length > 0 ? initialJobs : [];
 
@@ -33,6 +46,67 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
   const filters = departments.slice(0, 5);
 
   const filteredJobs = jobs.filter(job => activeFilter === "All" || job.department === activeFilter);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setShowCVModal(false);
+    };
+    if (showCVModal) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [showCVModal]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('File size must be less than 5MB');
+        return;
+      }
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowedTypes.includes(file.type)) {
+        toast.error('Please upload a PDF or Word document');
+        return;
+      }
+      setResumeFile(file);
+    }
+  };
+
+  const handleCVSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...cvFormData,
+          job_title: 'General Application',
+          resume_url: resumeFile ? `File: ${resumeFile.name}` : ''
+        }),
+      });
+
+      if (response.ok) {
+        toast.success('Application submitted successfully! We will be in touch.');
+        setShowCVModal(false);
+        setCvFormData({ full_name: '', email: '', phone: '', linkedin_url: '', cover_letter: '', message: '' });
+        setResumeFile(null);
+      } else {
+        const data = await response.json();
+        toast.error(data.error || 'Failed to submit application');
+      }
+    } catch {
+      toast.error('Network error. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <main className="font-body text-on-surface antialiased bg-surface min-h-screen">
@@ -258,27 +332,232 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
 
       {/* CTA Section */}
       <FadeIn>
-          <section className="py-24">
-              <div className="max-w-7xl mx-auto px-8 lg:px-12">
-                  <div className="bg-primary rounded-[2rem] p-12 md:p-24 relative overflow-hidden text-center md:text-left shadow-2xl">
-                      <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none">
-                          <img className="w-full h-full object-cover" alt="Tech workspace" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" />
+          <section className="py-24 bg-primary relative overflow-hidden">
+              <div className="absolute inset-0">
+                  <div className="absolute top-0 right-0 w-1/2 h-full opacity-20">
+                      <img className="w-full h-full object-cover" alt="Team collaboration" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary to-transparent"></div>
+              </div>
+              
+              <div className="max-w-7xl mx-auto px-8 relative z-10">
+                  <div className="grid lg:grid-cols-2 gap-16 items-center">
+                      <div>
+                          <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-8">
+                              Open Applications
+                          </span>
+                          <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                              Don&apos;t see a<br />
+                              <span className="text-on-tertiary-container">perfect fit?</span>
+                          </h2>
+                          <p className="text-lg text-white/80 mb-10 max-w-xl leading-relaxed">
+                              We&apos;re always looking for exceptional talent. Send your CV and tell us how you can contribute to our mission.
+                          </p>
+                          <button 
+                              onClick={() => setShowCVModal(true)}
+                              className="group inline-flex items-center justify-center gap-3 bg-on-tertiary-container text-white px-10 py-5 rounded-xl font-bold text-lg shadow-xl shadow-on-tertiary-container/20 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
+                          >
+                              <span className="material-symbols-outlined text-2xl">upload_file</span>
+                              Send Your CV
+                              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                          </button>
                       </div>
-                      <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 items-center">
-                          <div className="md:col-span-8 lg:col-span-8">
-                              <h2 className="font-headline text-4xl md:text-6xl font-extrabold text-white mb-6">{t.careers.dontSeeFit}</h2>
-                              <p className="text-primary-fixed-dim text-lg md:text-xl mb-10 max-w-xl font-light">
-                                  {t.careers.alwaysLooking}
-                              </p>
-                              <a className="inline-block bg-on-tertiary-container text-white px-10 py-5 rounded-xl font-bold font-headline tracking-wide hover:shadow-2xl hover:-translate-y-1 hover:bg-tertiary-fixed hover:text-on-tertiary-fixed transition-all" href="mailto:careers@ferdsilinks.com">
-                                  {t.careers.sendCV}
-                              </a>
+                      
+                      <div className="hidden lg:block">
+                          <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-3xl p-8 space-y-6">
+                              <div className="flex items-center gap-4">
+                                  <div className="w-14 h-14 bg-on-tertiary-container rounded-xl flex items-center justify-center flex-shrink-0">
+                                      <span className="material-symbols-outlined text-white text-2xl">lightbulb</span>
+                                  </div>
+                                  <div>
+                                      <h4 className="text-white font-bold text-lg">Share Your Vision</h4>
+                                      <p className="text-white/60 text-sm">Tell us about your goals and aspirations</p>
+                                  </div>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                  <div className="w-14 h-14 bg-on-tertiary-container rounded-xl flex items-center justify-center flex-shrink-0">
+                                      <span className="material-symbols-outlined text-white text-2xl">description</span>
+                                  </div>
+                                  <div>
+                                      <h4 className="text-white font-bold text-lg">Show Your Skills</h4>
+                                      <p className="text-white/60 text-sm">Attach your CV and portfolio work</p>
+                                  </div>
+                              </div>
+                              <div className="flex items-center gap-4">
+                                  <div className="w-14 h-14 bg-on-tertiary-container rounded-xl flex items-center justify-center flex-shrink-0">
+                                      <span className="material-symbols-outlined text-white text-2xl">handshake</span>
+                                  </div>
+                                  <div>
+                                      <h4 className="text-white font-bold text-lg">Join the Team</h4>
+                                      <p className="text-white/60 text-sm">We&apos;ll review and get back to you</p>
+                                  </div>
+                              </div>
                           </div>
                       </div>
                   </div>
               </div>
           </section>
       </FadeIn>
+
+      {/* CV Submission Modal */}
+      {showCVModal && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowCVModal(false)}
+          />
+          <div 
+            ref={modalRef}
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+          >
+            <div className="sticky top-0 bg-white border-b border-gray-100 px-8 py-6 flex items-center justify-between rounded-t-2xl">
+              <div>
+                <h3 className="font-headline text-2xl font-bold text-primary">Submit Your CV</h3>
+                <p className="text-sm text-gray-500 mt-1">Join the Ferdsilinks team</p>
+              </div>
+              <button 
+                onClick={() => setShowCVModal(false)}
+                className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+              >
+                <span className="material-symbols-outlined text-gray-600">close</span>
+              </button>
+            </div>
+
+            <form onSubmit={handleCVSubmit} className="p-8 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={cvFormData.full_name}
+                    onChange={(e) => setCvFormData(prev => ({ ...prev, full_name: e.target.value }))}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={cvFormData.email}
+                    onChange={(e) => setCvFormData(prev => ({ ...prev, email: e.target.value }))}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    value={cvFormData.phone}
+                    onChange={(e) => setCvFormData(prev => ({ ...prev, phone: e.target.value }))}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                    placeholder="+237 676 817 339"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    LinkedIn URL
+                  </label>
+                  <input
+                    type="url"
+                    value={cvFormData.linkedin_url}
+                    onChange={(e) => setCvFormData(prev => ({ ...prev, linkedin_url: e.target.value }))}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                    placeholder="https://linkedin.com/in/yourprofile"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Resume / CV <span className="text-red-500">*</span>
+                </label>
+                <div className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
+                  resumeFile ? 'border-green-400 bg-green-50' : 'border-gray-300 hover:border-primary'
+                }`}>
+                  <input
+                    type="file"
+                    id="resume-upload"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  <label htmlFor="resume-upload" className="cursor-pointer">
+                    {resumeFile ? (
+                      <div className="flex items-center justify-center gap-3">
+                        <span className="material-symbols-outlined text-green-600 text-3xl">check_circle</span>
+                        <div className="text-left">
+                          <p className="font-medium text-green-700">{resumeFile.name}</p>
+                          <p className="text-sm text-green-600">{(resumeFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-gray-400 text-4xl mb-3">upload_file</span>
+                        <p className="text-gray-600 font-medium">Click to upload your CV</p>
+                        <p className="text-sm text-gray-400 mt-1">PDF or Word document (max 5MB)</p>
+                      </>
+                    )}
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Cover Letter / Message <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  value={cvFormData.cover_letter}
+                  onChange={(e) => setCvFormData(prev => ({ ...prev, cover_letter: e.target.value }))}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none"
+                  placeholder="Tell us about yourself and why you'd like to join Ferdsilinks..."
+                />
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-primary text-white px-8 py-4 rounded-xl font-bold hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      Submit Application
+                      <span className="material-symbols-outlined">send</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCVModal(false)}
+                  className="px-8 py-4 border-2 border-gray-200 rounded-xl font-bold text-gray-600 hover:bg-gray-50 transition-all"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/supabase-browser-client';
 
 interface NavItem {
   name: string;
@@ -17,16 +19,16 @@ interface NavSection {
 
 const navigation: NavSection[] = [
   {
-    title: 'Overview',
+    title: 'Main',
     items: [
       { name: 'Dashboard', href: '/admin', icon: 'dashboard' },
     ],
   },
   {
-    title: 'Management',
+    title: 'Leads & Enquiries',
     items: [
-      { name: 'Leads', href: '/admin/leads', icon: 'inbox' },
-      { name: 'Enrollments', href: '/admin/enrollments', icon: 'school' },
+      { name: 'Leads', href: '/admin/leads', icon: 'inbox', badge: 12 },
+      { name: 'Enrollments', href: '/admin/enrollments', icon: 'school', badge: 5 },
       { name: 'Applications', href: '/admin/applications', icon: 'person_search' },
     ],
   },
@@ -43,21 +45,33 @@ const navigation: NavSection[] = [
     ],
   },
   {
-    title: 'Communication',
+    title: 'Engagement',
     items: [
       { name: 'Newsletter', href: '/admin/newsletter', icon: 'mail' },
     ],
   },
   {
-    title: 'Settings',
+    title: 'System',
     items: [
       { name: 'Settings', href: '/admin/settings', icon: 'settings' },
+      { name: 'Analytics', href: '/admin/analytics', icon: 'analytics' },
     ],
   },
 ];
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val: boolean) => void }) {
   const pathname = usePathname();
+  const [user, setUser] = useState<{ email?: string; user_metadata?: { full_name?: string; avatar_url?: string } } | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
 
   const isActive = (href: string) => {
     if (href === '/admin') {
@@ -66,90 +80,125 @@ export default function AdminSidebar() {
     return pathname.startsWith(href);
   };
 
+  const toggleSection = (title: string) => {
+    setActiveSection(activeSection === title ? null : title);
+  };
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
-    <aside className="fixed inset-y-0 left-0 w-64 bg-[#002147] text-white flex flex-col z-50">
-      {/* Header */}
-      <div className="p-5 border-b border-white/10">
-        <Link href="/admin" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#cf7000] rounded-lg flex items-center justify-center shadow-lg">
-            <span className="material-symbols-outlined text-white text-xl">hub</span>
-          </div>
-          <div>
-            <span className="font-headline font-bold text-lg tracking-tight">Ferdsilinks</span>
-            <span className="block text-[10px] text-white/50 uppercase tracking-widest">Admin</span>
-          </div>
-        </Link>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 py-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-        {navigation.map((section) => (
-          <div key={section.title} className="mb-4">
-            <div className="px-5 py-2">
-              <span className="text-[10px] font-label uppercase tracking-widest text-white/40">
-                {section.title}
-              </span>
+    <>
+      {/* Mobile Backdrop */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden backdrop-blur-sm transition-opacity"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <aside className={`fixed inset-y-0 left-0 w-72 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 flex flex-col z-50 shadow-2xl shadow-slate-900/5 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        
+        {/* Gradient Accent */}
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+        
+        {/* Header / Logo */}
+        <div className="relative h-20 flex-shrink-0 flex items-center px-6">
+          <Link href="/admin" className="flex items-center gap-4 group">
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30 group-hover:shadow-xl group-hover:shadow-primary/40 transition-all duration-300">
+                <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
-            <div className="px-3 space-y-0.5">
-              {section.items.map((item) => {
-                const active = isActive(item.href);
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 ${
-                      active
-                        ? 'bg-[#cf7000] text-white shadow-md shadow-[#cf7000]/20'
-                        : 'text-white/70 hover:bg-white/10 hover:text-white'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-xl">{item.icon}</span>
-                      <span className="font-medium text-sm">{item.name}</span>
-                    </div>
-                    {item.badge && item.badge > 0 && (
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        active ? 'bg-white/20' : 'bg-[#cf7000]'
-                      }`}>
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
+            <div>
+              <span className="font-headline font-bold text-xl text-slate-900 tracking-tight">Ferdsilinks</span>
+              <span className="block text-[10px] text-slate-400 font-semibold uppercase tracking-widest">Control Center</span>
             </div>
-          </div>
-        ))}
-      </nav>
+          </Link>
+        </div>
 
-      {/* Footer */}
-      <div className="p-4 border-t border-white/10 space-y-1">
-        <Link
-          href="/"
-          target="_blank"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition-all"
-        >
-          <span className="material-symbols-outlined text-xl">open_in_new</span>
-          <span className="font-medium text-sm">View Website</span>
-        </Link>
-        <button
-          onClick={async () => {
-            try {
-              const { createClient } = await import('@/lib/supabase/supabase-browser-client');
-              const supabase = createClient();
-              await supabase.auth.signOut();
-              window.location.href = '/admin/login';
-            } catch (error) {
-              console.error('Sign out error:', error);
-              window.location.href = '/admin/login';
-            }
-          }}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition-all"
-        >
-          <span className="material-symbols-outlined text-xl">logout</span>
-          <span className="font-medium text-sm">Sign Out</span>
-        </button>
-      </div>
-    </aside>
+        {/* Navigation Container */}
+        <div className="flex-1 overflow-hidden flex flex-col px-4 py-2">
+          
+          {/* Main Navigation */}
+          <nav className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent py-2">
+            
+            {/* Dashboard Link - Prominent */}
+            <Link
+              href="/admin"
+              onClick={() => setIsOpen(false)}
+              className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl mb-4 transition-all duration-200 ${
+                isActive('/admin') && pathname === '/admin'
+                  ? 'bg-gradient-to-r from-primary to-primary/90 text-white shadow-lg shadow-primary/30'
+                  : 'bg-white border border-slate-200/80 text-slate-600 hover:border-primary/30 hover:text-primary'
+              }`}
+            >
+              <span className={`material-symbols-outlined text-2xl ${isActive('/admin') && pathname === '/admin' ? 'text-white' : 'text-slate-400'}`}>dashboard</span>
+              <span className="font-semibold text-sm">Dashboard Overview</span>
+            </Link>
+
+            {/* Section Headers & Items */}
+            {navigation.filter(s => s.title !== 'Main').map((section) => (
+              <div key={section.title} className="mb-4">
+                <button
+                  onClick={() => toggleSection(section.title)}
+                  className="w-full flex items-center justify-between px-3 py-2.5 mb-1.5 hover:bg-slate-100/50 rounded-xl transition-colors"
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    {section.title}
+                  </span>
+                  <span className={`material-symbols-outlined text-slate-300 text-xl transition-all duration-200 ${activeSection === section.title ? 'rotate-180' : ''}`}>
+                    expand_more
+                  </span>
+                </button>
+                
+                <div className={`space-y-0.5 overflow-hidden transition-all duration-200 ${activeSection === section.title ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  {section.items.map((item) => {
+                    const active = isActive(item.href);
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`flex items-center justify-between px-4 py-2.5 rounded-xl transition-all duration-150 group ${
+                          active
+                            ? 'bg-primary/10 text-primary'
+                            : 'text-slate-500 hover:bg-slate-100/80 hover:text-slate-900'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`material-symbols-outlined text-xl transition-colors ${
+                            active ? 'text-primary' : 'text-slate-400 group-hover:text-slate-600'
+                          }`}>{item.icon}</span>
+                          <span className="font-medium text-sm">{item.name}</span>
+                        </div>
+                        {item.badge && item.badge > 0 && (
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                            active ? 'bg-primary text-white' : 'bg-slate-200 text-slate-600'
+                          }`}>
+                            {item.badge}
+                          </span>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </nav>
+
+        </div>
+      </aside>
+    </>
   );
 }

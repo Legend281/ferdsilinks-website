@@ -55,15 +55,15 @@ export function Pagination({ currentPage, totalItems, itemsPerPage, onPageChange
   const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
   return (
-    <div className="px-6 py-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p className="text-sm text-gray-500">
+    <div className="px-6 py-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p className="text-sm text-slate-500">
         Showing {startItem} to {endItem} of {totalItems} results
       </p>
       <div className="flex items-center gap-1">
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-2 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="p-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           title="Previous page"
         >
           <span className="material-symbols-outlined">chevron_left</span>
@@ -71,15 +71,15 @@ export function Pagination({ currentPage, totalItems, itemsPerPage, onPageChange
         
         {getPageNumbers().map((page, index) => (
           page === '...' ? (
-            <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-400">...</span>
+            <span key={`ellipsis-${index}`} className="px-3 py-2 text-slate-400">...</span>
           ) : (
             <button
               key={page}
               onClick={() => onPageChange(page as number)}
               className={`min-w-[40px] h-10 rounded-lg font-medium transition-all ${
                 currentPage === page
-                  ? 'bg-[#002147] text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? 'bg-[#0302cb] text-white'
+                  : 'text-slate-600 hover:bg-slate-100'
               }`}
             >
               {page}
@@ -90,7 +90,7 @@ export function Pagination({ currentPage, totalItems, itemsPerPage, onPageChange
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="p-2 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="p-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           title="Next page"
         >
           <span className="material-symbols-outlined">chevron_right</span>

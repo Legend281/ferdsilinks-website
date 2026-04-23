@@ -11,7 +11,7 @@ export function Footer() {
         <span className="absolute right-full mr-4 bg-primary text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Chat with us</span>
       </Link>
 
-      <footer className="bg-primary-container w-full pt-20 pb-10 text-tertiary-fixed font-body text-sm leading-relaxed">
+      <footer className="bg-[#111827] w-full pt-20 pb-10 text-tertiary-fixed font-body text-sm leading-relaxed">
 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-6 border-t border-white/10 pt-16">
 <div className="col-span-1 md:col-span-1">
 <span className="text-xl font-black text-white mb-4 block">Ferdsilinks</span>

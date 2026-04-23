@@ -131,7 +131,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
   if (fetching) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-[#cf7000] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -155,25 +155,25 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-[#002147]">Edit Podcast Episode</h1>
-          <p className="text-gray-500">Update episode details</p>
+          <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Edit Podcast Episode</h1>
+          <p className="text-slate-500">Update episode details</p>
         </div>
         <Link
           href="/admin/podcasts"
-          className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg">arrow_back</span>
           Back to Podcasts
         </Link>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-slate-100">
         <div className="p-6 space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Season Number
                   </label>
                   <input
@@ -182,11 +182,11 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                     value={formData.season_number}
                     onChange={handleChange}
                     min="1"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Episode Number
                   </label>
                   <input
@@ -195,12 +195,12 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                     value={formData.episode_number}
                     onChange={handleChange}
                     min="1"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="1"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Duration
                   </label>
                   <input
@@ -208,7 +208,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                     name="duration"
                     value={formData.duration}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="45:00"
                   />
                 </div>
@@ -216,7 +216,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Episode Title <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -224,14 +224,14 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="Building AI-Powered Applications"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     URL Slug <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -239,7 +239,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                     name="slug"
                     value={formData.slug}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                     placeholder="building-ai-powered-applications"
                     required
                   />
@@ -247,7 +247,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Description
                 </label>
                 <textarea
@@ -255,13 +255,13 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                   value={formData.description}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none resize-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none resize-none"
                   placeholder="Episode description..."
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Audio URL
                 </label>
                 <input
@@ -269,16 +269,16 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                   name="audio_url"
                   value={formData.audio_url}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   placeholder="https://example.com/podcast/ep1.mp3"
                 />
               </div>
 
-              <div className="border-t border-gray-100 pt-6">
-                <h3 className="font-medium text-gray-900 mb-4">Guest Information</h3>
+              <div className="border-t border-slate-100 pt-6">
+                <h3 className="font-medium text-slate-900 mb-4">Guest Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Guest Name
                     </label>
                     <input
@@ -286,12 +286,12 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                       name="guest_name"
                       value={formData.guest_name}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                      className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Guest Role/Title
                     </label>
                     <input
@@ -299,13 +299,13 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                       name="guest_role"
                       value={formData.guest_role}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                      className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                       placeholder="CEO at TechCorp"
                     />
                   </div>
                 </div>
                 <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Guest Bio
                   </label>
                   <textarea
@@ -313,7 +313,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                     value={formData.guest_bio}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none resize-none"
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none resize-none"
                     placeholder="Brief guest bio..."
                   />
                 </div>
@@ -322,7 +322,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Cover Image
                 </label>
                 <ImageUpload
@@ -333,7 +333,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Guest Image
                 </label>
                 <ImageUpload
@@ -344,14 +344,14 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Category
                 </label>
                 <select
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 >
                   <option value="">Select category</option>
                   {categoryOptions.map(cat => (
@@ -361,7 +361,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Tags
                 </label>
                 <input
@@ -369,13 +369,13 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                   name="tags"
                   value={formData.tags}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                   placeholder="AI, Data Science, Career (comma separated)"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Published Date
                 </label>
                 <input
@@ -383,7 +383,7 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                   name="published_date"
                   value={formData.published_date}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 />
               </div>
 
@@ -394,22 +394,22 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                   id="featured"
                   checked={formData.featured}
                   onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-300 text-[#cf7000] focus:ring-[#cf7000]"
+                  className="w-5 h-5 rounded border-slate-300 text-[#ef0d11] focus:ring-[#ef0d11]"
                 />
-                <label htmlFor="featured" className="text-sm font-medium text-gray-700">
+                <label htmlFor="featured" className="text-sm font-medium text-slate-700">
                   Featured Episode
                 </label>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Status
                 </label>
                 <select
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none"
                 >
                   <option value="draft">Draft</option>
                   <option value="published">Published</option>
@@ -417,11 +417,11 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
                 </select>
               </div>
 
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-xs text-gray-500">
+              <div className="p-4 bg-slate-50 rounded-lg">
+                <p className="text-xs text-slate-500">
                   Created: {new Date(item.created_at).toLocaleDateString()}
                 </p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-slate-500">
                   Last updated: {new Date(item.updated_at).toLocaleDateString()}
                 </p>
               </div>
@@ -429,17 +429,17 @@ export default function EditPodcastPage({ params }: { params: Promise<{ id: stri
           </div>
         </div>
 
-        <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-end gap-3">
+        <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-3">
           <Link
             href="/admin/podcasts"
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-all"
+            className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-all"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2 bg-[#cf7000] text-white rounded-lg font-medium hover:bg-[#b86300] transition-all flex items-center gap-2 disabled:opacity-50"
+            className="px-6 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all flex items-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>

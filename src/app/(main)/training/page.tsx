@@ -3,8 +3,16 @@ import TrainingClient from './TrainingClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Training',
-  description: 'Expert-led intensives in Data Science, AI, and Software Engineering at Ferdsilinks Academy. Built for the next generation of African tech leaders in Silicon Mountain, Buea.',
+  title: 'Tech Training | Data Science, AI & Software Development Courses',
+  description: 'Expert-led intensives in Data Science, AI, and Software Engineering at Ferdsilinks Academy in Buea, Cameroon. Build your tech career in Silicon Mountain.',
+  keywords: ['tech training', 'data science course', 'AI course', 'software development', 'Python training', 'Buea', 'Cameroon', 'Silicon Mountain', 'Ferdsilinks Academy'],
+  alternates: {
+    canonical: 'https://ferdsilinks.com/training',
+  },
+  openGraph: {
+    title: 'Tech Training | Ferdsilinks Academy',
+    description: 'Expert-led tech intensives in Python, Data Science & AI. Join the next generation of African tech leaders.',
+  },
 };
 
 async function getCourses() {

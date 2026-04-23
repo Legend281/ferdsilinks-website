@@ -1,16 +1,16 @@
-import { createClient } from '@/lib/supabase/supabase-server-client';
+import { createServiceClient } from '@/lib/supabase/supabase-server-client';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const supabase = await createClient();
+    const supabase = await createServiceClient();
     const { data, error } = await supabase
       .from('podcasts')
       .select('*')
-      .eq('status', 'published')
-      .order('season_number', { ascending: false })
-      .order('episode_number', { ascending: false })
-      .order('published_date', { ascending: false });
+      .order('created_at', { ascending: false })
+      .limit(20);
+
+    console.log('Public podcasts:', data);
 
     if (error) {
       console.error('Public podcasts API error:', error);

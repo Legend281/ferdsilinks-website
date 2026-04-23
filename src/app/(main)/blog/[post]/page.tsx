@@ -2,21 +2,16 @@ import { createClient } from '@/lib/supabase/supabase-server-client';
 import { notFound } from 'next/navigation';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
+import { blogPosts as staticPosts } from '@/data/blog';
 import type { Metadata } from 'next';
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ post: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const supabase = await createClient();
-  const { data: post } = await supabase
-    .from('blog_posts')
-    .select('title, excerpt, cover_image')
-    .eq('slug', slug)
-    .eq('status', 'published')
-    .single();
+  const { post: slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     return { title: 'Post Not Found' };
@@ -43,13 +38,31 @@ async function getPost(slug: string) {
       .eq('status', 'published')
       .single();
     
-    if (error || !data) {
-      return null;
+    if (!error && data) {
+      return data;
     }
-    return data;
-  } catch {
-    return null;
+  } catch (error) {
+    console.error('Database error, falling back to static data:', error);
   }
+  
+  const staticPost = staticPosts.find(p => p.slug === slug);
+  if (staticPost) {
+    return {
+      id: staticPost.id,
+      slug: staticPost.slug,
+      title: staticPost.title,
+      excerpt: staticPost.excerpt,
+      content: staticPost.content,
+      category: staticPost.category,
+      author_name: staticPost.author,
+      cover_image: null,
+      published_at: staticPost.date,
+      created_at: staticPost.date,
+      status: 'published',
+    };
+  }
+  
+  return null;
 }
 
 async function getRelatedPosts(currentId: string, category: string) {
@@ -63,18 +76,29 @@ async function getRelatedPosts(currentId: string, category: string) {
       .neq('id', currentId)
       .limit(2);
     
-    if (error || !data) {
-      return [];
+    if (!error && data) {
+      return data;
     }
-    return data || [];
   } catch {
-    return [];
+    // Fall through to static data
   }
+  
+  return staticPosts
+    .filter(p => p.category === category && p.id !== currentId)
+    .slice(0, 2)
+    .map(p => ({
+      id: p.id,
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      category: p.category,
+      cover_image: null,
+    }));
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug: postSlug } = await params;
-  const post = await getPost(postSlug);
+export default async function BlogPostPage({ params }: { params: Promise<{ post: string }> }) {
+  const { post: slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
@@ -93,19 +117,29 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <main className="pt-20 bg-surface">
+    <main className="bg-surface">
       <style dangerouslySetInnerHTML={{__html: `
-        .article-content p { margin-bottom: 1.5rem; line-height: 1.75; color: #191c1d; font-family: 'Inter', sans-serif; }
-        .article-content h2 { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.875rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: #000a1e; }
-        .article-content h3 { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; color: #002147; }
-        .article-content ul { margin-bottom: 1.5rem; list-style-type: none; padding-left: 0; }
-        .article-content li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; }
-        .article-content li::before { content: '→'; position: absolute; left: 0; color: #cf7000; font-weight: bold; }
+        .article-content { font-family: 'Inter', sans-serif; }
+        .article-content p { margin-bottom: 1.5rem; line-height: 1.75; color: #191c1d; }
+        .article-content h1, .article-content h2, .article-content h3, .article-content h4 { font-family: 'Manrope', sans-serif; font-weight: 800; color: #000a1e; margin-top: 2.5rem; margin-bottom: 1.25rem; }
+        .article-content h2 { font-size: 1.875rem; }
+        .article-content h3 { font-size: 1.5rem; font-weight: 700; }
+        .article-content ul, .article-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        .article-content li { margin-bottom: 0.75rem; line-height: 1.75; }
+        .article-content blockquote { border-left: 4px solid #ef0d11; padding-left: 1.5rem; margin: 1.5rem 0; font-style: italic; color: #475569; }
+        .article-content a { color: #0302cb; text-decoration: underline; }
+        .article-content img { border-radius: 0.5rem; margin: 1.5rem 0; max-width: 100%; }
+        .article-content hr { border: none; border-top: 2px solid #e2e8f0; margin: 2rem 0; }
+        .article-content strong { font-weight: 700; }
+        .article-content em { font-style: italic; }
+        .article-content ul { list-style-type: disc; }
+        .article-content ol { list-style-type: decimal; }
       `}} />
 
-      {/* Hero Section */}
-      <header className="relative w-full bg-primary overflow-hidden">
-        <div className="absolute inset-0 opacity-40 mix-blend-overlay">
+      {/* Hero Section - Full Width Image */}
+      <header className="relative h-[60vh] min-h-[500px] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
           {formattedPost.cover_image ? (
             <img 
                 alt={formattedPost.title} 
@@ -113,38 +147,60 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 src={formattedPost.cover_image}
             />
           ) : (
-            <img 
-                alt={formattedPost.title} 
-                className="w-full h-full object-cover" 
-                src={`https://api.dicebear.com/7.x/shapes/svg?seed=${formattedPost.id}&backgroundColor=002147`} 
-            />
+            <div className="w-full h-full bg-gradient-to-br from-primary via-primary to-slate-900"></div>
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/70 to-slate-900/30"></div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary via-primary/80 to-transparent"></div>
-        <div className="relative max-w-5xl mx-auto px-6 py-24 md:py-32">
-          <div className="inline-block px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant font-label text-xs font-bold tracking-widest uppercase rounded mb-6">
-              {formattedPost.category}
-          </div>
-          <h1 className="text-4xl md:text-7xl font-black text-white font-headline leading-[1.1] mb-8 tracking-tighter">
+        
+        {/* Content Overlay */}
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full max-w-6xl mx-auto px-6 pb-16">
+            {/* Category Badge */}
+            <div className="mb-6">
+              <span className="inline-block bg-on-tertiary-container text-white px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                {formattedPost.category}
+              </span>
+            </div>
+            
+            {/* Title */}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight mb-6 max-w-5xl">
               {formattedPost.title}
-          </h1>
-          <div className="flex flex-wrap items-center gap-8 text-slate-300 font-label text-sm border-t border-white/10 pt-8">
-            <div className="flex items-center gap-3">
-              <img alt={formattedPost.author} className="w-12 h-12 rounded-full border-2 border-orange-500 object-cover" src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${formattedPost.author}`} />
-              <div>
-                <p className="text-white font-bold">{formattedPost.author}</p>
-                <p className="text-xs text-slate-400">{formattedPost.authorRole}</p>
+            </h1>
+            
+            {/* Meta Bar */}
+            <div className="flex flex-wrap items-center gap-6 text-white/80 text-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-tertiary-fixed">
+                  <img 
+                    alt={formattedPost.author} 
+                    className="w-full h-full object-cover" 
+                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${formattedPost.author}`} 
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">{formattedPost.author}</p>
+                  <p className="text-white/60 text-xs">{formattedPost.authorRole}</p>
+                </div>
+              </div>
+              
+              <div className="w-px h-10 bg-white/30"></div>
+              
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-tertiary-fixed text-lg">calendar_today</span>
+                <span>{formattedPost.date}</span>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-tertiary-fixed text-lg">schedule</span>
+                <span>{formattedPost.readTime}</span>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-orange-500 text-sm">calendar_today</span>
-              <span>{formattedPost.date}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-orange-500 text-sm">schedule</span>
-              <span>{formattedPost.readTime}</span>
-            </div>
           </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 animate-bounce">
+          <span className="material-symbols-outlined text-4xl">keyboard_double_arrow_down</span>
         </div>
       </header>
 

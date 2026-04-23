@@ -3,6 +3,7 @@ import { Manrope, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
+import TrackVisitor from "@/components/TrackVisitor";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -20,6 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ferdsilinks.com'),
   title: {
     default: "Ferdsilinks Group | Innovation & Digital Architecture",
     template: "%s | Ferdsilinks",
@@ -75,6 +77,94 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    // Organization Schema
+    {
+      "@type": "Organization",
+      "@id": "https://ferdsilinks.com/#organization",
+      name: "Ferdsilinks Group",
+      url: "https://ferdsilinks.com",
+      logo: "https://ferdsilinks.com/logo.svg",
+      description: "A tech and data-focused company based in Silicon Mountain, Cameroon, driving African innovation through data and applied tech solutions.",
+      foundingLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Buea",
+          addressRegion: "Southwest Region",
+          addressCountry: "CM",
+        },
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "Cameroon",
+      },
+      serviceType: [
+        "Data Science Consulting",
+        "Software Development",
+        "Technical Training",
+        "AI Solutions",
+        "Digital Transformation",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+237-681XXXXXX",
+        contactType: "customer service",
+        email: "ferdsilinksinfo@gmail.com",
+        availableLanguage: ["English", "French"],
+      },
+      sameAs: [
+        "https://www.youtube.com/@Ferdsilinks",
+        "https://www.linkedin.com/company/ferdsilinks",
+      ],
+    },
+    // LocalBusiness Schema
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://ferdsilinks.com/#localbusiness",
+      name: "Ferdsilinks Group",
+      description: "Tech and data company in Buea, Cameroon offering data science consulting, software development, and technical training.",
+      url: "https://ferdsilinks.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Silicon Mountain",
+        addressLocality: "Buea",
+        addressRegion: "Southwest Region",
+        addressCountry: "CM",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: "4.1528",
+        longitude: "9.2424",
+      },
+      openingHours: "Mo-Fr 08:00-17:00",
+      priceRange: "$$",
+      image: "https://ferdsilinks.com/og-image.svg",
+    },
+    // Website Schema
+    {
+      "@type": "WebSite",
+      "@id": "https://ferdsilinks.com/#website",
+      url: "https://ferdsilinks.com",
+      name: "Ferdsilinks Group",
+      publisher: {
+        "@type": "Organization",
+        "@id": "https://ferdsilinks.com/#organization",
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: "https://ferdsilinks.com/?s={search_term_string}",
+        },
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -84,8 +174,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className={`${manrope.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant`}>
+        <TrackVisitor />
         {children}
       </body>
     </html>

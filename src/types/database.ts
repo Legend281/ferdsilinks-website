@@ -81,6 +81,7 @@ export interface BlogPost {
   author_name?: string;
   category: string;
   tags: string[];
+  featured?: boolean;
   status: 'draft' | 'published';
   published_at?: string;
   created_at: string;
@@ -187,22 +188,22 @@ export interface Course {
 export interface Podcast {
   id: string;
   title: string;
-  slug: string;
+  slug?: string;
   description?: string;
-  episode_number?: number;
-  season_number?: number;
-  duration?: string;
-  audio_url?: string;
+  content?: string;
   cover_image?: string;
+  youtube_url?: string;
+  video_id?: string;
+  duration?: string;
   guest_name?: string;
-  guest_role?: string;
   guest_bio?: string;
   guest_image?: string;
-  published_date?: string;
   category?: string;
-  tags?: string[];
-  featured: boolean;
+  season_number?: number;
+  episode_number?: number;
+  published_date?: string;
   status: 'draft' | 'published' | 'archived';
+  featured?: boolean;
   created_at: string;
   updated_at: string;
 }

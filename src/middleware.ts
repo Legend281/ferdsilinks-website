@@ -35,6 +35,18 @@ export async function middleware(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname === '/admin/login';
   const isApiRoute = request.nextUrl.pathname.startsWith('/api');
 
+  // Security: Add security headers
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('X-Frame-Options', 'DENY');
+  requestHeaders.set('X-Content-Type-Options', 'nosniff');
+  requestHeaders.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  requestHeaders.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+
+  // Block dangerous paths
+  if (request.nextUrl.pathname.includes('/..') || request.nextUrl.pathname.includes('%2e%2e')) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
   if (isApiRoute) {
     return supabaseResponse;
   }

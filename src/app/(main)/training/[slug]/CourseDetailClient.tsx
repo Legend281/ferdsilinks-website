@@ -117,9 +117,6 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                 >
                   Enroll Now - {formatPrice(course.price, course.currency)}
                 </button>
-                <button className="outline outline-2 outline-outline-variant px-8 py-4 rounded-lg font-bold text-lg hover:bg-surface-container-high transition-all">
-                  Download Syllabus
-                </button>
               </div>
             </section>
           </FadeIn>
@@ -184,17 +181,8 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                         </span>
                       </div>
                       {expandedModule === index + 1 && (
-                        <div className="px-6 pb-6 pt-0 ml-12 space-y-4">
-                          <ul className="space-y-3 text-on-surface-variant border-t border-outline-variant/20 pt-4">
-                            <li className="flex items-center gap-3">
-                              <span className="material-symbols-outlined text-sm text-on-tertiary-container">play_circle</span>
-                              Core concepts and fundamentals
-                            </li>
-                            <li className="flex items-center gap-3">
-                              <span className="material-symbols-outlined text-sm text-on-tertiary-container">description</span>
-                              Hands-on project assignment
-                            </li>
-                          </ul>
+                        <div className="px-6 pb-6 pt-4 ml-12 border-t border-outline-variant/20">
+                          <p className="text-on-surface-variant">Module content available upon enrollment.</p>
                         </div>
                       )}
                     </div>
@@ -304,12 +292,12 @@ export default function CourseDetailClient({ course }: CourseDetailClientProps) 
                         </div>
                       </div>
                     )}
-                    {course.is_online && (
+                    {!course.is_online && (
                       <div className="flex items-center gap-4 text-on-surface-variant">
-                        <span className="material-symbols-outlined">wifi</span>
+                        <span className="material-symbols-outlined">location_on</span>
                         <div>
                           <p className="text-xs uppercase font-label tracking-widest">Format</p>
-                          <p className="text-primary font-bold">Online</p>
+                          <p className="text-primary font-bold">Onsite</p>
                         </div>
                       </div>
                     )}

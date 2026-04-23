@@ -111,7 +111,7 @@ export default function TeamManagementPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-[#cf7000] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -120,25 +120,25 @@ export default function TeamManagementPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-headline font-bold text-[#002147]">Team Members</h1>
-          <p className="text-gray-500">Manage team member profiles</p>
+          <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Team Members</h1>
+          <p className="text-slate-500">Manage team member profiles</p>
         </div>
         <Link
           href="/admin/content/team/new"
-          className="px-4 py-2 bg-[#cf7000] text-white rounded-lg font-medium hover:bg-[#b86300] transition-all flex items-center gap-2"
+          className="px-4 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-lg">add</span>
           Add Member
         </Link>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-xl shadow-sm border border-slate-100">
+        <div className="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => handleFilterChange('all')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'all' ? 'bg-[#002147] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'all' ? 'bg-[#0302cb] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               All ({members.length})
@@ -146,7 +146,7 @@ export default function TeamManagementPage() {
             <button
               onClick={() => handleFilterChange('active')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'active' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'active' ? 'bg-green-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Active ({members.filter(m => m.status === 'active').length})
@@ -154,7 +154,7 @@ export default function TeamManagementPage() {
             <button
               onClick={() => handleFilterChange('inactive')}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                filter === 'inactive' ? 'bg-gray-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                filter === 'inactive' ? 'bg-slate-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
               Inactive ({members.filter(m => m.status === 'inactive').length})
@@ -162,37 +162,38 @@ export default function TeamManagementPage() {
           </div>
           
           <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
             <input
               type="text"
               placeholder="Search team members..."
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none w-full md:w-64"
+              className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none w-full md:w-64"
             />
           </div>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <div className="overflow-x-auto w-full">
+              <table className="w-full min-w-[800px]">
             <thead>
-              <tr className="bg-gray-50 text-left">
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Member</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Department</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <tr className="bg-slate-50 text-left">
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Member</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Role</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Department</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-slate-100">
               {paginatedMembers.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-12 text-center">
-                    <span className="material-symbols-outlined text-gray-300 text-4xl">groups</span>
-                    <p className="text-gray-500 mt-2">No team members found</p>
+                    <span className="material-symbols-outlined text-slate-300 text-4xl">groups</span>
+                    <p className="text-slate-500 mt-2">No team members found</p>
                     <Link
                       href="/admin/content/team/new"
-                      className="text-[#cf7000] hover:underline text-sm mt-1 inline-block"
+                      className="text-[#ef0d11] hover:underline text-sm mt-1 inline-block"
                     >
                       Add your first team member
                     </Link>
@@ -200,10 +201,10 @@ export default function TeamManagementPage() {
                 </tr>
               ) : (
                 paginatedMembers.map((member) => (
-                  <tr key={member.id} className="hover:bg-gray-50 transition-all">
+                  <tr key={member.id} className="hover:bg-slate-50 transition-all">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-[#002147] rounded-full flex items-center justify-center overflow-hidden">
+                        <div className="w-12 h-12 bg-[#0302cb] rounded-full flex items-center justify-center overflow-hidden">
                           {member.image_url ? (
                             <img src={member.image_url} alt="" className="w-full h-full object-cover" />
                           ) : (
@@ -211,18 +212,18 @@ export default function TeamManagementPage() {
                           )}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">{member.name}</p>
+                          <p className="font-medium text-slate-900">{member.name}</p>
                           {member.email && (
-                            <p className="text-sm text-gray-500">{member.email}</p>
+                            <p className="text-sm text-slate-500">{member.email}</p>
                           )}
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <p className="text-sm font-medium text-gray-900">{member.role}</p>
+                      <p className="text-sm font-medium text-slate-900">{member.role}</p>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded">
+                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded">
                         {member.department || 'N/A'}
                       </span>
                     </td>
@@ -230,7 +231,7 @@ export default function TeamManagementPage() {
                       <span className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
                         member.status === 'active' 
                           ? 'bg-green-100 text-green-700' 
-                          : 'bg-gray-100 text-gray-700'
+                          : 'bg-slate-100 text-slate-700'
                       }`}>
                         {member.status}
                       </span>
@@ -239,7 +240,7 @@ export default function TeamManagementPage() {
                       <div className="flex items-center gap-1">
                         <Link
                           href={`/admin/content/team/${member.id}`}
-                          className="p-2 text-gray-400 hover:text-[#cf7000] hover:bg-[#cf7000]/10 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-[#ef0d11] hover:bg-[#ef0d11]/10 rounded-lg transition-all"
                           title="Edit"
                         >
                           <span className="material-symbols-outlined text-lg">edit</span>
@@ -247,7 +248,7 @@ export default function TeamManagementPage() {
                         {member.status === 'active' ? (
                           <button
                             onClick={() => handleStatusChange(member.id, 'inactive')}
-                            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-all"
                             title="Deactivate"
                           >
                             <span className="material-symbols-outlined text-lg">person_off</span>
@@ -255,7 +256,7 @@ export default function TeamManagementPage() {
                         ) : (
                           <button
                             onClick={() => handleStatusChange(member.id, 'active')}
-                            className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
+                            className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-all"
                             title="Activate"
                           >
                             <span className="material-symbols-outlined text-lg">person</span>
@@ -263,7 +264,7 @@ export default function TeamManagementPage() {
                         )}
                         <button
                           onClick={() => handleDelete(member.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                           title="Delete"
                         >
                           <span className="material-symbols-outlined text-lg">delete</span>
@@ -275,6 +276,7 @@ export default function TeamManagementPage() {
               )}
             </tbody>
           </table>
+            </div>
         </div>
 
         <Pagination

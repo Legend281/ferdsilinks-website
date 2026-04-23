@@ -118,18 +118,18 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
       case 'interview': return 'bg-purple-100 text-purple-700';
       case 'accepted': return 'bg-green-100 text-green-700';
       case 'rejected': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-700';
+      default: return 'bg-slate-100 text-slate-700';
     }
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-      <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="bg-white rounded-xl shadow-sm border border-slate-100">
+      <div className="px-6 py-4 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={() => handleFilterChange('all')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'all' ? 'bg-[#002147] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'all' ? 'bg-[#0302cb] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             All ({applications.length})
@@ -137,7 +137,7 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
           <button
             onClick={() => handleFilterChange('pending')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'pending' ? 'bg-yellow-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'pending' ? 'bg-yellow-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             Pending ({applications.filter(a => a.status === 'pending').length})
@@ -145,7 +145,7 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
           <button
             onClick={() => handleFilterChange('reviewing')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'reviewing' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'reviewing' ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             Reviewing ({applications.filter(a => a.status === 'reviewing').length})
@@ -153,7 +153,7 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
           <button
             onClick={() => handleFilterChange('interview')}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              filter === 'interview' ? 'bg-purple-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              filter === 'interview' ? 'bg-purple-500 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
             Interview ({applications.filter(a => a.status === 'interview').length})
@@ -163,67 +163,68 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
         <div className="flex items-center gap-3">
           <button
             onClick={handleExport}
-            className="px-4 py-2 bg-[#002147] text-white rounded-lg font-medium hover:bg-[#001a3a] transition-all flex items-center gap-2"
+            className="px-4 py-2 bg-[#0302cb] text-white rounded-lg font-medium hover:bg-[#001a3a] transition-all flex items-center gap-2"
           >
             <span className="material-symbols-outlined"> download</span>
             Export CSV
           </button>
           
           <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
             <input
               type="text"
               placeholder="Search applications..."
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#cf7000]/20 focus:border-[#cf7000] outline-none w-full md:w-64"
+              className="pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-[#ef0d11]/20 focus:border-[#ef0d11] outline-none w-full md:w-64"
             />
           </div>
         </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <div className="overflow-x-auto w-full">
+              <table className="w-full min-w-[800px]">
           <thead>
-            <tr className="bg-gray-50 text-left">
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Candidate</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Cover Letter</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Applied</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            <tr className="bg-slate-50 text-left">
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Candidate</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Position</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Contact</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Cover Letter</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Applied</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-slate-100">
             {paginatedApplications.length === 0 ? (
               <tr>
                 <td colSpan={7} className="px-6 py-12 text-center">
-                  <span className="material-symbols-outlined text-gray-300 text-4xl">work_off</span>
-                  <p className="text-gray-500 mt-2">No applications found</p>
+                  <span className="material-symbols-outlined text-slate-300 text-4xl">work_off</span>
+                  <p className="text-slate-500 mt-2">No applications found</p>
                 </td>
               </tr>
             ) : (
               paginatedApplications.map((app) => (
-                <tr key={app.id} className="hover:bg-gray-50 transition-all">
+                <tr key={app.id} className="hover:bg-slate-50 transition-all">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-[#002147] rounded-full flex items-center justify-center text-white font-medium">
+                      <div className="w-10 h-10 bg-[#0302cb] rounded-full flex items-center justify-center text-white font-medium">
                         {app.full_name.charAt(0)}
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{app.full_name}</p>
+                        <p className="font-medium text-slate-900">{app.full_name}</p>
                         {app.phone && (
-                          <p className="text-sm text-gray-500">{app.phone}</p>
+                          <p className="text-sm text-slate-500">{app.phone}</p>
                         )}
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm font-medium text-gray-900">{app.job_title}</p>
+                    <p className="text-sm font-medium text-slate-900">{app.job_title}</p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm text-gray-900">{app.email}</p>
+                    <p className="text-sm text-slate-900">{app.email}</p>
                     <div className="flex items-center gap-2 mt-1">
                       {app.linkedin_url && (
                         <a
@@ -248,13 +249,13 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
                     </div>
                   </td>
                   <td className="px-6 py-4 max-w-xs">
-                    <p className="text-sm text-gray-600 line-clamp-2">{app.cover_letter}</p>
+                    <p className="text-sm text-slate-600 line-clamp-2">{app.cover_letter}</p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-slate-500">
                       {new Date(app.created_at).toLocaleDateString()}
                     </p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-slate-400">
                       {new Date(app.created_at).toLocaleTimeString()}
                     </p>
                   </td>
@@ -275,14 +276,14 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => window.location.href = `mailto:${app.email}`}
-                        className="p-2 text-gray-400 hover:text-[#cf7000] hover:bg-[#cf7000]/10 rounded-lg transition-all"
+                        className="p-2 text-slate-400 hover:text-[#ef0d11] hover:bg-[#ef0d11]/10 rounded-lg transition-all"
                         title="Send email"
                       >
                         <span className="material-symbols-outlined text-lg">mail</span>
                       </button>
                       <button
                         onClick={() => deleteApplication(app.id)}
-                        className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+                        className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
                         title="Delete"
                       >
                         <span className="material-symbols-outlined text-lg">delete</span>
@@ -294,6 +295,7 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
             )}
           </tbody>
         </table>
+            </div>
       </div>
 
       <Pagination
