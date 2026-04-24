@@ -4,7 +4,6 @@ import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
 import TrackVisitor from "@/components/TrackVisitor";
-import FloatingLanguageToggle from "@/components/FloatingLanguageToggle";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -181,7 +180,18 @@ export default function RootLayout({
         />
       </head>
       <body className={`${manrope.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant`}>
-        <FloatingLanguageToggle />
+        <div id="google_translate_element" className="fixed bottom-24 right-8 z-[100]"></div>
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+        <script dangerouslySetInnerHTML={{ __html: `
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'en,fr',
+              layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+              autoDisplay: false
+            }, 'google_translate_element');
+          }
+        ` }} />
         <TrackVisitor />
         {children}
       </body>
