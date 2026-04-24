@@ -81,14 +81,21 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
     setIsSubmitting(true);
 
     try {
+      const formData = new FormData();
+      formData.append('full_name', cvFormData.full_name);
+      formData.append('email', cvFormData.email);
+      formData.append('phone', cvFormData.phone);
+      formData.append('linkedin_url', cvFormData.linkedin_url);
+      formData.append('cover_letter', cvFormData.cover_letter);
+      formData.append('job_title', 'General Application');
+      
+      if (resumeFile) {
+        formData.append('resume', resumeFile);
+      }
+
       const response = await fetch('/api/apply', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...cvFormData,
-          job_title: 'General Application',
-          resume_url: resumeFile ? `File: ${resumeFile.name}` : ''
-        }),
+        body: formData,
       });
 
       if (response.ok) {
@@ -96,11 +103,12 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
         setShowCVModal(false);
         setCvFormData({ full_name: '', email: '', phone: '', linkedin_url: '', cover_letter: '' });
         setResumeFile(null);
-      } else {
+} else {
         const data = await response.json();
         toast.error(data.error || 'Failed to submit application');
       }
-    } catch {
+} catch (error) {
+      console.error('Submission error:', error);
       toast.error('Network error. Please try again.');
     } finally {
       setIsSubmitting(false);

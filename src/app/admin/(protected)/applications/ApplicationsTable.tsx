@@ -200,7 +200,7 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
           <tbody className="divide-y divide-slate-100">
             {paginatedApplications.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-6 py-12 text-center">
+                <td colSpan={8} className="px-6 py-12 text-center">
                   <span className="material-symbols-outlined text-slate-300 text-4xl">work_off</span>
                   <p className="text-slate-500 mt-2">No applications found</p>
                 </td>
@@ -254,10 +254,15 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
                   </td>
                   <td className="px-6 py-4">
                     {app.resume_url ? (
-                      <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <span className="material-symbols-outlined text-lg">description</span>
-                        <span>{app.resume_url.replace('File: ', '')}</span>
-                      </div>
+                      <a
+                        href={app.resume_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
+                      >
+                        <span className="material-symbols-outlined text-lg">download</span>
+                        <span>Download CV</span>
+                      </a>
                     ) : (
                       <span className="text-sm text-slate-400">—</span>
                     )}
