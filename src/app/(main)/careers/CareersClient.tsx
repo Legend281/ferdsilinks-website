@@ -81,21 +81,15 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
     setIsSubmitting(true);
 
     try {
-      const payload = {
-        ...cvFormData,
-        job_title: 'General Application',
-        resume_url: resumeFile ? `File: ${resumeFile.name}` : ''
-      };
-      console.log('Sending payload:', payload);
-      
       const response = await fetch('/api/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...cvFormData,
+          job_title: 'General Application',
+          resume_url: resumeFile ? `File: ${resumeFile.name}` : ''
+        }),
       });
-
-      const data = await response.json();
-      console.log('Response:', data);
 
       if (response.ok) {
         toast.success('Application submitted successfully! We will be in touch.');

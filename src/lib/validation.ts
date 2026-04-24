@@ -108,7 +108,7 @@ export const jobApplicationSchema = z.object({
     .or(z.literal('')),
   cover_letter: z
     .string()
-    .min(10, 'Cover letter must be at least 10 characters')
+    .min(1, 'Cover letter is required')
     .max(5000, 'Cover letter must be less than 5000 characters'),
   resume_url: z
     .string()
