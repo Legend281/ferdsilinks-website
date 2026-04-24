@@ -98,7 +98,7 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
         body: formData,
       });
 
-      if (response.ok) {
+      if (response.ok || response.status === 201) {
         toast.success('Application submitted successfully! We will be in touch.');
         setShowCVModal(false);
         setCvFormData({ full_name: '', email: '', phone: '', linkedin_url: '', cover_letter: '' });
