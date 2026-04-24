@@ -191,6 +191,7 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
               <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Position</th>
               <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Contact</th>
               <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Cover Letter</th>
+              <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Resume</th>
               <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Applied</th>
               <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
               <th className="px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
@@ -250,6 +251,16 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
                   </td>
                   <td className="px-6 py-4 max-w-xs">
                     <p className="text-sm text-slate-600 line-clamp-2">{app.cover_letter}</p>
+                  </td>
+                  <td className="px-6 py-4">
+                    {app.resume_url ? (
+                      <div className="flex items-center gap-2 text-sm text-slate-600">
+                        <span className="material-symbols-outlined text-lg">description</span>
+                        <span>{app.resume_url.replace('File: ', '')}</span>
+                      </div>
+                    ) : (
+                      <span className="text-sm text-slate-400">—</span>
+                    )}
                   </td>
                   <td className="px-6 py-4">
                     <p className="text-sm text-slate-500">
