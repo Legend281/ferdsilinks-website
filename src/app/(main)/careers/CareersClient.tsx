@@ -33,8 +33,7 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
     email: '',
     phone: '',
     linkedin_url: '',
-    cover_letter: '',
-    message: ''
+    cover_letter: ''
   });
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -82,20 +81,26 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
     setIsSubmitting(true);
 
     try {
+      const payload = {
+        ...cvFormData,
+        job_title: 'General Application',
+        resume_url: resumeFile ? `File: ${resumeFile.name}` : ''
+      };
+      console.log('Sending payload:', payload);
+      
       const response = await fetch('/api/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...cvFormData,
-          job_title: 'General Application',
-          resume_url: resumeFile ? `File: ${resumeFile.name}` : ''
-        }),
+        body: JSON.stringify(payload),
       });
+
+      const data = await response.json();
+      console.log('Response:', data);
 
       if (response.ok) {
         toast.success('Application submitted successfully! We will be in touch.');
         setShowCVModal(false);
-        setCvFormData({ full_name: '', email: '', phone: '', linkedin_url: '', cover_letter: '', message: '' });
+        setCvFormData({ full_name: '', email: '', phone: '', linkedin_url: '', cover_letter: '' });
         setResumeFile(null);
       } else {
         const data = await response.json();
