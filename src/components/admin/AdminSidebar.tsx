@@ -27,8 +27,8 @@ const navigation: NavSection[] = [
   {
     title: 'Leads & Enquiries',
     items: [
-      { name: 'Leads', href: '/admin/leads', icon: 'inbox', badge: 12 },
-      { name: 'Enrollments', href: '/admin/enrollments', icon: 'school', badge: 5 },
+      { name: 'Leads', href: '/admin/leads', icon: 'inbox' },
+      { name: 'Enrollments', href: '/admin/enrollments', icon: 'school' },
       { name: 'Applications', href: '/admin/applications', icon: 'person_search' },
     ],
   },
