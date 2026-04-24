@@ -98,6 +98,8 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
         body: formData,
       });
 
+      console.log('Response status:', response.status);
+      
       if (response.ok || response.status === 201) {
         toast.success('Application submitted successfully! We will be in touch.');
         setShowCVModal(false);
