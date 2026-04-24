@@ -232,6 +232,86 @@ export async function sendNewsletterAlert(data: { email: string; name?: string; 
   });
 }
 
+export async function sendWelcomeEmail(data: { email: string; name?: string }) {
+  try {
+    if (!process.env.RESEND_API_KEY) {
+      console.log('📧 [Welcome Email - Development Mode]', { to: data.email });
+      return { success: true, development: true };
+    }
+
+    const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f9fafb;">
+  <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+    <div style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #e5e7eb;">
+        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #0302cb, #ef0d11); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+          <span style="color: white; font-size: 24px;">⚡</span>
+        </div>
+        <div>
+          <h1 style="margin: 0; font-size: 20px; font-weight: 700; color: #0302cb;">Ferdsilinks</h1>
+          <p style="margin: 0; font-size: 12px; color: #6b7280;">Welcome to our community!</p>
+        </div>
+      </div>
+
+      <h2 style="margin: 0 0 16px 0; font-size: 28px; font-weight: 700; color: #111827;">
+        Welcome to Ferdsilinks! 🎉
+      </h2>
+      
+      <p style="margin: 0 0 24px 0; font-size: 16px; color: #4b5563; line-height: 1.5;">
+        Thank you for subscribing to our newsletter! We're excited to have you as part of our community.
+      </p>
+
+      <div style="background: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+        <p style="margin: 0 0 12px 0; font-size: 14px; color: #4b5563;">Here's what you'll receive:</p>
+        <ul style="margin: 0; padding-left: 20px; color: #4b5563; font-size: 14px; line-height: 1.8;">
+          <li>Latest tech insights and data science trends</li>
+          <li>Exclusive training opportunities</li>
+          <li>Company updates and announcements</li>
+          <li>Special offers for our community</li>
+        </ul>
+      </div>
+
+      <p style="margin: 0 0 24px 0; font-size: 14px; color: #6b7280;">
+        Stay tuned for our next update. In the meantime, feel free to explore our <a href="https://ferdsilinks.com/services" style="color: #0302cb; text-decoration: none;">services</a> and <a href="https://ferdsilinks.com/training" style="color: #0302cb; text-decoration: none;">training programs</a>.
+      </p>
+
+      <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb; text-align: center;">
+        <p style="margin: 0; font-size: 12px; color: #9ca3af;">
+          Follow us: <a href="https://www.youtube.com/@ferdsilinks" style="color: #0302cb; text-decoration: none;">YouTube</a> • 
+          <a href="https://www.linkedin.com/company/ferdsilinks-group" style="color: #0302cb; text-decoration: none;">LinkedIn</a> • 
+          <a href="https://www.instagram.com/ferdsilinks" style="color: #0302cb; text-decoration: none;">Instagram</a>
+        </p>
+        <p style="margin: 12px 0 0 0; font-size: 11px; color: #9ca3af;">
+          <a href="https://ferdsilinks.com" style="color: #0302cb; text-decoration: none;">ferdsilinks.com</a> • Buea, Cameroon
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+    `.trim();
+
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: data.email,
+      subject: 'Welcome to Ferdsilinks! 🎉',
+      html,
+    });
+
+    console.log('📧 [Welcome Email Sent]', { to: data.email, id: result.data?.id });
+    return { success: true, id: result.data?.id };
+  } catch (error) {
+    console.error('📧 [Welcome Email Failed]', error);
+    return { success: false, error };
+  }
+}
+
 export async function sendApplicationAlert(data: { name: string; email: string; phone?: string; position: string }) {
   return sendAlertEmail({
     type: 'application',

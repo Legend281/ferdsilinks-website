@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase/supabase-server-client';
 import { newsletterSchema } from '@/lib/validation';
-import { sendNewsletterAlert } from '@/lib/email';
+import { sendNewsletterAlert, sendWelcomeEmail } from '@/lib/email';
 
 // Rate limiting
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -110,6 +110,12 @@ export async function POST(request: NextRequest) {
       email,
       name: name || undefined,
       source: 'Website',
+    });
+
+    // Send welcome email to subscriber
+    await sendWelcomeEmail({
+      email,
+      name: name || undefined,
     });
 
     return NextResponse.json(
