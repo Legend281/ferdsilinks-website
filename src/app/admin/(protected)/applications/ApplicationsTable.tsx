@@ -253,7 +253,7 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
                     <p className="text-sm text-slate-600 line-clamp-2">{app.cover_letter}</p>
                   </td>
                   <td className="px-6 py-4">
-                    {app.resume_url ? (
+                    {app.resume_url && app.resume_url.startsWith('http') ? (
                       <a
                         href={app.resume_url}
                         target="_blank"
@@ -263,6 +263,8 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
                         <span className="material-symbols-outlined text-lg">attach_file</span>
                         View Resume
                       </a>
+                    ) : app.resume_url ? (
+                      <span className="text-sm text-slate-500">{app.resume_url.replace('File: ', '')}</span>
                     ) : (
                       <span className="text-sm text-slate-400">—</span>
                     )}
