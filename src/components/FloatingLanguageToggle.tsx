@@ -1,12 +1,35 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { useLanguage } from '@/components/LanguageProvider';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
+type Language = 'en' | 'fr';
 
 export default function FloatingLanguageToggle() {
-  const { language, toggleLanguage } = useLanguage();
+  const [language, setLanguage] = useState<Language>('en');
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const toggleLanguage = useCallback(() => {
+    setLanguage(prev => {
+      const newLang = prev === 'en' ? 'fr' : 'en';
+      if (mounted) {
+        localStorage.setItem('language', newLang);
+        document.documentElement.lang = newLang;
+        window.dispatchEvent(new Event('languagechange'));
+      }
+      return newLang;
+    });
+    setIsOpen(false);
+  }, [mounted]);
+
+  useEffect(() => {
+    setMounted(true);
+    const saved = localStorage.getItem('language') as Language;
+    if (saved && (saved === 'en' || saved === 'fr')) {
+      setLanguage(saved);
+    }
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -17,6 +40,8 @@ export default function FloatingLanguageToggle() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <div ref={dropdownRef} className="fixed bottom-24 right-8 z-[100]">
@@ -34,14 +59,14 @@ export default function FloatingLanguageToggle() {
         }`}
       >
         <button
-          onClick={() => { toggleLanguage(); setIsOpen(false); }}
+          onClick={toggleLanguage}
           className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors w-full text-left"
         >
           <span className="text-lg">🇬🇧</span>
           <span className="text-sm font-medium text-slate-700">English</span>
         </button>
         <button
-          onClick={() => { toggleLanguage(); setIsOpen(false); }}
+          onClick={toggleLanguage}
           className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors w-full text-left border-t"
         >
           <span className="text-lg">🇫🇷</span>
