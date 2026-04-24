@@ -105,7 +105,6 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
         setResumeFile(null);
 } else {
         const data = await response.json();
-        console.log('Server response:', data);
         toast.error(data.error || 'Failed to submit application');
       }
 } catch (error) {

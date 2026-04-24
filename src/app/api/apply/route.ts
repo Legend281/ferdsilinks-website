@@ -86,7 +86,6 @@ export async function POST(request: NextRequest) {
     
     if (!result.success) {
       const errors = result.error.issues.map((e: { message: string }) => e.message);
-      console.log('Validation errors:', errors, 'JobData:', jobData);
       return NextResponse.json(
         { error: errors[0], errors },
         { status: 400 }
