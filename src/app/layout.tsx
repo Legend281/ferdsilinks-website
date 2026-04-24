@@ -4,7 +4,6 @@ import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
 import TrackVisitor from "@/components/TrackVisitor";
-import LanguageToggle from "@/components/LanguageToggle";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -181,7 +180,6 @@ export default function RootLayout({
         />
       </head>
       <body className={`${manrope.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant`}>
-        <LanguageToggle />
         <TrackVisitor />
         {children}
       </body>
