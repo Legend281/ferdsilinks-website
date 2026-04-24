@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/supabase-browser-client';
 
 interface NavItem {
   name: string;
   href: string;
   icon: string;
   badge?: number;
-  fetchCount?: string;
 }
 
 interface NavSection {
@@ -18,13 +19,13 @@ interface NavSection {
 
 const defaultNavigation: NavSection[] = [
   {
-    title: 'Overview',
+    title: 'Main',
     items: [
       { name: 'Dashboard', href: '/admin', icon: 'dashboard' },
     ],
   },
   {
-    title: 'Management',
+    title: 'Leads & Enquiries',
     items: [
       { name: 'Leads', href: '/admin/leads', icon: 'inbox' },
       { name: 'Enrollments', href: '/admin/enrollments', icon: 'school' },
@@ -44,23 +45,22 @@ const defaultNavigation: NavSection[] = [
     ],
   },
   {
-    title: 'Communication',
+    title: 'Engagement',
     items: [
       { name: 'Newsletter', href: '/admin/newsletter', icon: 'mail' },
     ],
   },
   {
-    title: 'Settings',
+    title: 'System',
     items: [
       { name: 'Settings', href: '/admin/settings', icon: 'settings' },
+      { name: 'Analytics', href: '/admin/analytics', icon: 'analytics' },
     ],
   },
 ];
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (val: boolean) => void }) {
   const pathname = usePathname();
-<<<<<<< Updated upstream
-=======
   const [user, setUser] = useState<{ email?: string; user_metadata?: { full_name?: string; avatar_url?: string } } | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [counts, setCounts] = useState({ leads: 0, enrollments: 0, applications: 0, newsletter: 0 });
@@ -73,7 +73,6 @@ export default function AdminSidebar() {
     };
     getUser();
   }, []);
->>>>>>> Stashed changes
 
   useEffect(() => {
     const fetchCounts = async () => {
@@ -101,100 +100,41 @@ export default function AdminSidebar() {
     return pathname.startsWith(href);
   };
 
+  const toggleSection = (title: string) => {
+    setActiveSection(activeSection === title ? null : title);
+  };
+
   return (
-    <aside className="fixed inset-y-0 left-0 w-64 bg-[#002147] text-white flex flex-col z-50">
-      {/* Header */}
-      <div className="p-5 border-b border-white/10">
-        <Link href="/admin" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#cf7000] rounded-lg flex items-center justify-center shadow-lg">
-            <span className="material-symbols-outlined text-white text-xl">hub</span>
-          </div>
-          <div>
-            <span className="font-headline font-bold text-lg tracking-tight">Ferdsilinks</span>
-            <span className="block text-[10px] text-white/50 uppercase tracking-widest">Admin</span>
-          </div>
-        </Link>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 py-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
-        {navigation.map((section) => (
-          <div key={section.title} className="mb-4">
-            <div className="px-5 py-2">
-              <span className="text-[10px] font-label uppercase tracking-widest text-white/40">
-                {section.title}
-              </span>
+    <>
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden backdrop-blur-sm"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+      
+      <aside className={`fixed inset-y-0 left-0 w-72 bg-gradient-to-b from-slate-50 to-white border-r border-slate-200/60 flex flex-col z-50 shadow-2xl shadow-slate-900/5 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+        
+        <div className="relative h-20 flex-shrink-0 flex items-center px-6">
+          <Link href="/admin" className="flex items-center gap-4 group">
+            <div className="relative">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30">
+                <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
             </div>
-            <div className="px-3 space-y-0.5">
-              {section.items.map((item) => {
-                const active = isActive(item.href);
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 ${
-                      active
-                        ? 'bg-[#cf7000] text-white shadow-md shadow-[#cf7000]/20'
-                        : 'text-white/70 hover:bg-white/10 hover:text-white'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-xl">{item.icon}</span>
-                      <span className="font-medium text-sm">{item.name}</span>
-                    </div>
-                    {item.badge && item.badge > 0 && (
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        active ? 'bg-white/20' : 'bg-[#cf7000]'
-                      }`}>
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                );
-              })}
+            <div>
+              <span className="font-headline font-bold text-xl text-slate-900 tracking-tight">Ferdsilinks</span>
+              <span className="block text-[10px] text-slate-400 font-semibold uppercase tracking-widest">Control Center</span>
             </div>
-          </div>
-        ))}
-      </nav>
+          </Link>
+        </div>
 
-<<<<<<< Updated upstream
-      {/* Footer */}
-      <div className="p-4 border-t border-white/10 space-y-1">
-        <Link
-          href="/"
-          target="_blank"
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition-all"
-        >
-          <span className="material-symbols-outlined text-xl">open_in_new</span>
-          <span className="font-medium text-sm">View Website</span>
-        </Link>
-        <button
-          onClick={async () => {
-            try {
-              const { createClient } = await import('@/lib/supabase/supabase-browser-client');
-              const supabase = createClient();
-              await supabase.auth.signOut();
-              window.location.href = '/admin/login';
-            } catch (error) {
-              console.error('Sign out error:', error);
-              window.location.href = '/admin/login';
-            }
-          }}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition-all"
-        >
-          <span className="material-symbols-outlined text-xl">logout</span>
-          <span className="font-medium text-sm">Sign Out</span>
-        </button>
-      </div>
-    </aside>
-=======
-        {/* Navigation Container */}
         <div className="flex-1 overflow-hidden flex flex-col px-4 py-2">
-          
-          {/* Main Navigation */}
           <nav className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent py-2">
-            
-            {/* Dashboard Link - Prominent */}
             <Link
               href="/admin"
               onClick={() => setIsOpen(false)}
@@ -208,7 +148,6 @@ export default function AdminSidebar() {
               <span className="font-semibold text-sm">Dashboard Overview</span>
             </Link>
 
-            {/* Section Headers & Items */}
             {defaultNavigation.filter(s => s.title !== 'Main').map((section) => (
               <div key={section.title} className="mb-4">
                 <button
@@ -238,18 +177,12 @@ export default function AdminSidebar() {
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className={`material-symbols-outlined text-xl transition-colors ${
+                          <span className={`material-symbols-outlined text-xl ${
                             active ? 'text-primary' : 'text-slate-400 group-hover:text-slate-600'
                           }`}>{item.icon}</span>
                           <span className="font-medium text-sm">{item.name}</span>
                         </div>
-                        {item.badge !== undefined ? (
-                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                            active ? 'bg-primary text-white' : 'bg-slate-200 text-slate-600'
-                          }`}>
-                            {item.badge}
-                          </span>
-                        ) : item.name === 'Leads' && counts.leads > 0 ? (
+                        {item.name === 'Leads' && counts.leads > 0 ? (
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">
                             {counts.leads}
                           </span>
@@ -273,10 +206,8 @@ export default function AdminSidebar() {
               </div>
             ))}
           </nav>
-
         </div>
       </aside>
     </>
->>>>>>> Stashed changes
   );
 }

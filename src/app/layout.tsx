@@ -89,15 +89,6 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className={`${manrope.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant`}>
-<<<<<<< Updated upstream
-        <LanguageProvider>
-          <PageTransitionProvider>
-            <MainLayout>
-              {children}
-            </MainLayout>
-          </PageTransitionProvider>
-        </LanguageProvider>
-=======
         <TrackVisitor />
         <GoogleTranslateProvider>
           <LanguageProvider>
@@ -109,7 +100,6 @@ export default function RootLayout({
             </PageTransitionProvider>
           </LanguageProvider>
         </GoogleTranslateProvider>
->>>>>>> Stashed changes
       </body>
     </html>
   );
