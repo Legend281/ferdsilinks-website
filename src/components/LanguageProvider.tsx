@@ -26,15 +26,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (saved && (saved === 'en' || saved === 'fr')) {
       setLanguage(saved);
     }
-    
-    const handleLanguageChange = () => {
-      const saved = localStorage.getItem('language') as Language;
-      if (saved && (saved === 'en' || saved === 'fr')) {
-        setLanguage(saved);
-      }
-    };
-    window.addEventListener('languagechange', handleLanguageChange);
-    return () => window.removeEventListener('languagechange', handleLanguageChange);
   }, []);
 
   useEffect(() => {

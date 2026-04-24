@@ -1,35 +1,33 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { en } from '@/lib/translations/en';
+import { fr } from '@/lib/translations/fr';
 
 type Language = 'en' | 'fr';
+type Translation = typeof en;
 
 export default function FloatingLanguageToggle() {
   const [language, setLanguage] = useState<Language>('en');
+  const [translations, setTranslations] = useState<Translation>(en);
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggleLanguage = useCallback(() => {
-    setLanguage(prev => {
-      const newLang = prev === 'en' ? 'fr' : 'en';
-      if (mounted) {
-        localStorage.setItem('language', newLang);
-        document.documentElement.lang = newLang;
-        window.dispatchEvent(new Event('languagechange'));
-      }
-      return newLang;
-    });
-    setIsOpen(false);
-  }, [mounted]);
-
   useEffect(() => {
     setMounted(true);
     const saved = localStorage.getItem('language') as Language;
-    if (saved && (saved === 'en' || saved === 'fr')) {
-      setLanguage(saved);
-    }
+    const initialLang = (saved === 'en' || saved === 'fr') ? saved : 'en';
+    setLanguage(initialLang);
+    setTranslations(initialLang === 'en' ? en : fr);
   }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    localStorage.setItem('language', language);
+    document.documentElement.lang = language;
+    setTranslations(language === 'en' ? en : fr);
+  }, [language, mounted]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -40,6 +38,11 @@ export default function FloatingLanguageToggle() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const toggleLanguage = () => {
+    setLanguage(prev => prev === 'en' ? 'fr' : 'en');
+    setIsOpen(false);
+  };
 
   if (!mounted) return null;
 
