@@ -29,11 +29,21 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (mounted) {
-      localStorage.setItem('language', language);
-      document.documentElement.lang = language;
-    }
+    if (!mounted) return;
+    localStorage.setItem('language', language);
+    document.documentElement.lang = language;
   }, [language, mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const interval = setInterval(() => {
+      const saved = localStorage.getItem('language') as Language;
+      if ((saved === 'en' || saved === 'fr') && saved !== language) {
+        setLanguage(saved);
+      }
+    }, 500);
+    return () => clearInterval(interval);
+  }, [mounted, language]);
 
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'en' ? 'fr' : 'en');
