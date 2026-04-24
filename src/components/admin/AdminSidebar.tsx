@@ -8,6 +8,7 @@ interface NavItem {
   href: string;
   icon: string;
   badge?: number;
+  fetchCount?: string;
 }
 
 interface NavSection {
@@ -15,7 +16,7 @@ interface NavSection {
   items: NavItem[];
 }
 
-const navigation: NavSection[] = [
+const defaultNavigation: NavSection[] = [
   {
     title: 'Overview',
     items: [
@@ -58,6 +59,40 @@ const navigation: NavSection[] = [
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+<<<<<<< Updated upstream
+=======
+  const [user, setUser] = useState<{ email?: string; user_metadata?: { full_name?: string; avatar_url?: string } } | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [counts, setCounts] = useState({ leads: 0, enrollments: 0, applications: 0, newsletter: 0 });
+
+  useEffect(() => {
+    const getUser = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
+>>>>>>> Stashed changes
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      const supabase = createClient();
+      const [leadsRes, enrollmentsRes, appsRes, newsletterRes] = await Promise.all([
+        supabase.from('leads').select('id', { count: 'exact', head: true }),
+        supabase.from('enrollments').select('id', { count: 'exact', head: true }),
+        supabase.from('job_applications').select('id', { count: 'exact', head: true }),
+        supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }),
+      ]);
+      setCounts({
+        leads: leadsRes.count || 0,
+        enrollments: enrollmentsRes.count || 0,
+        applications: appsRes.count || 0,
+        newsletter: newsletterRes.count || 0,
+      });
+    };
+    fetchCounts();
+  }, []);
 
   const isActive = (href: string) => {
     if (href === '/admin') {
@@ -122,6 +157,7 @@ export default function AdminSidebar() {
         ))}
       </nav>
 
+<<<<<<< Updated upstream
       {/* Footer */}
       <div className="p-4 border-t border-white/10 space-y-1">
         <Link
@@ -151,5 +187,96 @@ export default function AdminSidebar() {
         </button>
       </div>
     </aside>
+=======
+        {/* Navigation Container */}
+        <div className="flex-1 overflow-hidden flex flex-col px-4 py-2">
+          
+          {/* Main Navigation */}
+          <nav className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent py-2">
+            
+            {/* Dashboard Link - Prominent */}
+            <Link
+              href="/admin"
+              onClick={() => setIsOpen(false)}
+              className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl mb-4 transition-all duration-200 ${
+                isActive('/admin') && pathname === '/admin'
+                  ? 'bg-gradient-to-r from-primary to-primary/90 text-white shadow-lg shadow-primary/30'
+                  : 'bg-white border border-slate-200/80 text-slate-600 hover:border-primary/30 hover:text-primary'
+              }`}
+            >
+              <span className={`material-symbols-outlined text-2xl ${isActive('/admin') && pathname === '/admin' ? 'text-white' : 'text-slate-400'}`}>dashboard</span>
+              <span className="font-semibold text-sm">Dashboard Overview</span>
+            </Link>
+
+            {/* Section Headers & Items */}
+            {defaultNavigation.filter(s => s.title !== 'Main').map((section) => (
+              <div key={section.title} className="mb-4">
+                <button
+                  onClick={() => toggleSection(section.title)}
+                  className="w-full flex items-center justify-between px-3 py-2.5 mb-1.5 hover:bg-slate-100/50 rounded-xl transition-colors"
+                >
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    {section.title}
+                  </span>
+                  <span className={`material-symbols-outlined text-slate-300 text-xl transition-all duration-200 ${activeSection === section.title ? 'rotate-180' : ''}`}>
+                    expand_more
+                  </span>
+                </button>
+                
+                <div className={`space-y-0.5 overflow-hidden transition-all duration-200 ${activeSection === section.title ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  {section.items.map((item) => {
+                    const active = isActive(item.href);
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`flex items-center justify-between px-4 py-2.5 rounded-xl transition-all duration-150 group ${
+                          active
+                            ? 'bg-primary/10 text-primary'
+                            : 'text-slate-500 hover:bg-slate-100/80 hover:text-slate-900'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`material-symbols-outlined text-xl transition-colors ${
+                            active ? 'text-primary' : 'text-slate-400 group-hover:text-slate-600'
+                          }`}>{item.icon}</span>
+                          <span className="font-medium text-sm">{item.name}</span>
+                        </div>
+                        {item.badge !== undefined ? (
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                            active ? 'bg-primary text-white' : 'bg-slate-200 text-slate-600'
+                          }`}>
+                            {item.badge}
+                          </span>
+                        ) : item.name === 'Leads' && counts.leads > 0 ? (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">
+                            {counts.leads}
+                          </span>
+                        ) : item.name === 'Enrollments' && counts.enrollments > 0 ? (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">
+                            {counts.enrollments}
+                          </span>
+                        ) : item.name === 'Applications' && counts.applications > 0 ? (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">
+                            {counts.applications}
+                          </span>
+                        ) : item.name === 'Newsletter' && counts.newsletter > 0 ? (
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">
+                            {counts.newsletter}
+                          </span>
+                        ) : null}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </nav>
+
+        </div>
+      </aside>
+    </>
+>>>>>>> Stashed changes
   );
 }

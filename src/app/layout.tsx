@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Manrope, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { GoogleTranslateProvider } from "@/components/GoogleTranslateProvider";
+import FloatingTranslateButton from "@/components/FloatingTranslateButton";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
 
@@ -87,6 +89,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className={`${manrope.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased bg-surface font-body text-on-surface architect-grid selection:bg-tertiary-fixed selection:text-on-tertiary-fixed-variant`}>
+<<<<<<< Updated upstream
         <LanguageProvider>
           <PageTransitionProvider>
             <MainLayout>
@@ -94,6 +97,19 @@ export default function RootLayout({
             </MainLayout>
           </PageTransitionProvider>
         </LanguageProvider>
+=======
+        <TrackVisitor />
+        <GoogleTranslateProvider>
+          <LanguageProvider>
+            <PageTransitionProvider>
+              <MainLayout>
+                {children}
+              </MainLayout>
+              <FloatingTranslateButton />
+            </PageTransitionProvider>
+          </LanguageProvider>
+        </GoogleTranslateProvider>
+>>>>>>> Stashed changes
       </body>
     </html>
   );

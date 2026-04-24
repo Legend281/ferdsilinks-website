@@ -212,4 +212,29 @@
   .backface-hidden {
     backface-visibility: hidden;
   }
+  
+  .goog-te-banner-frame {
+    display: none !important;
+  }
+  
+  .goog-te-gadget-simple {
+    font-family: inherit !important;
+  }
+  
+  .goog-te-gadget-simple span {
+    font-family: inherit !important;
+  }
+  
+  .skiptranslate {
+    display: none !important;
+  }
+  
+  body > .skiptranslate {
+    display: none !important;
+  }
+  
+  .goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+  }
 }
