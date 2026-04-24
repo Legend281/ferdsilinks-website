@@ -6,6 +6,7 @@ import { GoogleTranslateProvider } from "@/components/GoogleTranslateProvider";
 import FloatingTranslateButton from "@/components/FloatingTranslateButton";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
 import { MainLayout } from "@/components/layout/MainLayout";
+import TrackVisitor from "@/components/TrackVisitor";
 
 const manrope = Manrope({
   variable: "--font-manrope",
