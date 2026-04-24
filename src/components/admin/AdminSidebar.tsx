@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { createClient } from '@/lib/supabase/supabase-browser-client';
 
 interface NavItem {
@@ -17,7 +17,7 @@ interface NavSection {
   items: NavItem[];
 }
 
-const navigation: NavSection[] = [
+const baseNavigation: NavSection[] = [
   {
     title: 'Main',
     items: [
@@ -63,6 +63,7 @@ export default function AdminSidebar({ isOpen, setIsOpen }: { isOpen: boolean, s
   const pathname = usePathname();
   const [user, setUser] = useState<{ email?: string; user_metadata?: { full_name?: string; avatar_url?: string } } | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [leadCount, setLeadCount] = useState(0);
 
   useEffect(() => {
     const getUser = async () => {
@@ -72,6 +73,31 @@ export default function AdminSidebar({ isOpen, setIsOpen }: { isOpen: boolean, s
     };
     getUser();
   }, []);
+
+  useEffect(() => {
+    const fetchLeadCount = async () => {
+      const supabase = createClient();
+      const { count } = await supabase
+        .from('leads')
+        .select('*', { count: 'exact', head: true });
+      setLeadCount(count || 0);
+    };
+    fetchLeadCount();
+  }, []);
+
+  const navigation = useMemo(() => {
+    return baseNavigation.map(section => {
+      if (section.title === 'Leads & Enquiries') {
+        return {
+          ...section,
+          items: section.items.map(item => 
+            item.name === 'Leads' ? { ...item, badge: leadCount } : item
+          )
+        };
+      }
+      return section;
+    });
+  }, [leadCount]);
 
   const isActive = (href: string) => {
     if (href === '/admin') {
