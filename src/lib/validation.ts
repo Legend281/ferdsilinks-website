@@ -78,6 +78,7 @@ export const enrollmentSchema = z.object({
 export const jobApplicationSchema = z.object({
   job_id: z
     .string()
+    .nullable()
     .optional(),
   job_title: z
     .string()
@@ -91,30 +92,24 @@ export const jobApplicationSchema = z.object({
     .email('Please enter a valid email address'),
   phone: z
     .string()
-    .optional()
-    .refine(
-      (val) => !val || /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/.test(val),
-      'Please enter a valid phone number'
-    ),
+    .nullable()
+    .optional(),
   linkedin_url: z
     .string()
-    .max(500)
-    .optional()
-    .or(z.literal('')),
+    .nullable()
+    .optional(),
   portfolio_url: z
     .string()
-    .max(500)
-    .optional()
-    .or(z.literal('')),
+    .nullable()
+    .optional(),
   cover_letter: z
     .string()
     .min(1, 'Cover letter is required')
     .max(5000, 'Cover letter must be less than 5000 characters'),
   resume_url: z
     .string()
-    .max(500)
-    .optional()
-    .or(z.literal('')),
+    .nullable()
+    .optional(),
 });
 
 export const teamMemberSchema = z.object({
