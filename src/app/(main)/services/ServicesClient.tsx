@@ -181,96 +181,25 @@ export default function ServicesContent() {
                           </div>
                           <div className="hidden md:block w-48 h-48 rounded-xl overflow-hidden shadow-xl bg-surface-container-high">
                               <img alt="Ferdsilinks Academy Training" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 mix-blend-multiply" src="https://api.dicebear.com/7.x/shapes/svg?seed=academy&backgroundColor=006a6a" />
-                          </div>
-                      </Link>
-                  </div>
-              </div>
-          </section>
-      </FadeIn>
-
-      {/* Our Process */}
-      <FadeIn>
-          <section className="py-24 bg-surface-container-low border-y border-outline-variant/10">
-              <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                  <div className="text-center mb-20">
-                      <span className="font-label text-on-tertiary-container tracking-widest uppercase text-sm font-bold">The Blueprint</span>
-                      <h2 className="font-headline text-4xl md:text-5xl font-black text-primary mt-4 tracking-tight">Our Process</h2>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
-                      {/* Connector Line (Desktop) */}
-                      <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-outline-variant/30 -z-10"></div>
-                      
-                      {/* Step 1 */}
-                      <div className="flex flex-col items-center text-center group">
-                          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm border-4 border-surface-container-low group-hover:border-on-tertiary-container transition-all duration-300 mb-6 relative">
-                              <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">01</span>
-                              <span className="material-symbols-outlined text-on-tertiary-container text-3xl">search</span>
-                          </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Discovery</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Deep diving into your business ecosystem to identify gaps and opportunities.</p>
-                      </div>
-                      
-                      {/* Step 2 */}
-                      <div className="flex flex-col items-center text-center group">
-                          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm border-4 border-surface-container-low group-hover:border-on-tertiary-container transition-all duration-300 mb-6 relative">
-                              <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">02</span>
-                              <span className="material-symbols-outlined text-on-tertiary-container text-3xl">architecture</span>
-                          </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Strategy</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Architecting a technical roadmap aligned with your long-term growth goals.</p>
-                      </div>
-                      
-                      {/* Step 3 */}
-                      <div className="flex flex-col items-center text-center group">
-                          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm border-4 border-surface-container-low group-hover:border-on-tertiary-container transition-all duration-300 mb-6 relative">
-                              <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">03</span>
-                              <span className="material-symbols-outlined text-on-tertiary-container text-3xl">code</span>
-                          </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Implementation</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Agile development and execution with a focus on precision and performance.</p>
-                      </div>
-                      
-                      {/* Step 4 */}
-                      <div className="flex flex-col items-center text-center group">
-                          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-sm border-4 border-surface-container-low group-hover:border-on-tertiary-container transition-all duration-300 mb-6 relative">
-                              <span className="absolute -top-2 -right-2 bg-on-tertiary-container text-white text-xs font-bold px-2 py-1 rounded">04</span>
-                              <span className="material-symbols-outlined text-on-tertiary-container text-3xl">speed</span>
-                          </div>
-                          <h3 className="font-headline text-xl font-bold text-primary mb-3">Optimization</h3>
-                          <p className="font-body text-sm text-on-surface-variant leading-relaxed">Continuous data monitoring and refinement to ensure peak efficiency.</p>
-                      </div>
-                  </div>
-              </div>
-          </section>
-      </FadeIn>
-
-      {/* CTA Section */}
-      <FadeIn>
-          <section className="py-24">
-              <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                  <div className="bg-primary rounded-xl p-12 md:p-20 relative overflow-hidden flex flex-col items-center text-center">
-                      <div className="absolute inset-0 bg-gradient-to-tr from-primary to-[#002147] -z-10"></div>
-                      <div className="absolute -right-24 -top-24 w-96 h-96 bg-on-tertiary-container/10 rounded-full blur-3xl"></div>
-                      <h2 className="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 tracking-tighter">Ready to Transform Your Business?</h2>
-                      <p className="font-body text-primary-fixed-dim text-lg mb-12 max-w-2xl leading-relaxed">
-                          Whether you need AI-powered solutions, an OHADA-compliant ERP system, or custom software — we're here to help 1000+ businesses across Africa succeed.
-                      </p>
-                      <div className="flex flex-col md:flex-row gap-4">
-                          <Link href="/contact">
-                              <button className="bg-on-tertiary-container text-white px-10 py-4 rounded-lg font-headline font-black text-lg transition-all duration-300 hover:shadow-xl hover:shadow-on-tertiary-container/20 hover:scale-[1.02] active:scale-95 w-full">
-                                  {t.services.getQuote}
-                              </button>
-                          </Link>
-                          <Link href="/contact">
-                              <button className="border border-white/20 text-white px-10 py-4 rounded-lg font-headline font-black text-lg hover:bg-white/10 transition-all duration-300 w-full">
-                                  {t.services.bookSession}
-                              </button>
-                          </Link>
-                      </div>
-                  </div>
-              </div>
-          </section>
-      </FadeIn>
+</div>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+    
+    {/* Featured Services from Admin */}
+    <FadeIn>
+      <section className="py-20 bg-surface-container-low">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="font-headline text-3xl font-bold text-primary mb-8">All Our Services</h2>
+          <Link href="/contact" className="inline-flex items-center gap-2 bg-on-tertiary-container text-white px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all">
+            <span>Request a Quote</span>
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </Link>
+        </div>
+      </section>
+    </FadeIn>
 
     </main>
   );
