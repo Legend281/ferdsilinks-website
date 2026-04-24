@@ -66,15 +66,20 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const resumeFile = formData.get('resume') as File | null;
     
+    const getString = (key: string) => {
+      const value = formData.get(key);
+      return value && typeof value === 'string' ? value : null;
+    };
+    
     const jobData = {
-      job_id: formData.get('job_id') as string || null,
-      job_title: formData.get('job_title') as string || 'General Application',
-      full_name: formData.get('full_name') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string || null,
-      linkedin_url: formData.get('linkedin_url') as string || null,
-      portfolio_url: formData.get('portfolio_url') as string || null,
-      cover_letter: formData.get('cover_letter') as string || '',
+      job_id: getString('job_id'),
+      job_title: getString('job_title') || 'General Application',
+      full_name: getString('full_name') || '',
+      email: getString('email') || '',
+      phone: getString('phone'),
+      linkedin_url: getString('linkedin_url'),
+      portfolio_url: getString('portfolio_url'),
+      cover_letter: getString('cover_letter') || '',
     };
 
     const result = jobApplicationSchema.safeParse(jobData);
@@ -95,22 +100,25 @@ export async function POST(request: NextRequest) {
       resumeUrl = await uploadResumeToStorage(supabase, resumeFile, jobData.email);
     }
 
+    const insertData: Record<string, any> = {
+      job_title: jobData.job_title,
+      full_name: jobData.full_name,
+      email: jobData.email,
+      phone: jobData.phone || null,
+      linkedin_url: jobData.linkedin_url || null,
+      portfolio_url: jobData.portfolio_url || null,
+      cover_letter: jobData.cover_letter || '',
+      resume_url: resumeUrl || null,
+      status: 'pending',
+    };
+    
+    if (jobData.job_id) {
+      insertData.job_id = jobData.job_id;
+    }
+
     const { data, error } = await supabase
       .from('job_applications')
-      .insert([
-        {
-          job_id: jobData.job_id,
-          job_title: jobData.job_title,
-          full_name: jobData.full_name,
-          email: jobData.email,
-          phone: jobData.phone,
-          linkedin_url: jobData.linkedin_url,
-          portfolio_url: jobData.portfolio_url,
-          cover_letter: jobData.cover_letter,
-          resume_url: resumeUrl,
-          status: 'pending',
-        },
-      ])
+      .insert([insertData])
       .select()
       .single();
 
