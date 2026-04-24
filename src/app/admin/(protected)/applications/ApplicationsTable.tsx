@@ -258,10 +258,10 @@ export default function ApplicationsTable({ initialApplications }: ApplicationsT
                         href={app.resume_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-blue-600 hover:underline"
+                        className="inline-flex items-center gap-1 text-sm text-blue-600 hover:underline"
                       >
-                        <span className="material-symbols-outlined text-lg">download</span>
-                        <span>Download CV</span>
+                        <span className="material-symbols-outlined text-lg">attach_file</span>
+                        View Resume
                       </a>
                     ) : (
                       <span className="text-sm text-slate-400">—</span>

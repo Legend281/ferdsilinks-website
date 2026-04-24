@@ -30,7 +30,8 @@ async function uploadResumeToStorage(supabase: any, file: File, email: string): 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     
-    const fileName = `${email}/${Date.now()}-${file.name}`;
+    const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const fileName = `applications/${Date.now()}-${sanitizedName}`;
     
     const { data, error } = await supabase.storage
       .from('resumes')
