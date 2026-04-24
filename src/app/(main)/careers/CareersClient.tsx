@@ -98,16 +98,16 @@ export default function CareersClient({ initialJobs }: CareersClientProps) {
         body: formData,
       });
 
-      console.log('Response status:', response.status);
+      const responseText = await response.text();
+      console.log('Response:', response.status, responseText);
       
-      if (response.ok || response.status === 201) {
+if (response.ok || response.status === 201) {
         toast.success('Application submitted successfully! We will be in touch.');
         setShowCVModal(false);
         setCvFormData({ full_name: '', email: '', phone: '', linkedin_url: '', cover_letter: '' });
         setResumeFile(null);
-} else {
-        const data = await response.json();
-        toast.error(data.error || 'Failed to submit application');
+      } else {
+        toast.error(responseText || 'Failed to submit application');
       }
 } catch (error) {
       console.error('Submission error:', error);
