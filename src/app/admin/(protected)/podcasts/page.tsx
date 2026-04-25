@@ -201,15 +201,15 @@ export default function PodcastsManagementPage() {
                 filteredItems.map((item) => (
                   <tr key={item.id} className="hover:bg-slate-50 transition-all">
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-14 h-10 bg-[#0302cb] rounded-lg flex items-center justify-center overflow-hidden">
+                      <div className="flex items-center gap-4">
+                        <div className="w-24 h-16 bg-slate-100 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
                           {item.cover_image ? (
                             <img src={item.cover_image} alt="" className="w-full h-full object-cover" />
                           ) : (
-                            <span className="material-symbols-outlined text-white text-lg">podcasts</span>
+                            <span className="material-symbols-outlined text-slate-400 text-2xl">podcasts</span>
                           )}
                         </div>
-                        <div>
+                        <div className="min-w-0">
                           <p className="font-medium text-slate-900 line-clamp-1">
                             S{item.season_number || '?'}:E{item.episode_number || '?'} - {item.title}
                           </p>

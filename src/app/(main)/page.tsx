@@ -6,6 +6,7 @@ import { FadeIn } from '@/components/FadeIn';
 import { useLanguage } from '@/components/LanguageProvider';
 import { serviceCategories } from '@/data/services';
 import { courses } from '@/data/training';
+import { User } from 'lucide-react';
 
 interface BlogPost {
   id: string;
@@ -372,15 +373,15 @@ export default function Home() {
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                   </div>
                   <p className="text-primary font-medium italic mb-8 leading-relaxed">&quot;Ferdsilinks transformed how we use data. Their team built a predictive analytics system that helped us reduce costs by 30% in just 6 months.&quot;</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-secondary-fixed overflow-hidden">
-                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Client" className="w-full h-full object-cover"/>
+<div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-on-tertiary-container flex items-center justify-center text-white">
+                        <User className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-primary">Business Executive</div>
+                        <div className="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Yaoundé, Cameroon</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-bold text-primary">Business Executive</div>
-                      <div className="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Yaoundé, Cameroon</div>
-                    </div>
-                  </div>
                 </div>
                 <div className="bg-white p-8 rounded-xl shadow-sm border border-black/5">
                   <div className="flex text-on-tertiary-container mb-6">
@@ -392,14 +393,14 @@ export default function Home() {
                   </div>
                   <p className="text-primary font-medium italic mb-8 leading-relaxed">&quot;The training program gave me practical skills I use every day. From zero experience to landing my first tech job in Douala - all thanks to Ferdsilinks.&quot;</p>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-tertiary-fixed overflow-hidden">
-                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Graduate" className="w-full h-full object-cover"/>
+                      <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white">
+                        <User className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-primary">Training Graduate</div>
+                        <div className="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Software Developer, Douala</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-bold text-primary">Training Graduate</div>
-                      <div className="text-xs text-on-surface-variant uppercase tracking-wider font-bold">Software Developer, Douala</div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FadeIn } from '@/components/FadeIn';
 import Link from 'next/link';
 import { useLanguage } from '@/components/LanguageProvider';
+import { User } from 'lucide-react';
 
 export default function ContactContent() {
   const { t } = useLanguage();
@@ -247,10 +248,10 @@ export default function ContactContent() {
 <h4 className="font-headline text-xl font-bold mb-4">{t.contact.unmatchedSupport}</h4>
 <p className="text-on-primary-container mb-6 leading-relaxed">{t.contact.supportDescription}</p>
 <div className="flex items-center gap-4">
-<div className="flex -space-x-2">
-<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Team" className="w-8 h-8 rounded-full border-2 border-primary-container object-cover"/>
-<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Team" className="w-8 h-8 rounded-full border-2 border-primary-container object-cover"/>
-<img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Team" className="w-8 h-8 rounded-full border-2 border-primary-container object-cover"/>
+<div className="flex items-center gap-3">
+<div className="w-8 h-8 bg-on-tertiary-container rounded-full flex items-center justify-center text-white"><User className="w-4 h-4" /></div>
+<div className="w-8 h-8 bg-on-tertiary-container rounded-full flex items-center justify-center text-white -ml-3"><User className="w-4 h-4" /></div>
+<div className="w-8 h-8 bg-on-tertiary-container rounded-full flex items-center justify-center text-white -ml-3"><User className="w-4 h-4" /></div>
 </div>
 <span className="text-sm font-label uppercase tracking-wider">{t.contact.expertTeam}</span>
 </div>

@@ -27,9 +27,15 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const { data: { user: authUser } } = await supabase.auth.getUser();
+    user = authUser;
+  } catch (error: any) {
+    // Rate limit or network error - continue with the request
+    // Don't logout the user just because of a temporary rate limit
+    console.log('Auth check skipped due to error:', error?.message || error);
+  }
 
   const isAdminPage = request.nextUrl.pathname.startsWith('/admin');
   const isLoginPage = request.nextUrl.pathname === '/admin/login';
@@ -51,6 +57,7 @@ export async function middleware(request: NextRequest) {
     return supabaseResponse;
   }
 
+  // Only redirect if we're sure the user is not authenticated (not on rate limit errors)
   if (isAdminPage && !user && !isLoginPage) {
     const url = request.nextUrl.clone();
     url.pathname = '/admin/login';

@@ -1,80 +1,119 @@
-import { createClient } from '@/lib/supabase/supabase-server-client';
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/supabase-browser-client';
 
-async function getStats() {
-  const supabase = await createClient();
-  
-  const now = new Date();
-  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-  
-  try {
-    const [
-      { count: totalLeads },
-      { count: leadsThisWeek },
-      { count: totalSubscribers },
-      { count: totalEnrollments },
-      { count: recentEnrollments },
-      { count: totalApplications },
-    ] = await Promise.all([
-      supabase.from('leads').select('*', { count: 'exact', head: true }),
-      supabase.from('leads').select('*', { count: 'exact', head: true }).gte('created_at', weekAgo.toISOString()),
-      supabase.from('subscribers').select('*', { count: 'exact', head: true }).eq('status', 'active'),
-      supabase.from('enrollments').select('*', { count: 'exact', head: true }),
-      supabase.from('enrollments').select('*', { count: 'exact', head: true }).gte('created_at', weekAgo.toISOString()),
-      supabase.from('job_applications').select('*', { count: 'exact', head: true }),
-    ]);
+interface Stats {
+  totalLeads: number;
+  leadsThisWeek: number;
+  totalSubscribers: number;
+  totalEnrollments: number;
+  recentEnrollments: number;
+  totalApplications: number;
+}
 
-    return {
-      totalLeads: totalLeads || 0,
-      leadsThisWeek: leadsThisWeek || 0,
-      totalSubscribers: totalSubscribers || 0,
-      totalEnrollments: totalEnrollments || 0,
-      recentEnrollments: recentEnrollments || 0,
-      totalApplications: totalApplications || 0,
-    };
-  } catch (error) {
-    console.error('Error fetching stats:', error);
-    return {
-      totalLeads: 0,
-      leadsThisWeek: 0,
-      totalSubscribers: 0,
-      totalEnrollments: 0,
-      recentEnrollments: 0,
-      totalApplications: 0,
-    };
+interface Lead {
+  id: string;
+  name: string;
+  email: string;
+  status: string;
+  message: string;
+  created_at: string;
+}
+
+interface Enrollment {
+  id: string;
+  full_name: string;
+  email: string;
+  status: string;
+  course_title: string;
+  created_at: string;
+}
+
+export default function AdminDashboard() {
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
+  const [recentEnrollments, setRecentEnrollments] = useState<Enrollment[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    setLoading(true);
+    try {
+      const supabase = createClient();
+      
+      const now = new Date();
+      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+      // Fetch stats with sequential requests to avoid rate limiting
+      const leadsCount = await supabase
+        .from('leads')
+        .select('*', { count: 'exact', head: true });
+
+      const leadsWeekCount = await supabase
+        .from('leads')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', weekAgo.toISOString());
+
+      const subscribersCount = await supabase
+        .from('subscribers')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'active');
+
+      const enrollmentsCount = await supabase
+        .from('enrollments')
+        .select('*', { count: 'exact', head: true });
+
+      const enrollmentsWeekCount = await supabase
+        .from('enrollments')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', weekAgo.toISOString());
+
+      const applicationsCount = await supabase
+        .from('job_applications')
+        .select('*', { count: 'exact', head: true });
+
+      setStats({
+        totalLeads: leadsCount.count || 0,
+        leadsThisWeek: leadsWeekCount.count || 0,
+        totalSubscribers: subscribersCount.count || 0,
+        totalEnrollments: enrollmentsCount.count || 0,
+        recentEnrollments: enrollmentsWeekCount.count || 0,
+        totalApplications: applicationsCount.count || 0,
+      });
+
+      // Fetch recent data
+      const [leadsData, enrollmentsData] = await Promise.all([
+        supabase.from('leads').select('*').order('created_at', { ascending: false }).limit(5),
+        supabase.from('enrollments').select('*').order('created_at', { ascending: false }).limit(5),
+      ]);
+
+      setRecentLeads(leadsData.data || []);
+      setRecentEnrollments(enrollmentsData.data || []);
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-4 border-[#ef0d11] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
-}
-
-async function getRecentLeads() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from('leads')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(5);
-  return data || [];
-}
-
-async function getRecentEnrollments() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from('enrollments')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(5);
-  return data || [];
-}
-
-export default async function AdminDashboard() {
-  const stats = await getStats();
-  const recentLeads = await getRecentLeads();
-  const recentEnrollments = await getRecentEnrollments();
 
   const statCards = [
-    { label: 'Total Leads', value: stats.totalLeads, subtext: `${stats.leadsThisWeek} this week`, icon: 'inbox', color: 'bg-[#0302cb]' },
-    { label: 'Subscribers', value: stats.totalSubscribers, subtext: 'Newsletter members', icon: 'mail', color: 'bg-[#006a6a]' },
-    { label: 'Enrollments', value: stats.totalEnrollments, subtext: `${stats.recentEnrollments} this week`, icon: 'school', color: 'bg-[#ef0d11]' },
-    { label: 'Applications', value: stats.totalApplications, subtext: 'Job applications', icon: 'work', color: 'bg-[#6b7280]' },
+    { label: 'Total Leads', value: stats?.totalLeads || 0, subtext: `${stats?.leadsThisWeek || 0} this week`, icon: 'inbox', color: 'bg-[#0302cb]' },
+    { label: 'Subscribers', value: stats?.totalSubscribers || 0, subtext: 'Newsletter members', icon: 'mail', color: 'bg-[#006a6a]' },
+    { label: 'Enrollments', value: stats?.totalEnrollments || 0, subtext: `${stats?.recentEnrollments || 0} this week`, icon: 'school', color: 'bg-[#ef0d11]' },
+    { label: 'Applications', value: stats?.totalApplications || 0, subtext: 'Job applications', icon: 'work', color: 'bg-[#6b7280]' },
   ];
 
   return (
@@ -84,12 +123,13 @@ export default async function AdminDashboard() {
           <h1 className="text-2xl font-headline font-bold text-[#0302cb]">Dashboard</h1>
           <p className="text-slate-500">Welcome back! Here&apos;s an overview of your site.</p>
         </div>
-        <Link
-          href="/admin/leads"
-          className="px-4 py-2 bg-[#ef0d11] text-white rounded-lg font-medium hover:bg-[#b90000] transition-all"
+        <button
+          onClick={fetchDashboardData}
+          className="px-4 py-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all flex items-center gap-2"
         >
-          View All Leads
-        </Link>
+          <span className="material-symbols-outlined text-lg">refresh</span>
+          Refresh
+        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

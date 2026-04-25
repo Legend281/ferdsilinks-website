@@ -234,15 +234,15 @@ export default function BlogManagementPage() {
                 paginatedPosts.map((post) => (
                   <tr key={post.id} className="hover:bg-slate-50 transition-all">
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-[#0302cb] rounded-lg flex items-center justify-center overflow-hidden">
+                      <div className="flex items-center gap-4">
+                        <div className="w-24 h-16 bg-slate-100 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
                           {post.cover_image ? (
                             <img src={post.cover_image} alt="" className="w-full h-full object-cover" />
                           ) : (
-                            <span className="material-symbols-outlined text-white">article</span>
+                            <span className="material-symbols-outlined text-slate-400 text-2xl">article</span>
                           )}
                         </div>
-                        <div>
+                        <div className="min-w-0">
                           <p className="font-medium text-slate-900 line-clamp-1">{post.title}</p>
                           <p className="text-sm text-slate-500 line-clamp-1">{post.excerpt}</p>
                         </div>
