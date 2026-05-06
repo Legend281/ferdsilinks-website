@@ -60,8 +60,8 @@ export function Footer() {
 </div>
 </div>
 <div className="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-<div className="text-slate-500 font-medium">
-                © 2024 Ferdsilinks. Precision in Data, Excellence in Tech. Buea, Cameroon.
+<div className="text-slate-500 font-medium" suppressHydrationWarning>
+                © {new Date().getFullYear()} Ferdsilinks. Precision in Data, Excellence in Tech. Buea, Cameroon.
             </div>
 <div className="flex gap-8 text-slate-400">
 <Link className="hover:text-white" href="#">Privacy Policy</Link>

@@ -49,33 +49,22 @@ export default function AdminDashboard() {
       const now = new Date();
       const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-      // Fetch stats with sequential requests to avoid rate limiting
-      const leadsCount = await supabase
-        .from('leads')
-        .select('*', { count: 'exact', head: true });
-
-      const leadsWeekCount = await supabase
-        .from('leads')
-        .select('*', { count: 'exact', head: true })
-        .gte('created_at', weekAgo.toISOString());
-
-      const subscribersCount = await supabase
-        .from('subscribers')
-        .select('*', { count: 'exact', head: true })
-        .eq('status', 'active');
-
-      const enrollmentsCount = await supabase
-        .from('enrollments')
-        .select('*', { count: 'exact', head: true });
-
-      const enrollmentsWeekCount = await supabase
-        .from('enrollments')
-        .select('*', { count: 'exact', head: true })
-        .gte('created_at', weekAgo.toISOString());
-
-      const applicationsCount = await supabase
-        .from('job_applications')
-        .select('*', { count: 'exact', head: true });
+      // Fetch stats concurrently to improve dashboard load time
+      const [
+        leadsCount,
+        leadsWeekCount,
+        subscribersCount,
+        enrollmentsCount,
+        enrollmentsWeekCount,
+        applicationsCount
+      ] = await Promise.all([
+        supabase.from('leads').select('*', { count: 'exact', head: true }),
+        supabase.from('leads').select('*', { count: 'exact', head: true }).gte('created_at', weekAgo.toISOString()),
+        supabase.from('subscribers').select('*', { count: 'exact', head: true }).eq('status', 'active'),
+        supabase.from('enrollments').select('*', { count: 'exact', head: true }),
+        supabase.from('enrollments').select('*', { count: 'exact', head: true }).gte('created_at', weekAgo.toISOString()),
+        supabase.from('job_applications').select('*', { count: 'exact', head: true })
+      ]);
 
       setStats({
         totalLeads: leadsCount.count || 0,

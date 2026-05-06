@@ -111,7 +111,7 @@ const jsonLd = {
       ],
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+237-681XXXXXX",
+        telephone: "+237 676 817 339",
         contactType: "customer service",
         email: "ferdsilinksinfo@gmail.com",
         availableLanguage: ["English", "French"],
@@ -206,7 +206,11 @@ export default function RootLayout({
           }}
         />
         <TrackVisitor />
-        {children}
+        <LanguageProvider>
+          <PageTransitionProvider>
+            {children}
+          </PageTransitionProvider>
+        </LanguageProvider>
       </body>
     </html>
   );
